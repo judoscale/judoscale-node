@@ -1,15 +1,7 @@
-const RequestMetrics = require('./lib/RequestMetrics')
+'use strict';
 
-const defaultConfig = {
-  // use built-in console.log by default
-  log: console.log,
-
-  // prefix logs so it's clear where they come from
-  prefix: '[judoscale] ',
-
-  // dynamically determine the current time at runtime
-  now: null
-}
+const requestMetrics = require('./lib/request-metrics');
+const defaultConfig = require('./lib/default-config');
 
 /**
  * Construct a middleware function for logging request queue time in whole milliseconds.
@@ -27,7 +19,7 @@ module.exports = function (config) {
 
   return function (req, _res, next) {
     const now = config.now || new Date()
-    const queued = RequestMetrics.queueTimeFromHeaders(req.headers, now)
+    const queued = requestMetrics.queueTimeFromHeaders(req.headers, now)
 
     if (config.log && queued) {
       config.log(`${config.prefix}queued=${Math.round(queued)}`)
