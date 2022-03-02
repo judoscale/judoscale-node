@@ -1,0 +1,3 @@
+#!/bin/bash
+
+DYNO=web.1 heroku local -f Procfile.dev

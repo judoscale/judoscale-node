@@ -1,0 +1,7 @@
+{
+  "name": "Judoscale Demo",
+  "description": "A tiny Node.js application for testing Judoscale",
+  "repository": "https://github.com/judoscale/judoscale-express-sample",
+  "logo": "https://res.cloudinary.com/adamlogic/image/upload/v1573326217/Brand/logo-square-transparent-png.png",
+  "keywords": ["node", "express", "judoscale", "autoscale", "scaling", "dynos"]
+}

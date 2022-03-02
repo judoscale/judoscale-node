@@ -1,0 +1,19 @@
+<p>The demo app is running! 😄</p>
+<p>
+  Next, run the following command from a terminal to install the early access
+  (free) version of Judoscale.
+</p>
+
+<pre><code id="snippet">$ heroku addons:create judoscale -a [your-app-name]</code></pre>
+
+<p>Refresh this page to verify your installation.</p>
+
+<script>
+  const host = document.location.hostname;
+  const appName = host.split(".herokuapp.com")[0];
+
+  if (appName) {
+    const el = document.getElementById("snippet");
+    el.innerText = el.innerText.replace("[your-app-name]", appName);
+  }
+</script>

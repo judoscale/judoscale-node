@@ -1,0 +1,49 @@
+<p>Boo-yah! You've installed the Judoscale add-on, so you're good to go.</p>
+
+<p>Thanks for helping us with our beta!</p>
+<br />
+
+<iframe
+  src="https://giphy.com/embed/z1Ss4CmBlWbUcn9YRs"
+  width="480"
+  height="400"
+  frameBorder="0"
+  class="giphy-embed"
+  allowFullScreen
+></iframe>
+
+<!--
+
+<h2>Running a simple load test</h2>
+
+<p>
+  To see Judoscale in action, we'll run a quick & dirty load testing using the
+  <a href="https://github.com/grafana/k6"><code>k6</code></a> command line tool.
+  Run the command below to install k6 via Homebrew, or see the
+  <a href="https://github.com/grafana/k6#install">installation docs</a>
+  for other options.
+</p>
+
+<pre><code>$ brew install k6</code></pre>
+
+<p>
+  Now create a file called <code>script.js</code> and paste following code. Add
+  your Heroku app name where indicated.
+</p>
+
+<pre><code>import http from "k6/http";
+
+export default function() {
+    let response = http.get("https://your-heroku-app.herokuapp.com");
+};
+</code></pre>
+
+<p>
+  We're ready to run our load test! The command below will run a 3-minute test.
+  It will ramp up to 50 concurrrent users over two minutes, then sustain that
+  load for the last minute.
+</p>
+
+<pre><code>$ k6 run script.js -s 2m:50,3m:50</code></pre>
+
+-->
