@@ -3,8 +3,6 @@
  * @author Carlos Marques
  */
 
-'use strict'
-
 /**
  * Calculates the request queue time based on the X-Request-Start header.
  *
@@ -23,8 +21,10 @@ function queueTimeFromHeaders(headers, now) {
     const queueTime = now - new Date(Number(requestStart))
     return Math.max(0, queueTime)
   }
+
+  return null
 }
 
-module.exports = {
-  queueTimeFromHeaders: queueTimeFromHeaders
+export default {
+  queueTimeFromHeaders
 }

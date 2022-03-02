@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000;
-const judoscale = require('judoscale-node')
+const judoscale = require('judoscale-node').default
 
 app.set('views', './views')
 app.set('view engine', 'ejs')

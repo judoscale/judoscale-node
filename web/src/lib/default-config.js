@@ -3,8 +3,6 @@
  * @author Carlos Marques
  */
 
-'use strict';
-
 const defaultConfig = {
   // use built-in console.log by default
   log: console.log,
@@ -16,4 +14,4 @@ const defaultConfig = {
   now: null
 }
 
-module.exports = defaultConfig
+export default defaultConfig
