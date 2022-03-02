@@ -1,0 +1,23 @@
+{
+  "name": "judoscale-node",
+  "version": "1.0.3",
+  "description": "NodeJS adapter for the JudoScale autoscaling add-on for Heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "teenytest test/**/*.test.js --helper test/helper.js",
+    "style": "standard --fix"
+  },
+  "keywords": [
+    "heroku",
+    "autoscale"
+  ],
+  "author": "Adam McCrea",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^16.0.4",
+    "teenytest": "^6.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
