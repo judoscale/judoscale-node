@@ -15,7 +15,6 @@ function queueTimeFromHeaders(headers, now) {
   // NGINX sets the header as fractional sections preceeded by "t=".
   // We can cover both scenarios by stripping all non-digits and treating as milliseconds.
   let requestStart = headers['x-request-start']
-
   if (requestStart) {
     requestStart = requestStart.replace(/\D/g, '')
     const queueTime = now - new Date(Number(requestStart))

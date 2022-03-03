@@ -1,9 +1,10 @@
 require('dotenv').config()
 
-const express = require('express')
+import express from 'express'
+import judoscale from 'judoscale-node'
+
 const app = express()
-const port = process.env.PORT || 5000;
-const judoscale = require('judoscale-node').default
+const port = process.env.PORT || 5000
 
 app.set('views', './views')
 app.set('view engine', 'ejs')
@@ -12,7 +13,7 @@ app.use(judoscale())
 
 app.get('/', (req, res) => {
   res.render('index', {
-    judoscaleIsInstalled: process.env.JUDOSCALE_URL,
+    judoscaleIsInstalled: process.env.JUDOSCALE_URL
   })
 })
 

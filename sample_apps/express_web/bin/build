@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo 'Removing old build contents.'
+
+rm -rf build
+
+mkdir build
+
+echo 'Copying non-transpilebles to build.'
+
+cp -r partials views build/
+
+cp app.json build/
+
+echo 'Transpiling...'
+
+npx babel src --out-dir build

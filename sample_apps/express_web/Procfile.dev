@@ -1,2 +1,2 @@
 proxy: npx judoscale-adapter-proxy-server
-web: npm run start
+web: npx babel-node src/app.js
