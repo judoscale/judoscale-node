@@ -14,5 +14,13 @@
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "judoscale-node": "file:../../web"
+  },
+  "engines": {
+    "node": "16.X"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11"
   }
 }
