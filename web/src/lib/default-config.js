@@ -3,15 +3,15 @@
  * @author Carlos Marques
  */
 
+import fs from 'fs'
+
 const defaultConfig = {
-  // use built-in console.log by default
   log: console.log,
-
-  // prefix logs so it's clear where they come from
   prefix: '[judoscale] ',
-
-  // dynamically determine the current time at runtime
-  now: null
+  now: null,
+  api_base_url: process.env.JUDOSCALE_URL,
+  dyno: process.env.DYNO,
+  version: JSON.parse(fs.readFileSync('../../../package.json')).version
 }
 
 export default defaultConfig

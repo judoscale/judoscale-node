@@ -25,6 +25,8 @@
     "teenytest": "^6.0.2"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "async": "^2.6.3",
+    "express": "^4.17.3",
+    "unirest": "^0.6.0"
   }
 }

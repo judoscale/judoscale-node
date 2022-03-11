@@ -12,7 +12,7 @@
 class Metric {
   constructor(identifier, time, value, queueName = null) {
     this.identifier = identifier
-    this.time = time.toUTCString()
+    this.time = new Date(time.toUTCString())
     this.value = Number(value)
     this.queueName = queueName
   }

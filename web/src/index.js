@@ -1,6 +1,7 @@
 import requestMetrics from './lib/request-metrics'
 import defaultConfig from './lib/default-config'
-
+import MetricStore from './lib/metrics-store'
+import Reporter from './lib/reporter'
 /**
  * Construct a middleware function for logging request queue time in whole milliseconds.
  * Log output looks like: [judoscale] queued=123
@@ -14,12 +15,17 @@ import defaultConfig from './lib/default-config'
 export default (config) => {
   const finalConfig = { ...defaultConfig, ...config }
 
+  const store = new MetricStore()
+  const reporter = new Reporter()
+
+  reporter.start(finalConfig, store)
+
   return ({ headers }, _res, next) => {
     const now = finalConfig.now || new Date()
-    const queued = requestMetrics.queueTimeFromHeaders(headers, now)
+    const queueTime = requestMetrics.queueTimeFromHeaders(headers, now)
 
-    if (finalConfig.log && queued) {
-      finalConfig.log(`${finalConfig.prefix}queued=${Math.round(queued)}`)
+    if (queueTime) {
+      store.push('qt', queueTime)
     }
 
     next()
