@@ -64,6 +64,10 @@ module.exports = {
   // A set of global variables that need to be available in all test environments
   // globals: {},
 
+<<<<<<< HEAD
+=======
+  // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
+>>>>>>> 994c804 (Adds jest test coverage of request-metrics.js)
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
