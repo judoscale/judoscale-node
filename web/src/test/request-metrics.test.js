@@ -1,49 +1,37 @@
-import assert from 'assert'
+/* global test, expect */
+
 import RequestMetrics from '../lib/request-metrics'
 
-export default {
-  queueTimeFromHeaders: {
-    handleHerokuRouterFormat() {
-      // request started 100ms before now
-      const now = new Date('2012-12-12T12:12:12.012Z')
-      const requestStart = new Date(now.getTime() - 100).getTime().toString()
-      const headers = { 'x-request-start': requestStart }
+test('Handle Heroku router format', () => {
+  const now = new Date('2012-12-12T12:12:12.012Z')
+  const requestStart = new Date(now.getTime() - 100).getTime().toString()
+  const headers = { 'x-request-start': requestStart }
 
-      const queued = RequestMetrics.queueTimeFromHeaders(headers, now)
+  expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(100)
+})
 
-      assert.equal(queued, 100)
-    },
+test('Handle Nginx format', () => {
+  const now = new Date('2012-12-12T12:12:12.012Z')
+  const requestStart = `t=${(
+    new Date(now.getTime() - 100).getTime() / 1000
+  ).toString()}`
+  const headers = { 'x-request-start': requestStart }
 
-    handleNginxFormat() {
-      // request started 100ms before now
-      const now = new Date('2012-12-12T12:12:12.012Z')
-      const requestStart = `t=${(
-        new Date(now.getTime() - 100).getTime() / 1000
-      ).toString()}`
-      const headers = { 'x-request-start': requestStart }
+  expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(100)
+})
 
-      const queued = RequestMetrics.queueTimeFromHeaders(headers, now)
+test('Handle negative queue time', () => {
+  const now = new Date('2012-12-12T12:12:12.012Z')
+  const requestStart = new Date(now.getTime() + 100).getTime().toString()
+  const headers = { 'x-request-start': requestStart }
 
-      assert.equal(queued, 100)
-    },
+  expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(0)
+})
 
-    handleNegativeQueueTime() {
-      // request started 100ms *after* now
-      const now = new Date('2012-12-12T12:12:12.012Z')
-      const requestStart = new Date(now.getTime() + 100).getTime().toString()
-      const headers = { 'x-request-start': requestStart }
+test('Handle missing header', () => {
+  expect(RequestMetrics.queueTimeFromHeaders({})).toBe(null)
+})
 
-      const queued = RequestMetrics.queueTimeFromHeaders(headers, now)
-
-      assert.equal(queued, 0)
-    },
-
-    handleMissingHeader() {
-      const headers = {}
-
-      const queued = RequestMetrics.queueTimeFromHeaders(headers)
-
-      assert.equal(queued, null)
-    }
-  }
-}
+test('Request ID from headers', () => {
+  expect(RequestMetrics.requestId({ 'x-request-id': 'someidvalue' })).toBe('someidvalue')
+})

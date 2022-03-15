@@ -16,6 +16,12 @@
       "comma-dangle": [2, "never"],
       "no-console": 0,
       "no-cond-assign": 0,
-      "class-methods-use-this": 0
+      "class-methods-use-this": 0,
+      "max-len": [
+        "error",
+        {
+          "code": 160
+        }
+      ]
     }
 }

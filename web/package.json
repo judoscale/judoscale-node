@@ -4,7 +4,7 @@
   "description": "NodeJS adapter for the JudoScale autoscaling add-on for Heroku",
   "main": "dist/index.js",
   "scripts": {
-    "test": "teenytest dist/test/**/*.test.js --helper dist/test/helper.js",
+    "test": "jest src/test/*.test.js",
     "style": "npx eslint src/**",
     "build": "npx babel src --out-dir dist",
     "start": "npx babel src --watch --out-dir dist"
@@ -19,9 +19,11 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.5.1",
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.5.1",
     "teenytest": "^6.0.2"
   },
   "dependencies": {
