@@ -9,13 +9,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
   web_coverage:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           working-directory: ./web
