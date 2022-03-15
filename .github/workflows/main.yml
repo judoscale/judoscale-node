@@ -16,9 +16,12 @@ jobs:
   web_coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: ArtiomTr/jest-coverage-report-action@v2
-        working-directory: ./web
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Coverage Report
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: ./web
   # build:
   #   # The type of runner that the job will run on
   #   runs-on: ubuntu-latest
