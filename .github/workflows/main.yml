@@ -14,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
   web_coverage:
-    - uses: ArtiomTr/jest-coverage-report-action@v2
-      with:
-        working-directory: ./web
-        annotations: none
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: ./web
+          annotations: none
