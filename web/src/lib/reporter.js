@@ -3,7 +3,6 @@ import Registration from './registration'
 import Api from './api'
 import Report from './report'
 import forever from 'async/forever'
-// import worker from 'worker_threads'
 
 class Reporter {
   constructor() {
@@ -16,7 +15,6 @@ class Reporter {
       this.started = true
       const collectors = [new WebMetricsCollector(store)]
 
-      // Should spawn a new thread
       forever(async (next) => {
         if (!this.isRegistered()) {
           await this.register(config, collectors)
@@ -36,7 +34,6 @@ class Reporter {
   }
 
   stop() {
-    // should handle Thread termination
     this.registered = false
     this.started = false
   }
