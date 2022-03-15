@@ -15,7 +15,7 @@ on:
 jobs:
   web_coverage:
     runs-on: ubuntu-latest
-    with:
+    defaults:
       working-directory: './web'
     steps:
       - uses: actions/checkout@v1
