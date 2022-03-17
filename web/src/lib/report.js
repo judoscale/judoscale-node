@@ -8,7 +8,8 @@
   * @param {Array[Metric]} metrics - Metrics collected
   */
 class Report {
-  constructor(config, metrics = []) {
+  constructor(adapter, config, metrics = []) {
+    this.adapter = adapter
     this.config = config
     this.metrics = metrics
   }
@@ -16,6 +17,8 @@ class Report {
   payload() {
     return {
       dyno: this.config.dyno,
+      pid: process.pid,
+      adapters: this.adapter.asJson(),
       metrics: (this.metrics.map((metric) => [
         (metric.time.getTime() / 1000),
         metric.value,
