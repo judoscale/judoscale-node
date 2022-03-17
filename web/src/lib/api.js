@@ -11,12 +11,8 @@ class Api {
     this.base_url = config.api_base_url
   }
 
-  registerReporter(registrationJson) {
-    return this.postJson('/adapter/v1/registrations', { registration: registrationJson })
-  }
-
   reportMetrics(reportJson) {
-    return this.postJson('/adapter/v1/metrics', reportJson)
+    return this.postJson('/v1/metrics', reportJson)
   }
 
   postJson(path, data) {
