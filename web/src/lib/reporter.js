@@ -50,18 +50,18 @@ class Reporter {
     const registration = new Registration(collectors)
     await new Api(config).registerReporter(registration.asJson()).then(async () => {
       this.registered = true
-      // const collectorsMsg = collectors.map((collector) => collector.collectorName).join(',')
+      const collectorsMsg = collectors.map((collector) => collector.collectorName).join(',')
 
-      // config.log(`Reporter starting, Metrics collectors: [${collectorsMsg}]`)
+      config.log(`Reporter starting, Metrics collectors: [${collectorsMsg}]`)
     })
   }
 
   async report(config, metrics) {
     const report = new Report(config, metrics)
-    // config.log(`Reporting ${report.metrics.length} metrics`)
+    config.log(`Reporting ${report.metrics.length} metrics`)
 
     await new Api(config).reportMetrics(report.payload()).then(async () => {
-      // config.log('Reported successfully')
+      config.log('Reported successfully')
     })
   }
 }
