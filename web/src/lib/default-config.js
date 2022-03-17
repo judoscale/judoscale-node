@@ -4,9 +4,10 @@
  */
 
 import fs from 'fs'
+import logger from './logger'
 
 const defaultConfig = {
-  log: console.log,
+  log: logger.log,
   prefix: '[judoscale] ',
   now: null,
   api_base_url: process.env.JUDOSCALE_URL,
