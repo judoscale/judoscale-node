@@ -1,4 +1,4 @@
-/* global test, expect */
+/* global test, expect, describe */
 
 import RequestMetrics from '../lib/request-metrics'
 
