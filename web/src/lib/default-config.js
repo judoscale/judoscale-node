@@ -3,7 +3,6 @@
  * @author Carlos Marques
  */
 
-import fs from 'fs'
 import logger from './logger'
 
 const defaultConfig = {
@@ -13,7 +12,7 @@ const defaultConfig = {
   now: null,
   api_base_url: process.env.JUDOSCALE_URL,
   dyno: process.env.DYNO,
-  version: JSON.parse(fs.readFileSync('../../../package.json')).version,
+  version: '1.0.3',
   report_interval_seconds: 10
 }
 
