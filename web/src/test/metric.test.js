@@ -15,4 +15,8 @@ describe('Metric', () => {
   test('time property converts its value to UTC', () => {
     expect(metric.time).toEqual(new Date(time.toUTCString()))
   })
+
+  test('value property converts its value to Number', () => {
+    expect(metric.value).toBe(1234)
+  })
 })
