@@ -34,5 +34,10 @@ describe('RequestMetrics', () => {
       expect(RequestMetrics.queueTimeFromHeaders({})).toBe(null)
     })
   })
+
+  describe('requestId', () => {
+    test('Request ID from headers', () => {
+      expect(RequestMetrics.requestId({ 'x-request-id': 'someidvalue' })).toBe('someidvalue')
+    })
   })
 })
