@@ -8,4 +8,7 @@ const value = '1234'
 const metric = new Metric(identifier, time, value)
 
 describe('Metric', () => {
+  test('identifier property', () => {
+    expect(metric.identifier).toBe(identifier)
+  })
 })
