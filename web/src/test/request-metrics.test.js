@@ -29,5 +29,10 @@ describe('RequestMetrics', () => {
 
       expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(0)
     })
+
+    test('Handle missing header', () => {
+      expect(RequestMetrics.queueTimeFromHeaders({})).toBe(null)
+    })
+  })
   })
 })
