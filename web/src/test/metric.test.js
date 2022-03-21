@@ -1,4 +1,4 @@
-/* global test, expect */
+/* global test, expect, describe */
 
 import Metric from '../lib/metric'
 
