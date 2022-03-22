@@ -11,14 +11,8 @@ const logger = winston.createLogger({
   defaultMeta: { service: 'judoscale-node-adapter' }
 })
 
-if (process.env.NODE_ENV !== 'dontreallymatterbythispoint') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.simple()
-  }))
-} else {
-  logger.add(new winston.transports.File({
-    filename: `${process.env.NODE_ENV}.log`
-  }))
-}
+logger.add(new winston.transports.Console({
+  format: winston.format.simple()
+}))
 
 export default logger
