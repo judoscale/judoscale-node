@@ -22,10 +22,6 @@ class Adapter {
 
     return data
   }
-
-  stringifiedCollectors() {
-    return this.collectors.map((collector) => collector.collectorName).join(',')
-  }
 }
 
 export default Adapter
