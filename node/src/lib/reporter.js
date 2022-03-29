@@ -7,11 +7,11 @@ class Reporter {
     this.started = this.hasStarted() || false
   }
 
-  start(config, store, collectors, adapter) {
+  start(config, store, collectors, Adapter) {
     if (!this.hasStarted()) {
       this.started = true
 
-      const adapter = new adapter(collectors)
+      const adapter = new Adapter(collectors)
       const adapterMsg = adapter.identifier
 
       config
