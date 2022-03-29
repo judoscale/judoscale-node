@@ -12,7 +12,7 @@ import Report from './lib/report'
 import Reporter from './lib/reporter'
 
 export {
-  Api
+  Api,
   defaultConfig,
   logger,
   Metric,
