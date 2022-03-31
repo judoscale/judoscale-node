@@ -1,9 +1,9 @@
 /* global test, expect, describe, jest */
 
 import WebMetricsCollector from '../lib/web-metrics-collector'
-import MetricsStore from '../lib/metrics-store'
+import { MetricsStore } from 'judoscale-node'
 
-jest.mock('../lib/metrics-store')
+jest.mock('judoscale-node')
 
 const store = new MetricsStore()
 
