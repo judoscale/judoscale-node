@@ -1,7 +1,7 @@
 /* global test, expect, describe */
 
+import { defaultConfig } from 'judoscale-node'
 import Adapter from '../lib/adapter'
-import defaultConfig from '../lib/default-config'
 
 const collectors = [{ a: 'collector' }]
 const adapter = new Adapter(collectors)
