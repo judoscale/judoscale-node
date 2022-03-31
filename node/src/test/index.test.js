@@ -1,7 +1,7 @@
 /* global test, expect, describe */
 
 import {
-  Api, defaultConfig, logger, Metric, MetricStore, Report, Reporter
+  Api, defaultConfig, logger, Metric, MetricsStore, Report, Reporter
 } from '../index'
 
 describe('exports', () => {
@@ -22,7 +22,7 @@ describe('exports', () => {
   })
 
   test('MetricStore', () => {
-    expect(MetricStore).toBeDefined()
+    expect(MetricsStore).toBeDefined()
   })
 
   test('Report', () => {
