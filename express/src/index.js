@@ -1,7 +1,9 @@
+import defaultConfig from 'judoscale-node'
+import MetricStore from 'judoscale-node'
+import Reporter from 'judoscale-node'
 import requestMetrics from './lib/request-metrics'
-import defaultConfig from './lib/default-config'
-import MetricStore from './lib/metrics-store'
-import Reporter from './lib/reporter'
+import WebMetricsCollector from './lib/web-metrics-collector'
+import Adapter from './lib/adapter'
 /**
  * Construct a middleware function for logging request queue time in whole milliseconds.
  * Log output looks like: [judoscale] queued=123
@@ -16,9 +18,10 @@ export default (config) => {
   const finalConfig = { ...defaultConfig, ...config }
 
   const store = new MetricStore()
+  const collectors = [new WebMetricsCollector(store)]
   const reporter = new Reporter()
 
-  reporter.start(finalConfig, store)
+  reporter.start(finalConfig, store, collectors, Adapter)
 
   return ({ headers }, _res, next) => {
     const now = finalConfig.now || new Date()
