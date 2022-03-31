@@ -8,7 +8,7 @@ import { defaultConfig } from 'judoscale-node'
 class Adapter {
   constructor(collectors) {
     this.collectors = collectors
-    this.identifier = 'judoscale-node'
+    this.identifier = 'judoscale-express'
     this.adapter_version = defaultConfig.version
     this.language_version = process.version
   }
