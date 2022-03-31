@@ -12,7 +12,7 @@ describe('constructor', () => {
   })
 
   test('identifier property', () => {
-    expect(adapter.identifier).toEqual('judoscale-node')
+    expect(adapter.identifier).toEqual('judoscale-bull')
   })
 
   test('adapter_version property', () => {
