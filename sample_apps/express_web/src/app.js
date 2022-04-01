@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 import express from 'express'
-import judoscale from 'judoscale-node'
+import judoscale from 'judoscale-express'
 
 const app = express()
 const port = process.env.PORT || 5000
