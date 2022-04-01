@@ -12,7 +12,7 @@ const defaultConfig = {
   now: null,
   api_base_url: process.env.JUDOSCALE_URL,
   dyno: process.env.DYNO,
-  version: '1.0.3',
+  version: '1.0.1',
   report_interval_seconds: 10
 }
 
