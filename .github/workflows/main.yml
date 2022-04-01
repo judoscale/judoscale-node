@@ -8,27 +8,27 @@ on:
 
   workflow_dispatch:
 
-defaults:
-  runs-on: ubuntu-latest
-
 jobs:
   express_coverage:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           working-directory: ./express
           annotations: none
   node_coverage:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           working-directory: ./node
           annotations: none
   bull_coverage:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           working-directory: ./bull
