@@ -5,6 +5,7 @@ import forever from 'async/forever'
 class Reporter {
   constructor() {
     this.started = this.hasStarted() || false
+    this.reporting = true
   }
 
   start(config, store, collectors, Adapter) {
@@ -18,16 +19,18 @@ class Reporter {
         .logger
         .info(`Reporter starting, will report every ${config.report_interval_seconds} seconds or so. Adapters: [${adapterMsg}]`)
 
-      forever(async (next) => {
-        const interval = (1 - (Math.random() / 4)) * (config.report_interval_seconds * 1000)
+      forever((next) => {
+        if (this.reporting) {
+          config.log('Reporting....')
+          this.reporting = false
+          setTimeout(() => {
+            const metrics = collectors.map((collector) => collector.collect()).flat()
 
-        await setTimeout(() => {
-          const metrics = collectors.map((collector) => collector.collect()).flat()
+            this.report(adapter, config, metrics)
+          }, ((1 - (Math.random() / 4)) * (config.report_interval_seconds * 1000)))
+        }
 
-          this.report(adapter, config, metrics)
-
-          next()
-        }, interval)
+        next()
       })
     }
   }
@@ -40,11 +43,12 @@ class Reporter {
     return this.started
   }
 
-  async report(adapter, config, metrics) {
+  report(adapter, config, metrics) {
     const report = new Report(adapter, config, metrics)
     config.logger.info(`Reporting ${report.metrics.length} metrics`)
 
-    await new Api(config).reportMetrics(report.payload()).then(async () => {
+    new Api(config).reportMetrics(report.payload()).then(async () => {
+      this.reporting = true
       config.logger.info('Reported successfully')
     })
   }
