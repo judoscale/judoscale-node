@@ -1,5 +1,4 @@
 /* global test, expect, describe */
-/* ok go */
 
 import {
   Api, defaultConfig, logger, Metric, MetricsStore, Report, Reporter
