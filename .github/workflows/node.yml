@@ -1,0 +1,20 @@
+name: Node Core
+
+on:
+  push:
+    paths:
+      - 'node/**'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  node_coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: ./node
+          annotations: none
