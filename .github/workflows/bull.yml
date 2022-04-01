@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  bull_coverage:
+  specs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
