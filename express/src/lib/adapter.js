@@ -3,7 +3,7 @@
  * @author Carlos Marques
  */
 
-import { defaultConfig } from 'judoscale-node'
+import { defaultConfig } from 'judoscale-node-core'
 
 class Adapter {
   constructor(collectors) {
