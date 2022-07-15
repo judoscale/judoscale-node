@@ -1,8 +1,3 @@
-/**
- * @fileoverview Handles requests to Judoscale's backend
- * @author Carlos Marques
- */
-
 import unirest from 'unirest'
 
 class Api {
@@ -18,9 +13,7 @@ class Api {
   postJson(path, data) {
     this.config.logger.debug(`[Judoscale] Posting to ${this.base_url}${path}`)
 
-    return unirest.post(`${this.base_url}${path}`)
-      .headers({ 'Content-Type': 'application/json' })
-      .send(data)
+    return unirest.post(`${this.base_url}${path}`).headers({ 'Content-Type': 'application/json' }).send(data)
   }
 }
 

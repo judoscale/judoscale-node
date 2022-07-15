@@ -1,8 +1,3 @@
-/**
- * @fileoverview Grab Bull's queues names from Redis
- * @author Carlos Marques
- */
-
 import redisClient from './lib/redis-client'
 
 export default (async () => {
@@ -15,7 +10,7 @@ export default (async () => {
     if (match) {
       return {
         prefix: match[1],
-        name: match[2]
+        name: match[2],
       }
     }
 

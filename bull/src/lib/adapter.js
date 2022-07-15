@@ -1,8 +1,3 @@
-/**
- * @fileoverview Adapter metadata class
- * @author Carlos Marques
- */
-
 import { defaultConfig } from 'judoscale-node-core'
 
 class Adapter {
@@ -17,7 +12,7 @@ class Adapter {
     const data = {}
     data[this.identifier] = {
       adapter_version: this.adapter_version,
-      language_version: this.language_version
+      language_version: this.language_version,
     }
 
     return data

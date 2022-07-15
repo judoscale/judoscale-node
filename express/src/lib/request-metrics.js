@@ -1,8 +1,3 @@
-/**
- * @fileoverview Calculates the request queue time based on the X-Request-Start header.
- * @author Carlos Marques
- */
-
 function queueTimeFromHeaders(headers, now) {
   // Heroku sets the header as integer milliseconds.
   // NGINX sets the header as fractional sections preceeded by "t=".
@@ -24,5 +19,5 @@ function requestId(headers) {
 
 export default {
   queueTimeFromHeaders,
-  requestId
+  requestId,
 }

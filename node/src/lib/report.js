@@ -1,12 +1,7 @@
 /**
- * @fileoverview Generates the JSON payload for the dyno metrics.
- * @author Carlos Marques
+ * @param {Object} config - Client settings
+ * @param {Array[Metric]} metrics - Metrics collected
  */
-
-/**
-  * @param {Object} config - Client settings
-  * @param {Array[Metric]} metrics - Metrics collected
-  */
 class Report {
   constructor(adapter, config, metrics = []) {
     this.adapter = adapter
@@ -19,12 +14,12 @@ class Report {
       dyno: this.config.dyno,
       pid: process.pid,
       adapters: this.adapter.asJson(),
-      metrics: (this.metrics.map((metric) => [
-        (metric.time.getTime() / 1000),
+      metrics: this.metrics.map((metric) => [
+        metric.time.getTime() / 1000,
         metric.value,
         metric.identifier,
-        metric.queueName
-      ]))
+        metric.queueName,
+      ]),
     }
   }
 }

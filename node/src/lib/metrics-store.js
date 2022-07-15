@@ -1,8 +1,3 @@
-/**
- * @fileoverview Mem based metrics storage
- * @author Carlos Marques
- */
-
 import Metric from './metric'
 
 class MetricsStore {
@@ -12,7 +7,7 @@ class MetricsStore {
   }
 
   push(identifier, value, time = new Date(), queueName = null) {
-    if (this.flushedAt && this.flushedAt < new Date((new Date() - 120000))) {
+    if (this.flushedAt && this.flushedAt < new Date(new Date() - 120000)) {
       return false
     }
 
@@ -30,7 +25,7 @@ class MetricsStore {
 
     let metric = null
 
-    while (metric = this.metrics.shift()) {
+    while ((metric = this.metrics.shift())) {
       flushedMetrics.push(metric)
     }
 
