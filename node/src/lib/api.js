@@ -16,6 +16,8 @@ class Api {
   }
 
   postJson(path, data) {
+    this.config.logger.debug(`[Judoscale] Posting to ${this.base_url}${path}`)
+
     return unirest.post(`${this.base_url}${path}`)
       .headers({ 'Content-Type': 'application/json' })
       .send(data)

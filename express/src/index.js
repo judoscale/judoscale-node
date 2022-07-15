@@ -18,7 +18,8 @@ export default (config) => {
     const now = finalConfig.now || new Date()
     const queueTime = requestMetrics.queueTimeFromHeaders(headers, now)
 
-    if (queueTime) {
+    if (queueTime !== null) {
+      finalConfig.logger.debug(`[Judoscale] queue_time=${queueTime}ms request_id=${requestMetrics.requestId(headers)}`)
       store.push('qt', queueTime)
     }
 
