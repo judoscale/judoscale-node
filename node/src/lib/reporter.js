@@ -21,16 +21,16 @@ class Reporter {
 
       forever((next) => {
         if (this.reporting) {
-          config.log('Reporting....')
+          config.logger.info('Reporting....')
           this.reporting = false
           setTimeout(() => {
             const metrics = collectors.map((collector) => collector.collect()).flat()
 
             this.report(adapter, config, metrics)
+
+            next()
           }, ((1 - (Math.random() / 4)) * (config.report_interval_seconds * 1000)))
         }
-
-        next()
       })
     }
   }
