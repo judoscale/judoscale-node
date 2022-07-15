@@ -5,7 +5,6 @@ import forever from 'async/forever'
 class Reporter {
   constructor() {
     this.started = this.hasStarted() || false
-    this.reporting = true
   }
 
   start(config, store, collectors, Adapter) {
@@ -17,20 +16,16 @@ class Reporter {
 
       config
         .logger
-        .info(`Reporter starting, will report every ${config.report_interval_seconds} seconds or so. Adapters: [${adapterMsg}]`)
+        .info(`[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`)
 
       forever((next) => {
-        if (this.reporting) {
-          config.logger.info('Reporting....')
-          this.reporting = false
-          setTimeout(() => {
-            const metrics = collectors.map((collector) => collector.collect()).flat()
+        setTimeout(() => {
+          const metrics = collectors.map((collector) => collector.collect()).flat()
 
-            this.report(adapter, config, metrics)
+          this.report(adapter, config, metrics)
 
-            next()
-          }, ((1 - (Math.random() / 4)) * (config.report_interval_seconds * 1000)))
-        }
+          next()
+        }, config.report_interval_seconds * 1000)
       })
     }
   }
@@ -45,11 +40,10 @@ class Reporter {
 
   report(adapter, config, metrics) {
     const report = new Report(adapter, config, metrics)
-    config.logger.info(`Reporting ${report.metrics.length} metrics`)
+    config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
     new Api(config).reportMetrics(report.payload()).then(async () => {
-      this.reporting = true
-      config.logger.info('Reported successfully')
+      config.logger.debug('[Judoscale] Reported successfully')
     })
   }
 }
