@@ -11,18 +11,23 @@ class Reporter {
     if (!this.hasStarted()) {
       this.started = true
 
+      if (!config.api_base_url) {
+        config.logger.info(`[Judoscale] Reporter not started: JUDOSCALE_URL is not set`)
+        return
+      }
+
       const adapter = new Adapter(collectors)
       const adapterMsg = adapter.identifier
 
-      config
-        .logger
-        .info(`[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`)
+      config.logger.info(
+        `[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`
+      )
+
+      this.report(adapter, config, collectors)
 
       forever((next) => {
         setTimeout(() => {
-          const metrics = collectors.map((collector) => collector.collect()).flat()
-
-          this.report(adapter, config, metrics)
+          this.report(adapter, config, collectors)
 
           next()
         }, config.report_interval_seconds * 1000)
@@ -38,7 +43,8 @@ class Reporter {
     return this.started
   }
 
-  report(adapter, config, metrics) {
+  report(adapter, config, collectors) {
+    const metrics = collectors.map((collector) => collector.collect()).flat()
     const report = new Report(adapter, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
