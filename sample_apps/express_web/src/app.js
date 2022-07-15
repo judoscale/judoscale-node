@@ -9,11 +9,15 @@ const port = process.env.PORT || 5000
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-app.use(judoscale())
+app.use(
+  judoscale({
+    api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+  })
+)
 
 app.get('/', (req, res) => {
   res.render('index', {
-    judoscaleIsInstalled: process.env.JUDOSCALE_URL
+    judoscaleIsInstalled: process.env.JUDOSCALE_URL,
   })
 })
 
