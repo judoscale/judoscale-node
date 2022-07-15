@@ -14,10 +14,6 @@ describe('defaultConfig', () => {
     expect(defaultConfig).toHaveProperty('log')
   })
 
-  test('has prefix property', () => {
-    expect(defaultConfig).toHaveProperty('prefix', '[judoscale] ')
-  })
-
   test('has now property', () => {
     expect(defaultConfig).toHaveProperty('now', null)
   })
@@ -36,10 +32,5 @@ describe('defaultConfig', () => {
 
   test('has report_interval_seconds property', () => {
     expect(defaultConfig).toHaveProperty('report_interval_seconds', 10)
-  })
-
-  test('log property wraps logger log()', () => {
-    defaultConfig.log('log')
-    expect(logger.log).toHaveBeenCalledWith({ level: 'debug', message: 'log' })
   })
 })

@@ -1,16 +1,8 @@
-import logger from './logger'
-
-const defaultConfig = {
-  logger,
-  log: (message, level = 'debug') => {
-    logger.log({ level, message })
-  },
-  prefix: '[judoscale] ',
-  now: null,
-  api_base_url: process.env.JUDOSCALE_URL,
-  dyno: process.env.DYNO,
+export default {
   version: '1.0.1',
+  api_base_url: process.env.JUDOSCALE_URL,
+  log_level: process.env.JUDOSCALE_LOG_LEVEL || 'info',
+  dyno: process.env.DYNO,
   report_interval_seconds: 10,
+  now: null,
 }
-
-export default defaultConfig

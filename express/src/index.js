@@ -1,4 +1,4 @@
-import { defaultConfig } from 'judoscale-node-core'
+import { mergeConfig } from 'judoscale-node-core'
 import { MetricsStore } from 'judoscale-node-core'
 import { Reporter } from 'judoscale-node-core'
 import requestMetrics from './lib/request-metrics'
@@ -6,7 +6,7 @@ import WebMetricsCollector from './lib/web-metrics-collector'
 import Adapter from './lib/adapter'
 
 export default (config) => {
-  const finalConfig = { ...defaultConfig, ...config }
+  const finalConfig = mergeConfig(config)
 
   const store = new MetricsStore()
   const collectors = [new WebMetricsCollector(store)]
