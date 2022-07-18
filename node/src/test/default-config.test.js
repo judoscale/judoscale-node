@@ -10,10 +10,6 @@ describe('defaultConfig', () => {
     expect(defaultConfig).toHaveProperty('logger')
   })
 
-  test('has log property', () => {
-    expect(defaultConfig).toHaveProperty('log')
-  })
-
   test('has now property', () => {
     expect(defaultConfig).toHaveProperty('now', null)
   })
