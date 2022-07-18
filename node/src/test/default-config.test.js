@@ -23,7 +23,7 @@ describe('defaultConfig', () => {
   })
 
   test('has version property', () => {
-    expect(defaultConfig).toHaveProperty('version', '1.0.4')
+    expect(defaultConfig).toHaveProperty('version', '1.0.5')
   })
 
   test('has report_interval_seconds property', () => {
