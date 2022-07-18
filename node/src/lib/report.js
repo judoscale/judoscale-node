@@ -13,6 +13,8 @@ class Report {
     return {
       dyno: this.config.dyno,
       pid: process.pid,
+      // TODO: this.config.asJson()
+      config: {},
       adapters: this.adapter.asJson(),
       metrics: this.metrics.map((metric) => [
         metric.time.getTime() / 1000,
