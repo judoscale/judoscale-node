@@ -22,6 +22,11 @@
     "express": "^4.17.2",
     "judoscale-express": "file:../../express"
   },
+  "overrides": {
+    "judoscale-express": {
+      "judoscale-node-core": "file:../../node"
+    }
+  },
   "engines": {
     "node": "16.X"
   }
