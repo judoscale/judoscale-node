@@ -7,7 +7,7 @@ class Api {
   }
 
   reportMetrics(reportJson) {
-    return this.postJson('/v1/metrics', reportJson)
+    return this.postJson('/v3/reports', reportJson)
   }
 
   postJson(path, data) {

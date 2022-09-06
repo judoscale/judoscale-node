@@ -31,7 +31,7 @@ describe('reportMetrics', () => {
   test('Makes POST request to the api metrics endpoint', () => {
     api.reportMetrics({})
 
-    expect(unirest.post).toHaveBeenCalledWith(`${api.base_url}/v1/metrics`)
+    expect(unirest.post).toHaveBeenCalledWith(`${api.base_url}/v3/reports`)
     expect(unirest.headers).toHaveBeenCalledWith({ 'Content-Type': 'application/json' })
     expect(unirest.send).toHaveBeenCalledWith({})
   })
