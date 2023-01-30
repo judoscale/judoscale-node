@@ -13,7 +13,11 @@ npm install judoscale-express --save
 2. Import and use the provided middleware:
 
 ```javascript
+// ES6-style import:
 import judoscale from 'judoscale-express'
+
+// Or if you use `require` for importing:
+const judoscale = require('judoscale-express').default
 
 // default configuration
 app.use(judoscale())
