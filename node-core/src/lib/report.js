@@ -11,7 +11,7 @@ class Report {
 
   payload() {
     return {
-      dyno: this.config.dyno,
+      container: this.config.container,
       pid: process.pid,
       // TODO: this.config.asJson()
       config: {},

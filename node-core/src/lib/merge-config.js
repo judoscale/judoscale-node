@@ -2,7 +2,7 @@ import getLogger from './logger'
 import defaultConfig from './default-config'
 
 export default (config) => {
-  const mergedConfig = { ...defaultConfig, ...config }
+  const mergedConfig = { ...defaultConfig(), ...config }
 
   return {
     ...mergedConfig,

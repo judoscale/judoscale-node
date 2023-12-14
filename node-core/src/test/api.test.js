@@ -1,7 +1,7 @@
 /* global test, expect, describe, jest */
 
 import Api from '../lib/api'
-import defaultConfig from '../lib/default-config'
+import defaultConfigFunction from '../lib/default-config'
 import unirest from 'unirest'
 
 jest.mock('unirest', () => {
@@ -11,10 +11,11 @@ jest.mock('unirest', () => {
     ...originalModule,
     post: jest.fn().mockReturnThis(),
     headers: jest.fn().mockReturnThis(),
-    send: jest.fn().mockResolvedValue({})
+    send: jest.fn().mockResolvedValue({}),
   }
 })
 
+const defaultConfig = defaultConfigFunction()
 const api = new Api(defaultConfig)
 
 describe('constructor', () => {
