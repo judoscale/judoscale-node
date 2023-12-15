@@ -1,4 +1,5 @@
 import getLogger from './logger'
+import packageInfo from '../../package.json'
 
 export default function () {
   const defaultLogLevel = process.env.JUDOSCALE_LOG_LEVEL || 'info'
@@ -17,7 +18,7 @@ export default function () {
   }
 
   return {
-    version: '1.1.0',
+    version: packageInfo.version,
     api_base_url: apiBaseUrl,
     log_level: defaultLogLevel,
     container: containerID,
