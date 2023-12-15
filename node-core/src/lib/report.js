@@ -13,8 +13,8 @@ class Report {
     return {
       container: this.config.container,
       pid: process.pid,
-      // TODO: this.config.asJson()
-      config: {},
+      // Convert logger (DerivedLogger instance) into something sane
+      config: { ...this.config, logger: this.config.logger && this.config.logger.constructor.name },
       adapters: this.adapter.asJson(),
       metrics: this.metrics.map((metric) => [
         metric.time.getTime() / 1000,

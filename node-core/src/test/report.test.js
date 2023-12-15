@@ -42,4 +42,9 @@ describe('payload', () => {
   test('adapters with property value', () => {
     expect(payload).toHaveProperty('adapters', report.adapter.asJson())
   })
+
+  test('config with property value', () => {
+    expect(typeof payload.config).toEqual('object')
+    expect(payload.config.container).toEqual('web.007')
+  })
 })

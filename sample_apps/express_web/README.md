@@ -4,7 +4,7 @@ A tiny Node.js app for testing Judoscale.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/judoscale/judoscale-sample-express)
 
-___
+---
 
 ### Local Run
 
@@ -17,25 +17,20 @@ ___
   ```shell
   touch .env && echo "NODE_ENV=development" >> .env
   ```
-- Install dependencies:
+- Install dependencies. Note that we're using `yarn` instead of `npm` so we can use "resolutions". More on this below.
   ```shell
-  npm install
+  yarn install
   ```
 - Then run the app:
+
 ```shell
 bin/dev
 ```
 
 This will run not only the app but also Judoscale proxy so you can check the metrics being collected by it.
 
-In case you are working on one of Judoscale's adapters within this project you can replace the **NPM** published one for a local version.
+Note that the sample app uses the NPM registry version of judoscale-express, but the local version of judoscale-node-core. If you want to use the local version of judoscale-express, change the `resolutions` in `package.json`.
 
-- Uninstall the original package
-  ```shell
-  npm uninstall judoscale-node
-  ```
+There doesn't seem to be a way to use _both_ local versions of judoscale-express and judoscale-node-core at the same time. When you use the local version of judoscale-express, the transitive dependency judoscale-node-core dependency will always be the register version, even if you include the local override in `resolutions`.
 
-- Replace it with the local copy
-```shell
-npm install "../../web"
-```
+You could temporarily fix this by updating the `package.json` in judoscale-express, but make sure you don't commit that change.
