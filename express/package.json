@@ -1,6 +1,6 @@
 {
   "name": "judoscale-express",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ExpressJS adapter for the JudoScale autoscaling add-on for Heroku",
   "main": "dist/index.js",
   "scripts": {
