@@ -12,6 +12,8 @@ npm install judoscale-express --save
 
 2. Import and use the provided middleware:
 
+**Judoscale should be one of the first middlewares for your app.**
+
 ```javascript
 // ES6-style import:
 import judoscale from 'judoscale-express'

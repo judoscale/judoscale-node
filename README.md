@@ -30,7 +30,10 @@ In production, run `heroku logs -t | grep Judoscale`, and you should see somethi
 
 > [Judoscale] Reporter starting, will report every 10 seconds
 
-If you don't see either of these, ensure "judoscale-express" is in your `Package.lock` file, and restart your app.
+If you don't see any Judoscale logging, check the following:
+
+- Make sure "judoscale-express" is in your `Package.lock` file, and restart your app.
+- Make sure Judoscale is one of the first middlewares for your app.
 
 You can see more detailed (debug) logging by setting `JUDOSCALE_LOG_LEVEL` on your Heroku app:
 
