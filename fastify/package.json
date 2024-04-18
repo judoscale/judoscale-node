@@ -2,9 +2,9 @@
   "name": "judoscale-fastify",
   "version": "1.0.0",
   "description": "Fastify plugin for the Judoscale autoscaler",
-  "main": "index.js",
+  "main": "plugin.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "fastify",
-    "autoscale"
+    "autoscale",
+    "nodejs"
   ],
   "author": "Adam McCrea",
   "license": "MIT",
