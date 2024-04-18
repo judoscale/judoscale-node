@@ -23,5 +23,9 @@
   "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "fastify": "^4.26.2",
+    "judoscale-node-core": "^1.2.0"
   }
 }
