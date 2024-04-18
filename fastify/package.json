@@ -2,7 +2,7 @@
   "name": "judoscale-fastify",
   "version": "1.0.0",
   "description": "Fastify plugin for the Judoscale autoscaler",
-  "main": "plugin.js",
+  "main": "src/plugin.js",
   "scripts": {
     "test": "jest",
     "lint": "npx standard"

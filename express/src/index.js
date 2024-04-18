@@ -1,8 +1,4 @@
-import { mergeConfig } from 'judoscale-node-core'
-import { MetricsStore } from 'judoscale-node-core'
-import { Reporter } from 'judoscale-node-core'
-import requestMetrics from './lib/request-metrics'
-import WebMetricsCollector from './lib/web-metrics-collector'
+import { mergeConfig, Reporter, MetricsStore, requestMetrics, WebMetricsCollector } from 'judoscale-node-core'
 import Adapter from './lib/adapter'
 
 export default (config) => {

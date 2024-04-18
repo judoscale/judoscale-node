@@ -8,6 +8,7 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "fastify": "^4.26.2"
+    "fastify": "^4.26.2",
+    "judoscale-fastify": "1.0.0"
   }
 }

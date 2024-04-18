@@ -29,6 +29,8 @@ bin/dev
 
 This will run not only the app but also Judoscale proxy so you can check the metrics being collected by it.
 
+http://localhost:5004
+
 Note that the sample app uses the NPM registry version of judoscale-express, but the local version of judoscale-node-core. If you want to use the local version of judoscale-express, change the `resolutions` in `package.json`.
 
 There doesn't seem to be a way to use _both_ local versions of judoscale-express and judoscale-node-core at the same time. When you use the local version of judoscale-express, the transitive dependency judoscale-node-core dependency will always be the register version, even if you include the local override in `resolutions`.

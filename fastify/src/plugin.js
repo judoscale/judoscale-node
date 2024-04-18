@@ -1,15 +1,19 @@
 const fp = require('fastify-plugin')
-const { MetricsStore } = require('judoscale-node-core')
+const { mergeConfig, Reporter, MetricsStore, requestMetrics, WebMetricsCollector } = require('judoscale-node-core')
+const Adapter = require('./adapter')
 
 async function judoscaleFastify(fastify, options) {
   // Allow injection for testing
   const metricsStore = options.metricsStore || new MetricsStore()
+  const finalConfig = mergeConfig(options)
+  const collectors = [new WebMetricsCollector(metricsStore)]
+  const reporter = new Reporter()
+
+  reporter.start(finalConfig, metricsStore, collectors, Adapter)
 
   fastify.addHook('onRequest', async (request, _reply) => {
     try {
-      const startTime = Date.now()
-      const requestStart = parseInt(request.headers['x-request-start']) || startTime
-      const queueTime = startTime - requestStart
+      const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
 
       metricsStore.push('qt', queueTime)
 
