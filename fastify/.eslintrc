@@ -1,0 +1,12 @@
+{
+  "extends": "standard",
+  "plugins": ["node"],
+  "rules": {
+    // Add or override rules here
+    "no-console": "off"
+  },
+  "env": {
+    "node": true,
+    "jest": true
+  }
+}
