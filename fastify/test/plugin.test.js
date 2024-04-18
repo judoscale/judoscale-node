@@ -8,7 +8,7 @@ describe('Judoscale Fastify Plugin', () => {
   beforeEach(async () => {
     metricsStore = new MetricsStore()
     app = fastify()
-    app.register(judoscalePlugin, { metricsStore: metricsStore })
+    app.register(judoscalePlugin, { metricsStore })
 
     await app.ready()
   })
