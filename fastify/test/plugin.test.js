@@ -1,22 +1,25 @@
 const fastify = require('fastify')
 const judoscalePlugin = require('../src/plugin')
+const { MetricsStore } = require('judoscale-node-core')
 
 describe('Judoscale Fastify Plugin', () => {
-  let app
+  let app, metricsStore
 
   beforeEach(async () => {
+    metricsStore = new MetricsStore()
     app = fastify()
-    app.register(judoscalePlugin)
+    app.register(judoscalePlugin, { metricsStore: metricsStore })
+
     await app.ready()
   })
 
   afterEach(() => app.close())
 
-  test('calculates and logs queue time correctly', async () => {
-    const startTime = Date.now()
-    const simulatedHeaderTime = startTime - 100 // simulate 100 ms queue time
+  test('captures queue time in MetricsStore', async () => {
+    // Simulate 100ms queue time
+    const simulatedHeaderTime = Date.now() - 100
 
-    const response = await app.inject({
+    await app.inject({
       method: 'GET',
       url: '/',
       headers: {
@@ -24,7 +27,12 @@ describe('Judoscale Fastify Plugin', () => {
       },
     })
 
-    // Assert that the log includes the correct queue time
-    expect(app.log.info).toHaveBeenCalledWith(`Queue Time: 100 ms`)
+    const metrics = metricsStore.flush()
+
+    expect(metrics.length).toEqual(1)
+
+    // Queue time should be 100-110ms
+    expect(metrics[0].value).toBeGreaterThanOrEqual(100)
+    expect(metrics[0].value).toBeLessThan(110)
   })
 })
