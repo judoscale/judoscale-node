@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/judoscale/judoscale-node/issues"
   },
-  "homepage": "https://github.com/judoscale/judoscale-node#readme"
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
