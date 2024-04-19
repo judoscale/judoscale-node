@@ -1,10 +1,11 @@
 # Judoscale
 
-These packages work together with the [Judoscale](https://judoscale.com) Heroku add-on to scale your web and worker dynos automatically. They gather a minimal set of metrics for each request or job queue, and periodically report this data asynchronously to the Judoscale API.
+These packages work together with the [Judoscale](https://judoscale.com) autoscaling service to scale your web and worker services automatically. They gather a minimal set of metrics for each request or job queue, and periodically report this data asynchronously to the Judoscale API.
 
 ## Supported frameworks
 
 - [Express](https://github.com/judoscale/judoscale-node/tree/main/express)
+- [Fastify](https://github.com/judoscale/judoscale-node/tree/main/fastify)
 
 ## What data is collected?
 
@@ -12,7 +13,7 @@ The following data is submitted periodically to the Judoscale API:
 
 - Node and framework versions
 - Judoscale package versions
-- Dyno name (example: web.1)
+- Dyno or service name (example: web.1)
 - PID
 - Queue time metrics
 
@@ -32,7 +33,7 @@ In production, run `heroku logs -t | grep Judoscale`, and you should see somethi
 
 If you don't see any Judoscale logging, check the following:
 
-- Make sure "judoscale-express" is in your `Package.lock` file, and restart your app.
+- Make sure a Judoscale package is present in your `Package.lock` file, and restart your app.
 - Make sure Judoscale is one of the first middlewares for your app.
 
 You can see more detailed (debug) logging by setting `JUDOSCALE_LOG_LEVEL` on your Heroku app:

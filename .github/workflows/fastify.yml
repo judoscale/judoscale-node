@@ -1,4 +1,4 @@
-name: Core adapter tests
+name: Fastify adapter tests
 
 on:
   push:
@@ -13,10 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [18.x, 20.x]
+        fastify-version: [3.x, 4.x]
 
     defaults:
       run:
-        working-directory: node-core
+        working-directory: fastify
 
     steps:
       - uses: actions/checkout@v3
@@ -29,6 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install Fastify ${{ matrix.fastify-version }}
+        run: npm install fastify@${{ matrix.fastify-version }}
 
       - name: Run tests
         run: npm test

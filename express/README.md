@@ -27,26 +27,18 @@ app.use(judoscale())
 // custom configuration (see config options below)
 app.use(
   judoscale({
-    report_interval_seconds: 5,
+    log_level: 'debug',
   })
 )
 ```
 
 ## Configuration
 
-Most Judoscale settings are handled via the Judoscale dashboard, but there a few ways you can configure the adapter in code:
+Most Judoscale settings are handled via the Judoscale dashboard, but there are a few ways you can configure the adapter in code:
 
 ```javascript
 app.use(
   judoscale({
-    // Specify how frequently data is sent to Judoscale.
-    // Default: 10
-    report_interval_seconds: 5,
-
-    // Specify the API endpoint.
-    // Default: process.env.JUDOSCALE_URL
-    api_base_url: 'https://judoscale-node.requestcatcher.com',
-
     // Use a custom logger instance
     // Default: Winston logger instance (simple format)
     logger: myLogger,

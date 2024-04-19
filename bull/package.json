@@ -14,7 +14,7 @@
     "autoscale"
   ],
   "author": "Carlos Marques",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
