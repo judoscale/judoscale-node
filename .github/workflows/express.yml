@@ -14,21 +14,34 @@ jobs:
       matrix:
         node-version: [18.x, 20.x]
 
-    defaults:
-      run:
-        working-directory: express
-
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
+          # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Prepare local dependency
+        run: |
+          npm install
+          npm run build
+          npm link
+        working-directory: node-core
+
+      - name: Install dependencies & link local dependency
+        run: |
+          npm install
+          npm link judoscale-node-core
+        working-directory: express
 
       - name: Run tests
         run: npm test
+        working-directory: express

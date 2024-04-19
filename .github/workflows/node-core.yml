@@ -21,14 +21,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
+          # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
+        working-directory: node-core
 
       - name: Run tests
         run: npm test
+        working-directory: node-core

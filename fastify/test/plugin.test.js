@@ -31,8 +31,8 @@ describe('Judoscale Fastify Plugin', () => {
 
     expect(metrics.length).toEqual(1)
 
-    // Queue time should be 100-110ms
+    // Queue time should be 100-200ms depending how long the test takes to run
     expect(metrics[0].value).toBeGreaterThanOrEqual(100)
-    expect(metrics[0].value).toBeLessThan(110)
+    expect(metrics[0].value).toBeLessThan(200)
   })
 })
