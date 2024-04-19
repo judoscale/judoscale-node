@@ -1,20 +1,42 @@
-name: Node Core
+name: Core adapter tests
 
 on:
   push:
-    paths:
-      - 'node-core/**'
     branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+  pull_request: {}
 
 jobs:
-  specs:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 20.x]
+
+    defaults:
+      run:
+        working-directory: node-core
+
     steps:
       - uses: actions/checkout@v3
-      - uses: ArtiomTr/jest-coverage-report-action@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          working-directory: ./node-core
-          annotations: none
+          # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: node-core
+
+      - name: Run tests
+        run: npm test
+        working-directory: node-core

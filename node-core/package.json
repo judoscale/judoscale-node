@@ -1,6 +1,6 @@
 {
   "name": "judoscale-node-core",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Core dependencies for NodeJS adapters for the JudoScale autoscaling add-on for Heroku",
   "main": "dist/index.js",
   "scripts": {
@@ -13,8 +13,8 @@
     "heroku",
     "autoscale"
   ],
-  "author": "Carlos Marques",
-  "license": "ISC",
+  "author": "Adam McCrea",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",

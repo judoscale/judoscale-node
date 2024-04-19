@@ -1,0 +1,14 @@
+{
+  "name": "fastify_web",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "npx node ./app.js"
+  },
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.26.2",
+    "judoscale-fastify": "1.0.0"
+  }
+}

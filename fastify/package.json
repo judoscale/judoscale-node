@@ -1,0 +1,46 @@
+{
+  "name": "judoscale-fastify",
+  "version": "1.3.0",
+  "description": "Fastify plugin for the Judoscale autoscaler",
+  "main": "src/plugin.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "npx standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judoscale/judoscale-node.git"
+  },
+  "keywords": [
+    "fastify",
+    "autoscale",
+    "nodejs"
+  ],
+  "author": "Adam McCrea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/judoscale/judoscale-node/issues"
+  },
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "standard": "^17.1.0"
+  },
+  "dependencies": {
+    "fastify": "^4.26.2",
+    "fastify-plugin": "^4.5.1",
+    "judoscale-node-core": "^1.3.0"
+  },
+  "peerDependencies": {
+    "fastify": "^3.0.0 || ^4.0.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "test",
+      "expect",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}
