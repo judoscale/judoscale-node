@@ -15,24 +15,30 @@ jobs:
         node-version: [18.x, 20.x]
         fastify-version: [3.x, 4.x]
 
-    defaults:
-      run:
-        working-directory: fastify
-
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
+          # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          # manual caching within our subdirectory
+          path: fastify/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('fastify/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Install Fastify ${{ matrix.fastify-version }}
-        run: npm install fastify@${{ matrix.fastify-version }}
+        run: |
+          npm install
+          npm install fastify@${{ matrix.fastify-version }}
+        working-directory: fastify
 
       - name: Run tests
         run: npm test
+        working-directory: fastify
