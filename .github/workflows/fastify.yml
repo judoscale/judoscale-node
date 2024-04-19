@@ -24,19 +24,24 @@ jobs:
           # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache Node modules
+      - name: Cache node modules
         uses: actions/cache@v2
         with:
-          # manual caching within our subdirectory
-          path: fastify/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('fastify/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install dependencies
+      - name: Prepare local dependency
+        run: |
+          npm install
+          npm run build
+          npm link
+        working-directory: node-core
+
+      - name: Install dependencies & link local dependency
         run: |
           npm install
           npm install fastify@${{ matrix.fastify-version }}
+          npm link judoscale-node-core
         working-directory: fastify
 
       - name: Run tests
