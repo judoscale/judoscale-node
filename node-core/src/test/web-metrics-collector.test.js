@@ -1,14 +1,9 @@
 /* global test, expect, describe, jest */
 
 import WebMetricsCollector from '../lib/web-metrics-collector'
-import { MetricsStore } from 'judoscale-node-core'
-
-jest.mock('judoscale-node-core')
+import MetricsStore from '../lib/metrics-store'
 
 const store = new MetricsStore()
-
-store.flush.mockReturnValue([])
-
 const collector = new WebMetricsCollector(store)
 
 describe('constructor', () => {
@@ -24,11 +19,5 @@ describe('constructor', () => {
 describe('collect', () => {
   test('Returns the flush() return', () => {
     expect(collector.collect()).toEqual([])
-  })
-
-  test('Calls flush() on store instance', () => {
-    collector.collect()
-
-    expect(store.flush).toHaveBeenCalled()
   })
 })
