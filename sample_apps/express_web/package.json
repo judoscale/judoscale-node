@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "main": "src/app.js",
   "scripts": {
-    "dev": "npx node src/app.js"
+    "dev": "nodemon src/app.js"
   },
   "type": "module",
   "license": "MIT",
   "dependencies": {
+    "bullmq": "^5.7.9",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "judoscale-express": "*"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

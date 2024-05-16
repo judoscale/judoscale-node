@@ -28,31 +28,46 @@
 
       <h2>Job Queues</h2>
 
-      <% if (Object.entries(queues).length > 0) { %>
-      <ul>
-        <% Object.entries(queues).forEach(([name, size]) => { %>
-        <li><%= name %>: <%= size %></li>
-        <% }); %>
-      </ul>
-      <% } else { %>
-      <p>No queues found.</p>
-      <% } %>
+      <table>
+        <thead>
+          <tr>
+            <th>Queue</th>
+            <th>Jobs</th>
+            <th>Latency (ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% queues.forEach(queue => { %>
+          <tr>
+            <td><%= queue.name %></td>
+            <td><%= queue.jobs %></td>
+            <td><%= queue.latency %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
 
       <h3>Enqueue Jobs</h3>
 
-      <form>
+      <form action="/enqueue-jobs" method="post">
         <div>
-          <label for="queue_name">Queue Name</label>
-          <select id="queue_name" name="queue_name" required>
-            <% Object.keys(queues).forEach(queue => { %>
-            <option value="<%= queue %>"><%= queue %></option>
-            <% }); %>
-          </select>
+          <label>
+            <span>Queue</span>
+            <select name="queue" required>
+              <% queues.forEach(queue => { %>
+              <option value="<%= queue.name %>"><%= queue.name %></option>
+              <% }); %>
+            </select>
+          </label>
         </div>
+
         <div>
-          <label for="enqueue_count">Enqueue Count</label>
-          <input type="number" id="enqueue_count" name="enqueue_count" min="1" max="100" required />
+          <label>
+            <span>Jobs to enqueue</span>
+            <input type="number" name="jobs" min="1" max="100" required />
+          </label>
         </div>
+
         <div>
           <button type="submit">Enqueue Jobs</button>
         </div>
