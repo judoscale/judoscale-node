@@ -10,7 +10,7 @@ Ensure the Heroku CLI is installed.
 heroku -v
 ```
 
-Install dependencies. Note that we're using `yarn` instead of `npm` so we can use "resolutions". More on this below.
+Install dependencies.
 
 ```shell
 npm install
@@ -24,14 +24,14 @@ bin/dev
 
 This will run both the app and a proxy server that adds the X-Request-Start header for simulating request queue time.
 
-http://localhost:5004
+Visit the app through the proxy server: http://localhost:5004
 
 ## Local development
 
-To reference the local version of `judoscale-fastify` instead of the NPM version:
+To reference a local Judoscale package instead of the NPM version:
 
 ```
 npm link judoscale-fastify
 ```
 
-This will create a symlink for `node_modules/judoscale-fastify` pointing to the local file system.
+This will create a symlink in `node_modules` pointing to the local file system.

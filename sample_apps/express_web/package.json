@@ -1,31 +1,15 @@
 {
   "name": "judoscale-sample-express",
   "version": "1.0.0",
-  "description": "",
-  "main": "build/app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 build/app.js",
-    "dev": "npx babel-node src/app.js",
-    "build": "bin/build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx node src/app.js"
   },
-  "author": "",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.5",
-    "@babel/node": "^7.16.8",
-    "@babel/preset-env": "7.16.11",
-    "bull": "^4.8.4",
-    "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "judoscale-express": "*"
-  },
-  "resolutions": {
-    "**/judoscale-node-core": "link:../../node-core"
-  },
-  "engines": {
-    "node": "16.X"
   }
 }

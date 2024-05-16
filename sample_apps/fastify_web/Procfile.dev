@@ -1,2 +1,2 @@
 proxy: npx judoscale-adapter-proxy-server
-web: yarn dev
+web: npm run dev

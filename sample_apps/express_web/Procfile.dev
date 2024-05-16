@@ -1,3 +1,2 @@
 proxy: npx judoscale-adapter-proxy-server
-web: npx babel-node src/app.js
-worker: npx babel-node --optimize_for_size --max_old_space_size=3000 --gc_interval=100 src/jobs.js
+web: npm run dev

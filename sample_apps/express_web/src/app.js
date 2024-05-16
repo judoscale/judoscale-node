@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 import express from 'express'
 import judoscale from 'judoscale-express'
 
@@ -10,7 +8,7 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 
 app.use(
-  judoscale({
+  judoscale.default({
     api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
   })
 )
