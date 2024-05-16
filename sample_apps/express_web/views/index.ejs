@@ -3,29 +3,60 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"
-    />
-    <title>Judoscale Demo</title>
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.cyan.min.css" />
+    <title>Judoscale sample app</title>
   </head>
   <body>
-    <main>
-      <hgroup>
-        <h1>Judoscale Demo</h1>
-        <p>
-          A tiny Node.js application for testing
-          <a href="https://elements.heroku.com/addons/judoscale" target="_blank"
-            >Judoscale</a
-          >.
-        </p>
-      </hgroup>
+    <main class="container">
+      <h1>Judoscale sample app</h1>
 
-      <% if (locals.judoscaleIsInstalled) { %>
-      <section><%- include ("../partials/judoscale-installed.ejs") %></section>
+      <p>
+        This is a simple NodeJS app that uses Express for web requests and BullMQ for background job processing. It uses
+        judoscale-express and judoscale-bullmq to report queue metrics. Instead of reporting to Judoscale, though, it
+        reports to Request Catcher, a service for debugging API endpoints. Visit
+        <a href="https://judoscale-node-sample.requestcatcher.com" target="_blank"
+          >judoscale-node-sample.requestcatcher.com</a
+        >
+        to view the requests made by judoscale-node.
+      </p>
+
+      <p>
+        Reload this page to capture request metrics, and use the form below to enqueue jobs to BullMQ and begin tracking
+        job queue metrics
+      </p>
+
+      <h2>Job Queues</h2>
+
+      <% if (Object.entries(queues).length > 0) { %>
+      <ul>
+        <% Object.entries(queues).forEach(([name, size]) => { %>
+        <li><%= name %>: <%= size %></li>
+        <% }); %>
+      </ul>
       <% } else { %>
-      <section><%- include ("../partials/install-judoscale.ejs") %></section>
+      <p>No queues found.</p>
       <% } %>
+
+      <h3>Enqueue Jobs</h3>
+
+      <form>
+        <div>
+          <label for="queue_name">Queue Name</label>
+          <select id="queue_name" name="queue_name" required>
+            <% Object.keys(queues).forEach(queue => { %>
+            <option value="<%= queue %>"><%= queue %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div>
+          <label for="enqueue_count">Enqueue Count</label>
+          <input type="number" id="enqueue_count" name="enqueue_count" min="1" max="100" required />
+        </div>
+        <div>
+          <button type="submit">Enqueue Jobs</button>
+        </div>
+      </form>
     </main>
   </body>
 </html>

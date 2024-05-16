@@ -17,7 +17,10 @@ app.use(
 
 app.get('/', (req, res) => {
   res.render('index', {
-    judoscaleIsInstalled: process.env.JUDOSCALE_URL,
+    queues: {
+      default: 1,
+      urgent: 2,
+    },
   })
 })
 
