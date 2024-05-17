@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/app.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "start": "nodemon src/app.js",
+    "worker": "nodemon src/worker.js"
   },
   "type": "module",
   "license": "MIT",

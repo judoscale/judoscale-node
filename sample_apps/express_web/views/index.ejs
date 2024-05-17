@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.cyan.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.cyan.min.css" />
     <title>Judoscale sample app</title>
   </head>
+
   <body>
     <main class="container">
       <h1>Judoscale sample app</h1>
@@ -26,52 +27,59 @@
         job queue metrics
       </p>
 
-      <h2>Job Queues</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Queue</th>
-            <th>Jobs</th>
-            <th>Latency (ms)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% queues.forEach(queue => { %>
-          <tr>
-            <td><%= queue.name %></td>
-            <td><%= queue.jobs %></td>
-            <td><%= queue.latency %></td>
-          </tr>
-          <% }); %>
-        </tbody>
-      </table>
-
-      <h3>Enqueue Jobs</h3>
-
-      <form action="/enqueue-jobs" method="post">
+      <div class="grid">
         <div>
-          <label>
-            <span>Queue</span>
-            <select name="queue" required>
+          <h2>Job Queues</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Queue</th>
+                <th>Enqueued Jobs</th>
+                <th>Active Jobs</th>
+              </tr>
+            </thead>
+            <tbody>
               <% queues.forEach(queue => { %>
-              <option value="<%= queue.name %>"><%= queue.name %></option>
+              <tr>
+                <td><%= queue.name %></td>
+                <td><%= queue.enqueuedJobs %></td>
+                <td><%= queue.activeJobs %></td>
+              </tr>
               <% }); %>
-            </select>
-          </label>
+            </tbody>
+          </table>
         </div>
 
-        <div>
-          <label>
-            <span>Jobs to enqueue</span>
-            <input type="number" name="jobs" min="1" max="100" required />
-          </label>
-        </div>
+        <article>
+          <h2>Enqueue Jobs</h2>
 
-        <div>
-          <button type="submit">Enqueue Jobs</button>
-        </div>
-      </form>
+          <form action="/enqueue-jobs" method="post">
+            <label>
+              <span>Queue</span>
+              <select name="queue" required>
+                <% queues.forEach(queue => { %>
+                <option value="<%= queue.name %>"><%= queue.name %></option>
+                <% }); %>
+              </select>
+            </label>
+
+            <label>
+              <span>Jobs to enqueue</span>
+              <input type="number" name="jobs" min="1" max="100" value="10" required />
+            </label>
+
+            <label>
+              <span>Job duration (sec)</span>
+              <input type="number" name="duration" min="1" max="100" value="5" required />
+            </label>
+
+            <div>
+              <button type="submit">Enqueue Jobs</button>
+            </div>
+          </form>
+        </article>
+      </div>
     </main>
   </body>
 </html>
