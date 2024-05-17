@@ -36,13 +36,13 @@ Once installed, you should see something like this in your development log:
 
 > [Judoscale] Reporter not started: JUDOSCALE_URL is not set
 
-In production, run `heroku logs -t | grep Judoscale`, and you should see something like this:
+In your production app where you've installed Judoscale, you should see this in your logs:
 
 > [Judoscale] Reporter starting, will report every 10 seconds
 
-If you don't see either of these, ensure "judoscale-express" is in your `Package.lock` file, and restart your app.
+If you don't see either of these, ensure "judoscale-fastify" is in your `Package.lock` file, and restart your app.
 
-You can see more detailed (debug) logging by setting `JUDOSCALE_LOG_LEVEL` on your Heroku app:
+You can see more detailed (debug) logging by setting the environment variable `JUDOSCALE_LOG_LEVEL=debug` on your deployed application. Here's how you would do that on Heroku:
 
 ```
 heroku config:set JUDOSCALE_LOG_LEVEL=debug
