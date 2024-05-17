@@ -52,17 +52,17 @@ async function handleIndex(req, res) {
 
 async function handleEnqueueJobs(req, res) {
   const queueName = req.body.queue || 'default'
-  const numJobs = Number(req.body.jobs) || 10
-  const jobData = { duration: Number(req.body.duration) || 10 }
   const queue = new Queue(queueName, redisConfig)
 
-  try {
-    const jobPromises = []
-    for (let i = 0; i < numJobs; i++) {
-      jobPromises.push(queue.add('testJob', jobData))
-    }
+  const numJobs = Number(req.body.jobs) || 10
+  const jobData = { duration: Number(req.body.duration) || 10 }
+  const bulkJobArgs = Array.from({ length: numJobs }, () => ({
+    name: 'testJob',
+    data: jobData,
+  }))
 
-    await Promise.all(jobPromises)
+  try {
+    await queue.addBulk(bulkJobArgs)
 
     console.log(`${numJobs} jobs added to ${queueName} queue`)
     res.redirect('/')
