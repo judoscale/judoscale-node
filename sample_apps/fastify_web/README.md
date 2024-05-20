@@ -26,6 +26,8 @@ This will run both the app and a proxy server that adds the X-Request-Start head
 
 Visit the app through the proxy server: http://localhost:5004
 
+Reports are sent to Request Catcher—an API testing tool—instead of Judoscale. To view the reports that are sent, go to https://judoscale-node-sample.requestcatcher.com.
+
 ## Local development
 
 To reference a local Judoscale package instead of the NPM version:

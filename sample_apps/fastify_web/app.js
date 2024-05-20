@@ -1,5 +1,5 @@
 import Fastify from 'fastify'
-import judoscale from 'judoscale-fastify'
+import judoscaleFastify from 'judoscale-fastify'
 
 const fastify = Fastify({
   logger: {
@@ -7,7 +7,7 @@ const fastify = Fastify({
   },
 })
 
-fastify.register(judoscale, {
+fastify.register(judoscaleFastify, {
   log_level: process.env.LOG_LEVEL || 'debug',
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
