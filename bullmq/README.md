@@ -14,16 +14,16 @@ npm install judoscale-bullmq --save
 
 ```javascript
 // ESM
-import judoscale from 'judoscale-bullmq'
+import judoscaleBullMQ from 'judoscale-bullmq'
 
 // CommonJs
-const judoscale = require('judoscale-bullmq').default
+const judoscaleBullMQ = require('judoscale-bullmq').default
 
 // default configuration
-judoscale.reporter.start()
+judoscaleBullMQ()
 
 // custom configuration
-judoscale.reporter.start({
+judoscaleBullMQ({
   queues: ['default', 'urgent'],
   log_level: 'debug',
 })
