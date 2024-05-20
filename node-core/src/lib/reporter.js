@@ -7,7 +7,7 @@ class Reporter {
     this.started = this.hasStarted() || false
   }
 
-  start(config, store, collectors, Adapter) {
+  start(config, collectors, Adapter) {
     if (!this.hasStarted()) {
       this.started = true
 
