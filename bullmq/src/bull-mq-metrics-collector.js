@@ -10,6 +10,8 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
 
     this.redis = new Redis({ connection: { url: redisUrl } })
     this.queueNames = new Set()
+
+    // TODO: do we need redis.quit() ??
   }
 
   async collect() {
@@ -18,7 +20,7 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
     let metrics = []
 
     for (const queueName of this.queueNames) {
-      const queue = new Queue(queueName, this.redis.config)
+      const queue = new Queue(queueName, { connection: this.redis })
       const jobCounts = await queue.getJobCounts('waiting', 'active')
 
       metrics.push(new Metric('qd', new Date(), jobCounts.waiting, queueName))
