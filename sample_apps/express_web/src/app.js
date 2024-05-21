@@ -4,6 +4,24 @@ import { Queue, Worker, QueueEvents } from 'bullmq'
 import judoscaleExpress from 'judoscale-express'
 import judoscaleBullMQ from 'judoscale-bullmq'
 
+// import { Judoscale, middleware as judoscaleMiddleware } from 'judoscale-express'
+// import { Judoscale, plugin as judoscalePlugin } from 'judoscale-fastify'
+// import 'judoscale-bullmq'
+// import { Judoscale } from 'judoscale-bullmq'
+
+// 1. Configure the reporter
+// 2. Start the reporter
+// const judoscale = new Judoscale({
+//   log_level: "debug",
+//   bullmq: {
+//     queues: []
+//   }
+// })
+
+// 3. Inject the middleware/plugin (if web process)
+// app.use(judoscaleMiddleware(judoscale))
+// fastify.register(judoscalePlugin(judoscale))
+
 const app = express()
 const port = process.env.PORT || 5000
 const redisConfig = { connection: { host: '127.0.0.1', port: 6379 } }
@@ -12,17 +30,9 @@ const redis = new Redis(redisConfig.connection)
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-// TODO: Consider this approach which would mirror our Ruby adapter
-// Judoscale.config({
-//   ...
-// })
-
 judoscaleBullMQ({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
-
-// TODO: Only pass the configuration to the first call that starts the reporter
-// app.use(judoscaleExpress())
 
 app.use(
   // TODO: Why do we have to use default? Is this broken in our published packages?
