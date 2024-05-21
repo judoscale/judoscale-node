@@ -45,8 +45,7 @@ class Reporter {
   async report(adapters, config) {
     const collectors = adapters.map((a) => a.collector)
     const metrics = (await Promise.all(collectors.map((collector) => collector.collect()))).flat()
-    // TODO: pass all adapters to Report
-    const report = new Report(adapters[0], config, metrics)
+    const report = new Report(adapters, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
     new Api(config).reportMetrics(report.payload()).then(async () => {
