@@ -1,26 +1,8 @@
 import Redis from 'ioredis'
 import express from 'express'
 import { Queue, Worker, QueueEvents } from 'bullmq'
-import judoscaleExpress from 'judoscale-express'
-import judoscaleBullMQ from 'judoscale-bullmq'
-
-// import { Judoscale, middleware as judoscaleMiddleware } from 'judoscale-express'
-// import { Judoscale, plugin as judoscalePlugin } from 'judoscale-fastify'
-// import 'judoscale-bullmq'
-// import { Judoscale } from 'judoscale-bullmq'
-
-// 1. Configure the reporter
-// 2. Start the reporter
-// const judoscale = new Judoscale({
-//   log_level: "debug",
-//   bullmq: {
-//     queues: []
-//   }
-// })
-
-// 3. Inject the middleware/plugin (if web process)
-// app.use(judoscaleMiddleware(judoscale))
-// fastify.register(judoscalePlugin(judoscale))
+import { Judoscale, middleware as judoscaleMiddleware } from 'judoscale-express'
+import 'judoscale-bullmq'
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -30,17 +12,11 @@ const redis = new Redis(redisConfig.connection)
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-judoscaleBullMQ({
+const judoscale = new Judoscale({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
 
-app.use(
-  // TODO: Why do we have to use default? Is this broken in our published packages?
-  judoscaleExpress.default({
-    api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
-  })
-)
-
+app.use(judoscaleMiddleware(judoscale))
 app.use(express.json()) // parse JSON bodies
 app.use(express.urlencoded({ extended: true })) // parse HTML forms
 

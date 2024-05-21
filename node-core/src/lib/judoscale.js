@@ -5,11 +5,10 @@ class Judoscale {
   static adapters = []
 
   constructor(options) {
-    // TODO: store config in this object
-    const finalConfig = mergeConfig(options)
+    this.config = mergeConfig(options)
     const reporter = new Reporter()
 
-    reporter.start(finalConfig, Judoscale.adapters)
+    reporter.start(this.config, Judoscale.adapters)
   }
 
   static registerAdapter(adapter) {
