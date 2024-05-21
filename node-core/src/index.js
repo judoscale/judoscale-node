@@ -8,6 +8,7 @@ import MetricsStore from './lib/metrics-store'
 import Report from './lib/report'
 import Reporter from './lib/reporter'
 import WebMetricsCollector from './lib/web-metrics-collector'
+import WorkerMetricsCollector from './lib/worker-metrics-collector'
 
 const defaultConfig = defaultConfigFunction()
 
@@ -21,5 +22,6 @@ export {
   Report,
   Reporter,
   WebMetricsCollector,
+  WorkerMetricsCollector,
   defaultConfig,
 }

@@ -17,7 +17,6 @@ app.set('view engine', 'ejs')
 //   ...
 // })
 
-// TODO: Why do we have to use default? Is this broken in our published packages?
 judoscaleBullMQ({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
@@ -26,6 +25,7 @@ judoscaleBullMQ({
 // app.use(judoscaleExpress())
 
 app.use(
+  // TODO: Why do we have to use default? Is this broken in our published packages?
   judoscaleExpress.default({
     api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
   })
