@@ -27,9 +27,9 @@ class Reporter {
 
       forever((next) => {
         setTimeout(() => {
-          this.report(adapter, config, collectors)
-
-          next()
+          this.report(adapter, config, collectors).then(() => {
+            next()
+          })
         }, config.report_interval_seconds * 1000)
       })
     }
@@ -43,8 +43,8 @@ class Reporter {
     return this.started
   }
 
-  report(adapter, config, collectors) {
-    const metrics = collectors.map((collector) => collector.collect()).flat()
+  async report(adapter, config, collectors) {
+    const metrics = (await Promise.all(collectors.map((collector) => collector.collect()))).flat()
     const report = new Report(adapter, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
