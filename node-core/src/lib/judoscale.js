@@ -11,8 +11,12 @@ class Judoscale {
     reporter.start(this.config, Judoscale.adapters)
   }
 
-  static registerAdapter(adapter) {
-    Judoscale.adapters.push(adapter)
+  static registerAdapter(identifier, collector, meta = {}) {
+    Judoscale.adapters.push({
+      identifier,
+      collector,
+      meta,
+    })
   }
 }
 

@@ -1,6 +1,6 @@
 const fp = require('fastify-plugin')
 const { Judoscale, MetricsStore, requestMetrics, WebMetricsCollector } = require('judoscale-node-core')
-const Adapter = require('./adapter')
+const packageInfo = require('../package.json')
 
 const metricsStore = new MetricsStore()
 
@@ -22,7 +22,9 @@ const plugin = fp(rawPlugin, {
   name: 'judoscale-fastify',
 })
 
-Judoscale.registerAdapter(new Adapter(new WebMetricsCollector(metricsStore)))
+Judoscale.registerAdapter('judoscale-fastify', new WebMetricsCollector(metricsStore), {
+  adapter_version: packageInfo.version,
+})
 
 module.exports = {
   Judoscale,

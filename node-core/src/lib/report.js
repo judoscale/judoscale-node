@@ -12,10 +12,7 @@ class Report {
   payload() {
     const adapterMetadata = {}
     for (const adapter of this.adapters) {
-      adapterMetadata[adapter.identifier] = {
-        adapter_version: adapter.adapter_version,
-        language_version: adapter.language_version,
-      }
+      adapterMetadata[adapter.identifier] = adapter.meta
     }
 
     return {

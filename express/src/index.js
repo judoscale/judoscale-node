@@ -1,5 +1,5 @@
 import { Judoscale, MetricsStore, requestMetrics, WebMetricsCollector } from 'judoscale-node-core'
-import Adapter from './lib/adapter'
+import packageInfo from '../package.json'
 
 const store = new MetricsStore()
 
@@ -19,6 +19,8 @@ function middleware(judoscale) {
   }
 }
 
-Judoscale.registerAdapter(new Adapter(new WebMetricsCollector(store)))
+Judoscale.registerAdapter('judoscale-express', new WebMetricsCollector(store), {
+  adapter_version: packageInfo.version,
+})
 
 export { Judoscale, middleware }
