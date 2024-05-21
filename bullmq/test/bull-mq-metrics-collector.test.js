@@ -4,8 +4,12 @@ const BullMQMetricsCollector = require('../src/bull-mq-metrics-collector')
 describe('BullMQMetricsCollector', () => {
   let collector
 
-  beforeEach(() => {
+  beforeEach(async () => {
     collector = new BullMQMetricsCollector()
+
+    // Clear all Bull information in Redis
+    const keys = await collector.redis.keys('bull:*')
+    if (keys.length) await collector.redis.del(keys)
   })
 
   afterEach(() => {
@@ -13,9 +17,6 @@ describe('BullMQMetricsCollector', () => {
   })
 
   test('collects queue metrics', async () => {
-    const keys = await collector.redis.keys('bull:*')
-    if (keys.length) await collector.redis.del(keys)
-
     const queue = new Queue('foo', { connection: collector.redis })
     await queue.add('test-job')
 

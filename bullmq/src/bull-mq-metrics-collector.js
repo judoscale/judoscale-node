@@ -10,8 +10,6 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
 
     this.redis = new Redis({ connection: { url: redisUrl } })
     this.queueNames = new Set()
-
-    // TODO: do we need redis.quit() ??
   }
 
   async collect() {
@@ -33,6 +31,7 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
   async fetchQueueNames() {
     const redisKeys = []
     let cursor = '0'
+
     do {
       const reply = await this.redis.scan(cursor, 'MATCH', 'bull:*:id')
       cursor = reply[0]

@@ -1,0 +1,49 @@
+name: BullMQ adapter tests
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 20.x]
+        bullmq-version: [4.x, 5.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Prepare local dependency
+        run: |
+          npm install
+          npm run build
+          npm link
+        working-directory: node-core
+
+      - name: Install dependencies & link local dependency
+        run: |
+          npm install
+          npm install bullmq@${{ matrix.bullmq-version }}
+          npm link judoscale-node-core
+        working-directory: bullmq
+
+      - name: Run tests
+        run: npm test
+        working-directory: bullmq
