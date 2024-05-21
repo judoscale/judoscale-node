@@ -1,8 +1,8 @@
 const { defaultConfig } = require('judoscale-node-core')
 
 class Adapter {
-  constructor(collectors) {
-    this.collectors = collectors
+  constructor(collector) {
+    this.collector = collector
     this.identifier = 'judoscale-fastify'
     this.adapter_version = defaultConfig.version
     this.language_version = process.version

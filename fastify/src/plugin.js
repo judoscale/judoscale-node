@@ -1,16 +1,10 @@
 const fp = require('fastify-plugin')
-const { mergeConfig, Reporter, MetricsStore, requestMetrics, WebMetricsCollector } = require('judoscale-node-core')
+const { Judoscale, MetricsStore, requestMetrics, WebMetricsCollector } = require('judoscale-node-core')
 const Adapter = require('./adapter')
 
-async function judoscaleFastify(fastify, options) {
-  // Allow injection for testing
-  const metricsStore = options.metricsStore || new MetricsStore()
-  const finalConfig = mergeConfig(options)
-  const collectors = [new WebMetricsCollector(metricsStore)]
-  const reporter = new Reporter()
+const metricsStore = new MetricsStore()
 
-  reporter.start(finalConfig, collectors, Adapter)
-
+async function rawPlugin(fastify, judoscale) {
   fastify.addHook('onRequest', async (request, _reply) => {
     try {
       const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
@@ -24,6 +18,13 @@ async function judoscaleFastify(fastify, options) {
   })
 }
 
-module.exports = fp(judoscaleFastify, {
+const plugin = fp(rawPlugin, {
   name: 'judoscale-fastify',
 })
+
+Judoscale.registerAdapter(new Adapter(new WebMetricsCollector(metricsStore)))
+
+module.exports = {
+  Judoscale,
+  plugin,
+}
