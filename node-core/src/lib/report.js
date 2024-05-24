@@ -12,7 +12,7 @@ class Report {
   payload() {
     const adapterMetadata = {}
     for (const adapter of this.adapters) {
-      adapterMetadata[adapter.identifier] = adapter.meta
+      adapterMetadata[adapter.identifier] = adapter.meta || {}
     }
 
     return {

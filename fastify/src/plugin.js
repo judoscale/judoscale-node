@@ -4,7 +4,7 @@ const packageInfo = require('../package.json')
 
 const metricsStore = new MetricsStore()
 
-async function rawPlugin(fastify, judoscale) {
+async function rawPlugin(fastify) {
   fastify.addHook('onRequest', async (request, _reply) => {
     try {
       const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())

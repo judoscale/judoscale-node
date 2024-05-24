@@ -1,21 +1,20 @@
 const fastify = require('fastify')
-const judoscalePlugin = require('../src/plugin')
+const { Judoscale, plugin } = require('../src/plugin')
 const { MetricsStore } = require('judoscale-node-core')
 
 describe('Judoscale Fastify Plugin', () => {
-  let app, metricsStore
+  let app
 
   beforeEach(async () => {
-    metricsStore = new MetricsStore()
     app = fastify()
-    app.register(judoscalePlugin, { metricsStore })
+    app.register(plugin)
 
     await app.ready()
   })
 
   afterEach(() => app.close())
 
-  test('captures queue time in MetricsStore', async () => {
+  test('captures request queue time and returns it from the collector', async () => {
     // Simulate 100ms queue time
     const simulatedHeaderTime = Date.now() - 100
 
@@ -27,7 +26,7 @@ describe('Judoscale Fastify Plugin', () => {
       },
     })
 
-    const metrics = metricsStore.flush()
+    const metrics = Judoscale.adapters[0].collector.collect()
 
     expect(metrics.length).toEqual(1)
 
