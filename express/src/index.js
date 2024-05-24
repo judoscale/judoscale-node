@@ -8,7 +8,7 @@ export default (config) => {
   const collectors = [new WebMetricsCollector(store)]
   const reporter = new Reporter()
 
-  reporter.start(finalConfig, store, collectors, Adapter)
+  reporter.start(finalConfig, collectors, Adapter)
 
   return ({ headers }, _res, next) => {
     const now = finalConfig.now || new Date()

@@ -7,6 +7,7 @@
 class Metric {
   constructor(identifier, time, value, queueName = null) {
     this.identifier = identifier
+    // TODO: why are we converting a date to a string then back to a date?
     this.time = new Date(time.toUTCString())
     this.value = Number(value)
     this.queueName = queueName

@@ -1,0 +1,44 @@
+{
+  "name": "judoscale-bullmq",
+  "version": "1.3.0",
+  "description": "BullMQ adapter for the Judoscale autoscaler",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "npx standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judoscale/judoscale-node.git"
+  },
+  "keywords": [
+    "bullmq",
+    "autoscale",
+    "nodejs"
+  ],
+  "author": "Adam McCrea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/judoscale/judoscale-node/issues"
+  },
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "standard": "^17.1.0"
+  },
+  "dependencies": {
+    "judoscale-node-core": "^1.3.0"
+  },
+  "peerDependencies": {
+    "bullmq": "^5.0.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "test",
+      "expect",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}

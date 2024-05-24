@@ -9,7 +9,7 @@ async function judoscaleFastify(fastify, options) {
   const collectors = [new WebMetricsCollector(metricsStore)]
   const reporter = new Reporter()
 
-  reporter.start(finalConfig, metricsStore, collectors, Adapter)
+  reporter.start(finalConfig, collectors, Adapter)
 
   fastify.addHook('onRequest', async (request, _reply) => {
     try {

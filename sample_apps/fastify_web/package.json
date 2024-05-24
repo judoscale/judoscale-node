@@ -1,5 +1,5 @@
 {
-  "name": "fastify_web",
+  "name": "judoscale-sample-fastify",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -9,6 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "fastify": "^4.26.2",
-    "judoscale-fastify": "1.0.0"
+    "judoscale-fastify": "*"
   }
 }
