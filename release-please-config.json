@@ -1,12 +1,20 @@
 {
   "packages": {
-    ".": {
-      "changelog-path": "CHANGELOG.md",
-      "release-type": "node",
-      "bump-minor-pre-major": false,
-      "bump-patch-for-minor-pre-major": false,
-      "draft": false,
-      "prerelease": false
+    "node-core": {
+      "changelog-path": "../CHANGELOG.md",
+      "release-type": "node"
+    },
+    "express": {
+      "changelog-path": "../CHANGELOG.md",
+      "release-type": "node"
+    },
+    "fastify": {
+      "changelog-path": "../CHANGELOG.md",
+      "release-type": "node"
+    },
+    "bullmq": {
+      "changelog-path": "../CHANGELOG.md",
+      "release-type": "node"
     }
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
