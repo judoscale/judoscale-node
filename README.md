@@ -1,4 +1,4 @@
-# Judoscale
+# Judoscale-Node
 
 These packages work together with the [Judoscale](https://judoscale.com) autoscaling service to scale your web and worker services automatically. They gather a minimal set of metrics for each request or job queue, and periodically report this data asynchronously to the Judoscale API.
 
