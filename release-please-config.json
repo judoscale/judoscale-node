@@ -1,19 +1,15 @@
 {
   "packages": {
     "node-core": {
-      "changelog-path": "../CHANGELOG.md",
       "release-type": "node"
     },
     "express": {
-      "changelog-path": "../CHANGELOG.md",
       "release-type": "node"
     },
     "fastify": {
-      "changelog-path": "../CHANGELOG.md",
       "release-type": "node"
     },
     "bullmq": {
-      "changelog-path": "../CHANGELOG.md",
       "release-type": "node"
     }
   },
