@@ -1,0 +1,28 @@
+#!/bin/bash
+
+packages=("node-core" "express" "fastify" "bullmq")
+
+check_failure() {
+  if [ $? -ne 0 ]; then
+    echo "Error: $1"
+    exit 1
+  fi
+}
+
+for package in "${packages[@]}"; do
+  package_path="$package"
+
+  echo "Preparing to publish $package..."
+
+  cd "$package_path" || exit
+  check_failure "Error: Package path $package_path does not exist."
+
+  npm install > /dev/null 2>&1
+  check_failure "Failed to install dependencies for $package."
+
+  npm publish
+  check_failure "Failed to publish $package."
+
+  echo "Published $package successfully."
+  cd -
+done
