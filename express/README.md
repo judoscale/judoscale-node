@@ -15,21 +15,22 @@ npm install judoscale-express --save
 **Judoscale should be one of the first middlewares for your app.**
 
 ```javascript
-// ES6-style import:
-import judoscale from 'judoscale-express'
+// ESM
+import { Judoscale, middleware as judoscaleMiddleware } from 'judoscale-express'
 
-// Or if you use `require` for importing:
-const judoscale = require('judoscale-express').default
+// CommonJS
+const { Judoscale, middleware: judoscaleMiddleware } = require('judoscale-express')
 
-// default configuration
-app.use(judoscale())
+// Initialize Judoscale with default configuration
+const judoscale = new Judoscale()
 
 // custom configuration (see config options below)
-app.use(
-  judoscale({
-    log_level: 'debug',
-  })
-)
+const judoscale = new Judoscale({
+  log_level: 'debug',
+})
+
+// Inject the middleware (this should be the first middleware)
+app.use(judoscaleMiddleware(judoscale))
 ```
 
 ## Configuration
@@ -37,17 +38,15 @@ app.use(
 Most Judoscale settings are handled via the Judoscale dashboard, but there are a few ways you can configure the adapter in code:
 
 ```javascript
-app.use(
-  judoscale({
-    // Use a custom logger instance
-    // Default: Winston logger instance (simple format)
-    logger: myLogger,
+new Judoscale({
+  // Use a custom logger instance
+  // Default: Winston logger instance (simple format)
+  logger: myLogger,
 
-    // Override the log level of the default logger (ignored if logger is overridden)
-    // Default: process.env.JUDOSCALE_LOG_LEVEL || 'info'
-    log_level: 'debug',
-  })
-)
+  // Override the log level of the default logger (ignored if logger is overridden)
+  // Default: process.env.JUDOSCALE_LOG_LEVEL || 'info'
+  log_level: 'debug',
+})
 ```
 
 ## Troubleshooting

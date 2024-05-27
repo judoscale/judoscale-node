@@ -16,18 +16,16 @@ npm install judoscale-fastify --save
 
 ```javascript
 // ESM
-import judoscale from 'judoscale-fastify'
+import { Judoscale, plugin as judoscalePlugin } from 'judoscale-fastify'
 
-// CommonJs
-const judoscale = require('judoscale-fastify').default
+// CommonJS
+const { Judoscale, plugin: judoscalePlugin } = require('judoscale-fastify')
 
-// default configuration
-fastify.register(judoscale)
+// Initialize Judoscale with default configuration
+const judoscale = new Judoscale()
 
-// custom configuration
-fastify.register(judoscale, {
-  log_level: 'debug',
-})
+// Register the plugin
+fastify.register(judoscalePlugin, judoscale)
 ```
 
 ## Troubleshooting

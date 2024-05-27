@@ -9,10 +9,12 @@ import Report from './lib/report'
 import Reporter from './lib/reporter'
 import WebMetricsCollector from './lib/web-metrics-collector'
 import WorkerMetricsCollector from './lib/worker-metrics-collector'
+import Judoscale from './lib/judoscale'
 
 const defaultConfig = defaultConfigFunction()
 
 export {
+  Judoscale,
   Api,
   mergeConfig,
   logger,

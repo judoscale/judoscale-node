@@ -1,11 +1,11 @@
-const { mergeConfig, Reporter } = require('judoscale-node-core')
-const Adapter = require('./adapter')
+const { Judoscale } = require('judoscale-node-core')
 const BullMQMetricsCollector = require('./bull-mq-metrics-collector')
+const packageInfo = require('../package.json')
 
-module.exports = function initJudoscaleBullMQ(config = {}) {
-  const finalConfig = mergeConfig(config)
-  const collectors = [new BullMQMetricsCollector()]
-  const reporter = new Reporter()
+Judoscale.registerAdapter('judoscale-bullmq', new BullMQMetricsCollector(), {
+  adapter_version: packageInfo.version,
+})
 
-  reporter.start(finalConfig, collectors, Adapter)
+module.exports = {
+  Judoscale,
 }

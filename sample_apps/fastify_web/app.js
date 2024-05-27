@@ -1,5 +1,5 @@
 import Fastify from 'fastify'
-import judoscaleFastify from 'judoscale-fastify'
+import { Judoscale, plugin as judoscalePlugin } from 'judoscale-fastify'
 
 const fastify = Fastify({
   logger: {
@@ -7,10 +7,11 @@ const fastify = Fastify({
   },
 })
 
-fastify.register(judoscaleFastify, {
-  log_level: process.env.LOG_LEVEL || 'debug',
+const judoscale = new Judoscale({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
+
+fastify.register(judoscalePlugin, judoscale)
 
 fastify.get('/', function (request, reply) {
   reply.send({ hello: 'world' })

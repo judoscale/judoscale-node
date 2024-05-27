@@ -1,10 +1,10 @@
 import { Worker } from 'bullmq'
-import judoscaleBullMQ from 'judoscale-bullmq'
+import { Judoscale } from 'judoscale-bullmq'
 
 const redisOpts = { url: process.env.REDIS_URL || 'redis://127.0.0.1:6379' }
 const queueNames = ['default', 'urgent']
 
-judoscaleBullMQ({
+new Judoscale({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
 

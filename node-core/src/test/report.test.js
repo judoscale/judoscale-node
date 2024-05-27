@@ -3,26 +3,10 @@
 import Report from '../lib/report'
 import Metric from '../lib/metric'
 
-const collectors = [{ a: 'collector' }]
-const adapter = {
-  asJson: () => {
-    'payload'
-  },
-  collectors,
-}
+const adapter = { identifier: 'some-adapter' }
 const exampleConfig = { container: 'web.007' }
 const metric = new Metric('some-identifier', new Date(), '1234')
-const report = new Report(adapter, exampleConfig, [metric])
-
-describe('constructor', () => {
-  test('adapter property', () => {
-    expect(report.adapter).toEqual(adapter)
-  })
-
-  test('config property', () => {
-    expect(report.config).toEqual(exampleConfig)
-  })
-})
+const report = new Report([adapter], exampleConfig, [metric])
 
 describe('payload', () => {
   const payload = report.payload()
@@ -40,7 +24,7 @@ describe('payload', () => {
   })
 
   test('adapters with property value', () => {
-    expect(payload).toHaveProperty('adapters', report.adapter.asJson())
+    expect(payload.adapters['some-adapter']).toEqual({})
   })
 
   test('config with property value', () => {

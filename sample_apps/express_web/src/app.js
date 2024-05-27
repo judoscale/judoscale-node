@@ -1,8 +1,8 @@
 import Redis from 'ioredis'
 import express from 'express'
 import { Queue, Worker, QueueEvents } from 'bullmq'
-import judoscaleExpress from 'judoscale-express'
-import judoscaleBullMQ from 'judoscale-bullmq'
+import { Judoscale, middleware as judoscaleMiddleware } from 'judoscale-express'
+import 'judoscale-bullmq'
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -12,25 +12,11 @@ const redis = new Redis(redisConfig.connection)
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-// TODO: Consider this approach which would mirror our Ruby adapter
-// Judoscale.config({
-//   ...
-// })
-
-judoscaleBullMQ({
+const judoscale = new Judoscale({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
 })
 
-// TODO: Only pass the configuration to the first call that starts the reporter
-// app.use(judoscaleExpress())
-
-app.use(
-  // TODO: Why do we have to use default? Is this broken in our published packages?
-  judoscaleExpress.default({
-    api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
-  })
-)
-
+app.use(judoscaleMiddleware(judoscale))
 app.use(express.json()) // parse JSON bodies
 app.use(express.urlencoded({ extended: true })) // parse HTML forms
 

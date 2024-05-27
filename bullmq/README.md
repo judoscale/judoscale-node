@@ -10,23 +10,32 @@ Official [Judoscale](https://judoscale.com) adapter package for autoscaling Bull
 npm install judoscale-bullmq --save
 ```
 
-2. In your worker code, import and start the Judoscale reporter:
+2. In your worker script, import and start the Judoscale reporter:
 
 ```javascript
 // ESM
-import judoscaleBullMQ from 'judoscale-bullmq'
+import { Judoscale } from 'judoscale-bullmq'
 
-// CommonJs
-const judoscaleBullMQ = require('judoscale-bullmq').default
+// CommonJS
+const { Judoscale } = require('judoscale-bullmq')
 
-// default configuration
-judoscaleBullMQ()
+// Initialize Judoscale with default configuration
+const judoscale = new Judoscale()
+```
 
-// custom configuration
-judoscaleBullMQ({
-  queues: ['default', 'urgent'],
-  log_level: 'debug',
-})
+3. If you want to scale your workers all the way down, you also need to install judoscale-bullmq in your web process:
+
+```javascript
+// ESM
+import { Judoscale, middleware as judoscaleMiddleware } from 'judoscale-express'
+import 'judoscale-bullmq'
+
+// CommonJS
+const { Judoscale, middleware: judoscaleMiddleware } = require('judoscale-express')
+require('judoscale-bullmq')
+
+// Judoscale will automatically be initialized for both BullMQ and Express/Fastify
+const judoscale = new Judoscale()
 ```
 
 ## Troubleshooting

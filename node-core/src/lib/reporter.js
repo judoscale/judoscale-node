@@ -7,7 +7,7 @@ class Reporter {
     this.started = this.hasStarted() || false
   }
 
-  start(config, collectors, Adapter) {
+  start(config, adapters) {
     if (!this.hasStarted()) {
       this.started = true
 
@@ -16,18 +16,17 @@ class Reporter {
         return
       }
 
-      const adapter = new Adapter(collectors)
-      const adapterMsg = adapter.identifier
+      const adapterMsg = adapters.map((a) => a.identifier).join(', ')
 
       config.logger.info(
         `[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`
       )
 
-      this.report(adapter, config, collectors)
+      this.report(adapters, config)
 
       forever((next) => {
         setTimeout(() => {
-          this.report(adapter, config, collectors).then(() => {
+          this.report(adapters, config).then(() => {
             next()
           })
         }, config.report_interval_seconds * 1000)
@@ -43,9 +42,10 @@ class Reporter {
     return this.started
   }
 
-  async report(adapter, config, collectors) {
+  async report(adapters, config) {
+    const collectors = adapters.map((a) => a.collector)
     const metrics = (await Promise.all(collectors.map((collector) => collector.collect()))).flat()
-    const report = new Report(adapter, config, metrics)
+    const report = new Report(adapters, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
     new Api(config).reportMetrics(report.payload()).then(async () => {
