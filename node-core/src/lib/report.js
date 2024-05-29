@@ -1,7 +1,3 @@
-/**
- * @param {Object} config - Client settings
- * @param {Array[Metric]} metrics - Metrics collected
- */
 class Report {
   constructor(adapters, config, metrics = []) {
     this.adapters = adapters
@@ -31,4 +27,4 @@ class Report {
   }
 }
 
-export default Report
+module.exports = Report

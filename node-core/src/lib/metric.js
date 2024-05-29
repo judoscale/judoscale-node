@@ -14,4 +14,4 @@ class Metric {
   }
 }
 
-export default Metric
+module.exports = Metric

@@ -1,4 +1,4 @@
-import unirest from 'unirest'
+const unirest = require('unirest')
 
 class Api {
   constructor(config) {
@@ -17,4 +17,4 @@ class Api {
   }
 }
 
-export default Api
+module.exports = Api

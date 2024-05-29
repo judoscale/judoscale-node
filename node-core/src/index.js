@@ -1,19 +1,19 @@
-import Api from './lib/api'
-import defaultConfigFunction from './lib/default-config'
-import mergeConfig from './lib/merge-config'
-import logger from './lib/logger'
-import requestMetrics from './lib/request-metrics'
-import Metric from './lib/metric'
-import MetricsStore from './lib/metrics-store'
-import Report from './lib/report'
-import Reporter from './lib/reporter'
-import WebMetricsCollector from './lib/web-metrics-collector'
-import WorkerMetricsCollector from './lib/worker-metrics-collector'
-import Judoscale from './lib/judoscale'
+const Api = require('./lib/api')
+const defaultConfigFunction = require('./lib/default-config')
+const mergeConfig = require('./lib/merge-config')
+const logger = require('./lib/logger')
+const requestMetrics = require('./lib/request-metrics')
+const Metric = require('./lib/metric')
+const MetricsStore = require('./lib/metrics-store')
+const Report = require('./lib/report')
+const Reporter = require('./lib/reporter')
+const WebMetricsCollector = require('./lib/web-metrics-collector')
+const WorkerMetricsCollector = require('./lib/worker-metrics-collector')
+const Judoscale = require('./lib/judoscale')
 
 const defaultConfig = defaultConfigFunction()
 
-export {
+module.exports = {
   Judoscale,
   Api,
   mergeConfig,

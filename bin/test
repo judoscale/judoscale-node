@@ -7,17 +7,13 @@ set -e
 set -x
 
 cd node-core
-npm install
-npm link
+npm run test
 
 cd ../express
-npm install
-npm link judoscale-node-core
+npm run test
 
 cd ../fastify
-npm install
-npm link judoscale-node-core
+npm run test
 
 cd ../bullmq
-npm install
-npm link judoscale-node-core
+npm run test

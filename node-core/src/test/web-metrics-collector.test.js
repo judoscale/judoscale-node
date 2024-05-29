@@ -1,7 +1,7 @@
 /* global test, expect, describe, jest */
 
-import WebMetricsCollector from '../lib/web-metrics-collector'
-import MetricsStore from '../lib/metrics-store'
+const WebMetricsCollector = require('../lib/web-metrics-collector')
+const MetricsStore = require('../lib/metrics-store')
 
 const store = new MetricsStore()
 const collector = new WebMetricsCollector(store)

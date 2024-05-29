@@ -1,4 +1,4 @@
-import Metric from './metric'
+const Metric = require('./metric')
 
 class MetricsStore {
   constructor() {
@@ -37,4 +37,4 @@ class MetricsStore {
   }
 }
 
-export default MetricsStore
+module.exports = MetricsStore

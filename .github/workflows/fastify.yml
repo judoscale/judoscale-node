@@ -33,7 +33,6 @@ jobs:
       - name: Prepare local dependency
         run: |
           npm install
-          npm run build
           npm link
         working-directory: node-core
 

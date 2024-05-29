@@ -1,6 +1,6 @@
-import winston from 'winston'
+const winston = require('winston')
 
-export default (level) => {
+module.exports = (level) => {
   const logger = winston.createLogger({
     level: process.env.JUDOSCALE_LOG_LEVEL || level,
   })

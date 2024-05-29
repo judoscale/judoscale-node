@@ -2,12 +2,10 @@
   "name": "judoscale-node-core",
   "version": "2.0.0",
   "description": "Core dependencies for NodeJS adapters for the JudoScale autoscaling add-on for Heroku",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest src/test/*.test.js",
-    "style": "npx eslint src/**",
-    "build": "npx babel src --out-dir dist",
-    "start": "npx babel src --watch --out-dir dist"
+    "test": "jest",
+    "lint": "npx standard"
   },
   "keywords": [
     "heroku",
@@ -16,14 +14,6 @@
   "author": "Adam McCrea",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.5",
-    "@babel/preset-env": "^7.16.11",
-    "babel-jest": "^27.5.1",
-    "dotenv": "^16.0.0",
-    "eslint": "^8.10.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
     "jest": "^27.5.1"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 /* global test, expect, describe */
 
-import MetricsStore from '../lib/metrics-store'
+const MetricsStore = require('../lib/metrics-store')
 
 const store = new MetricsStore()
 

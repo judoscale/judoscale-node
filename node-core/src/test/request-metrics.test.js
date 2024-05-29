@@ -1,6 +1,6 @@
 /* global test, expect, describe */
 
-import RequestMetrics from '../lib/request-metrics'
+const RequestMetrics = require('../lib/request-metrics')
 
 describe('RequestMetrics', () => {
   describe('queueTimeFromHeaders', () => {
@@ -14,9 +14,7 @@ describe('RequestMetrics', () => {
 
     test('Handle Nginx format', () => {
       const now = new Date('2012-12-12T12:12:12.012Z')
-      const requestStart = `t=${(
-        new Date(now.getTime() - 100).getTime() / 1000
-      ).toString()}`
+      const requestStart = `t=${(new Date(now.getTime() - 100).getTime() / 1000).toString()}`
       const headers = { 'x-request-start': requestStart }
 
       expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(100)

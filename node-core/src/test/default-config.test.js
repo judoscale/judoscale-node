@@ -1,7 +1,6 @@
 /* global test, expect, describe, jest */
 
-import defaultConfig from '../lib/default-config'
-import logger from '../lib/logger'
+const defaultConfig = require('../lib/default-config')
 
 jest.mock('../lib/logger')
 
