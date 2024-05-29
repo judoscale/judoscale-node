@@ -1,7 +1,7 @@
-import getLogger from './logger'
-import defaultConfig from './default-config'
+const getLogger = require('./logger')
+const defaultConfig = require('./default-config')
 
-export default (config) => {
+module.exports = (config) => {
   const mergedConfig = { ...defaultConfig(), ...config }
 
   return {

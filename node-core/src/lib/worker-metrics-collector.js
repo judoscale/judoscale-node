@@ -1,6 +1,3 @@
-/**
- * @param {String} collector_name - The collector's name
- */
 class WorkerMetricsCollector {
   constructor(collectorName) {
     this.collectorName = collectorName
@@ -11,4 +8,4 @@ class WorkerMetricsCollector {
   }
 }
 
-export default WorkerMetricsCollector
+module.exports = WorkerMetricsCollector

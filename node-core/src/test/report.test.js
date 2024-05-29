@@ -1,7 +1,7 @@
 /* global test, expect, describe */
 
-import Report from '../lib/report'
-import Metric from '../lib/metric'
+const Report = require('../lib/report')
+const Metric = require('../lib/metric')
 
 const adapter = { identifier: 'some-adapter' }
 const exampleConfig = { container: 'web.007' }

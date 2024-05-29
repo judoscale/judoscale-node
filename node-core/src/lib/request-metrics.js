@@ -17,7 +17,7 @@ function requestId(headers) {
   return headers['x-request-id']
 }
 
-export default {
+module.exports = {
   queueTimeFromHeaders,
   requestId,
 }

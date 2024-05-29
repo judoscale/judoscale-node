@@ -1,7 +1,7 @@
-import getLogger from './logger'
-import packageInfo from '../../package.json'
+const getLogger = require('./logger')
+const packageInfo = require('../../package.json')
 
-export default function () {
+module.exports = function () {
   const defaultLogLevel = process.env.JUDOSCALE_LOG_LEVEL || 'info'
 
   let apiBaseUrl = process.env.JUDOSCALE_URL

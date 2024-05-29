@@ -1,6 +1,6 @@
-import Api from './api'
-import Report from './report'
-import forever from 'async/forever'
+const Api = require('./api')
+const Report = require('./report')
+const forever = require('async/forever')
 
 class Reporter {
   constructor() {
@@ -54,4 +54,4 @@ class Reporter {
   }
 }
 
-export default Reporter
+module.exports = Reporter

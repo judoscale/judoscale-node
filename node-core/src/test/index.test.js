@@ -1,8 +1,6 @@
 /* global test, expect, describe */
 
-import {
-  Api, defaultConfig, logger, Metric, MetricsStore, Report, Reporter
-} from '../index'
+const { Api, defaultConfig, logger, Metric, MetricsStore, Report, Reporter } = require('../index')
 
 describe('exports', () => {
   test('Api', () => {

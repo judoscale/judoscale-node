@@ -1,6 +1,6 @@
 /* global test, expect, describe */
 
-import Metric from '../lib/metric'
+const Metric = require('../lib/metric')
 
 const identifier = 'some-identifier'
 const time = new Date()

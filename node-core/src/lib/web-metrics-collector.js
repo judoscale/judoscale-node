@@ -1,6 +1,3 @@
-/**
- * @param {String} collector_name - The collector's name
- */
 class WebMetricsCollector {
   constructor(store, collectorName = 'Web') {
     this.collectorName = collectorName
@@ -12,4 +9,4 @@ class WebMetricsCollector {
   }
 }
 
-export default WebMetricsCollector
+module.exports = WebMetricsCollector

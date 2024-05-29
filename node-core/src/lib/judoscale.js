@@ -1,5 +1,5 @@
-import mergeConfig from './merge-config'
-import Reporter from './reporter'
+const mergeConfig = require('./merge-config')
+const Reporter = require('./reporter')
 
 class Judoscale {
   static adapters = []
@@ -20,4 +20,4 @@ class Judoscale {
   }
 }
 
-export default Judoscale
+module.exports = Judoscale

@@ -1,8 +1,8 @@
 /* global test, expect, describe, jest */
 
-import Api from '../lib/api'
-import defaultConfigFunction from '../lib/default-config'
-import unirest from 'unirest'
+const Api = require('../lib/api')
+const defaultConfigFunction = require('../lib/default-config')
+const unirest = require('unirest')
 
 jest.mock('unirest', () => {
   const originalModule = jest.requireActual('unirest')
