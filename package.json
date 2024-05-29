@@ -3,9 +3,10 @@
   "version": "3.0.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "sample_apps/*"
   ],
   "scripts": {
-    "test": "npm run test --workspaces"
+    "test": "npm run test --workspaces --if-present"
   }
 }
