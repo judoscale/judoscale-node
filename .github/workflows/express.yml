@@ -34,4 +34,4 @@ jobs:
 
       - name: Run tests
         run: npm test
-        working-directory: express
+        working-directory: packages/express
