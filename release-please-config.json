@@ -1,15 +1,16 @@
 {
+  "release-type": "node",
   "packages": {
-    "node-core": {
+    "packages/node-core": {
       "release-type": "node"
     },
-    "express": {
+    "packages/express": {
       "release-type": "node"
     },
-    "fastify": {
+    "packages/fastify": {
       "release-type": "node"
     },
-    "bullmq": {
+    "packages/bullmq": {
       "release-type": "node"
     }
   },
