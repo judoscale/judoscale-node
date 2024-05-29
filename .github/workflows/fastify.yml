@@ -30,19 +30,9 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Prepare local dependency
-        run: |
-          npm install
-          npm link
-        working-directory: node-core
-
-      - name: Install dependencies & link local dependency
-        run: |
-          npm install
-          npm install fastify@${{ matrix.fastify-version }}
-          npm link judoscale-node-core
-        working-directory: fastify
+      - name: Install dependencies
+        run: npm install
 
       - name: Run tests
         run: npm test
-        working-directory: fastify
+        working-directory: packages/fastify

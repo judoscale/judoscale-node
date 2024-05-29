@@ -1,0 +1,12 @@
+{
+  "name": "judoscale-node",
+  "version": "3.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "sample_apps/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present"
+  }
+}

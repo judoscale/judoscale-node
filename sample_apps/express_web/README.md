@@ -4,19 +4,13 @@ A tiny Express app with BullMQ for testing Judoscale.
 
 ## Local Run
 
-Ensure the Heroku CLI is installed.
-
-```shell
-heroku -v
-```
-
-Install dependencies.
+Install dependencies at the root of the monorepo to prepare local dependency references.
 
 ```shell
 npm install
 ```
 
-Run the app:
+Run the app from within the `express_web` directory:
 
 ```shell
 bin/dev
@@ -27,14 +21,3 @@ This will run both the app and a proxy server that adds the X-Request-Start head
 Visit the app through the proxy server: http://localhost:5004
 
 Reports are sent to Request Catcher—an API testing tool—instead of Judoscale. To view the reports that are sent, go to https://judoscale-node-sample.requestcatcher.com.
-
-## Local development
-
-To reference a local Judoscale package instead of the NPM version:
-
-```
-npm link judoscale-express
-npm link judoscale-bullmq
-```
-
-This will create a symlink in `node_modules` pointing to the local file system.
