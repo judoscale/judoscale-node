@@ -9,7 +9,9 @@ async function rawPlugin(fastify) {
     try {
       const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
 
-      metricsStore.push('qt', queueTime)
+      if (queueTime !== null) {
+        metricsStore.push('qt', queueTime)
+      }
 
       fastify.log.debug(`Queue Time: ${queueTime} ms`)
     } catch (err) {
