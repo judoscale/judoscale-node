@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.0...judoscale-node-core-v2.0.1) (2024-05-29)
+
+
+### Miscellaneous Chores
+
+* release 2.0.1 ([b0b22bf](https://github.com/judoscale/judoscale-node/commit/b0b22bf8dd8662d7ee4d0450abdbbf7462200492))
+
 ## [2.0.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v1.3.0...judoscale-node-core-v2.0.0) (2024-05-27)
 
 
