@@ -2,10 +2,14 @@
 
 ## [2.0.1](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.0.0...judoscale-bullmq-v2.0.1) (2024-05-29)
 
+### Bug Fixes
+
+* Gracefully handle missing queue time for fastify ([#31](https://github.com/judoscale/judoscale-node/issues/31)) ([8fa1dff](https://github.com/judoscale/judoscale-node/commit/8fa1dff430e7cffc1f6dd97242734864145cf648))
 
 ### Miscellaneous Chores
 
 * release 2.0.1 ([b0b22bf](https://github.com/judoscale/judoscale-node/commit/b0b22bf8dd8662d7ee4d0450abdbbf7462200492))
+* Reorganize monorepo to use npm workspaces ([77c8565](https://github.com/judoscale/judoscale-node/commit/77c856565ce13859df057b73aec6f45044e9ffa6))
 
 ## [2.0.0](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v1.3.0...judoscale-bullmq-v2.0.0) (2024-05-27)
 
