@@ -7,18 +7,26 @@ check_failure() {
   fi
 }
 
+# Build the packages collection with "packages/node-core" first
+packages=("packages/node-core")
 for package in packages/*; do
+  if [ "$package" != "packages/node-core" ]; then
+    packages+=("$package")
+  fi
+done
+
+for package in "${packages[@]}"; do
   echo "Preparing to publish $package..."
 
-  cd "$package" || exit
+  cd "$package"
   check_failure "Error: Package path $package does not exist."
 
-  npm install > /dev/null 2>&1
+  npm install > /dev/null
   check_failure "Failed to install dependencies for $package."
 
   npm publish
   check_failure "Failed to publish $package."
 
   echo "Published $package successfully."
-  cd -
+  cd - > /dev/null
 done
