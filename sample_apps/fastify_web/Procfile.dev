@@ -1,2 +1,3 @@
 proxy: npx judoscale-adapter-proxy-server
-web: npm run dev
+web: npm run web
+worker: npm run worker

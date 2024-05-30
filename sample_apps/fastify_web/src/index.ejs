@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.cyan.min.css" />
+    <title>Judoscale sample app</title>
+  </head>
+
+  <body>
+    <main class="container">
+      <h1>Judoscale sample app</h1>
+
+      <p>
+        This is a simple NodeJS app that uses Express for web requests and BullMQ for background job processing. It uses
+        judoscale-express and judoscale-bullmq to report queue metrics. Instead of reporting to Judoscale, though, it
+        reports to Request Catcher, a service for debugging API endpoints. Visit
+        <a href="https://judoscale-node-sample.requestcatcher.com" target="_blank"
+          >judoscale-node-sample.requestcatcher.com</a
+        >
+        to view the requests made by judoscale-node.
+      </p>
+
+      <p>
+        Reload this page to capture request metrics, and use the form below to enqueue jobs to BullMQ and begin tracking
+        job queue metrics
+      </p>
+
+      <div class="grid">
+        <div>
+          <h2>Job Queues</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Queue</th>
+                <th>Enqueued Jobs</th>
+                <th>Active Jobs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% queues.forEach(queue => { %>
+              <tr>
+                <td><%= queue.queueName %></td>
+                <td><%= queue.enqueuedJobs %></td>
+                <td><%= queue.activeJobs %></td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+
+        <article>
+          <h2>Enqueue Jobs</h2>
+
+          <form action="/enqueue-jobs" method="post">
+            <label>
+              <span>Queue</span>
+              <select name="queue" required>
+                <option value="default">default</option>
+                <option value="urgent">urgent</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Jobs to enqueue</span>
+              <input type="number" name="jobs" min="1" max="100" value="10" required />
+            </label>
+
+            <label>
+              <span>Job duration (sec)</span>
+              <input type="number" name="duration" min="1" max="100" value="5" required />
+            </label>
+
+            <div>
+              <button type="submit">Enqueue Jobs</button>
+            </div>
+          </form>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>
