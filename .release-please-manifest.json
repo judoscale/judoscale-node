@@ -1,6 +1,6 @@
 {
-  "packages/node-core": "2.0.1",
-  "packages/express": "2.0.2",
-  "packages/fastify": "2.0.2",
-  "packages/bullmq": "2.0.2"
+  "packages/node-core": "2.0.2",
+  "packages/express": "2.0.3",
+  "packages/fastify": "2.0.3",
+  "packages/bullmq": "2.0.3"
 }
