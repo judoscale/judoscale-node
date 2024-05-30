@@ -1,0 +1,44 @@
+{
+  "name": "judoscale-bull",
+  "version": "1.0.0",
+  "description": "Bull adapter for the Judoscale autoscaler",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "npx standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judoscale/judoscale-node.git"
+  },
+  "keywords": [
+    "bull",
+    "autoscale",
+    "nodejs"
+  ],
+  "author": "Adam McCrea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/judoscale/judoscale-node/issues"
+  },
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
+  "dependencies": {
+    "judoscale-node-core": "2.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "standard": "^17.1.0"
+  },
+  "peerDependencies": {
+    "bull": "^4.0.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "test",
+      "expect",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}

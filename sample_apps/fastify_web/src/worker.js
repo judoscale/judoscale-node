@@ -1,12 +1,12 @@
 import Queue from 'bull'
-// import { Judoscale } from 'judoscale-bull'
+import { Judoscale } from 'judoscale-bull'
 
 const queueNames = ['default', 'urgent']
 const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
 
-// new Judoscale({
-//   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
-// })
+new Judoscale({
+  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+})
 
 const queues = queueNames.map((queueName) => {
   const queue = new Queue(queueName, { url: redisUrl })

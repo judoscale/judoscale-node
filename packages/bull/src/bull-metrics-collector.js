@@ -1,10 +1,10 @@
 const Redis = require('ioredis')
-const { Queue } = require('bullmq')
+const Queue = require('bull')
 const { Metric, WorkerMetricsCollector } = require('judoscale-node-core')
 
-class BullMQMetricsCollector extends WorkerMetricsCollector {
+class BullMetricsCollector extends WorkerMetricsCollector {
   constructor() {
-    super('BullMQ')
+    super('Bull')
 
     const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
 
@@ -46,4 +46,4 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
   }
 }
 
-module.exports = BullMQMetricsCollector
+module.exports = BullMetricsCollector
