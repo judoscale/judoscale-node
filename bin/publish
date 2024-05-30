@@ -24,9 +24,17 @@ for package in "${packages[@]}"; do
   npm install > /dev/null
   check_failure "Failed to install dependencies for $package."
 
-  npm publish
-  check_failure "Failed to publish $package."
+  package_name=$(node -p "require('./package.json').name")
+  version=$(node -p "require('./package.json').version")
 
-  echo "Published $package successfully."
+  # Check if the version is already published
+  if npm info "$package_name@$version" > /dev/null 2>&1; then
+    echo "Version $version of $package_name is already published."
+  else
+    npm publish
+    check_failure "Failed to publish $package."
+    echo "Published $package successfully."
+  fi
+
   cd - > /dev/null
 done
