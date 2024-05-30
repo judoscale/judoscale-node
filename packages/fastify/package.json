@@ -27,7 +27,7 @@
     "standard": "^17.1.0"
   },
   "dependencies": {
-    "fastify": "^3.0.0 || ^4.0.0",
+    "judoscale-node-core": "2.0.1",
     "fastify-plugin": "^4.5.1"
   },
   "peerDependencies": {
