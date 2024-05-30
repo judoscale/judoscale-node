@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.3](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.0.2...judoscale-fastify-v2.0.3) (2024-05-30)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.0.1 to 2.0.2
+
 ## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.0.1...judoscale-fastify-v2.0.2) (2024-05-30)
 
 

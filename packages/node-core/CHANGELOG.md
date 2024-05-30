@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.1...judoscale-node-core-v2.0.2) (2024-05-30)
+
+
+### Bug Fixes
+
+* Testing release-please updating dependencies ([fce11db](https://github.com/judoscale/judoscale-node/commit/fce11db52ada8d4479af4068a6b59e1f353fb312))
+
 ## [2.0.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.0...judoscale-node-core-v2.0.1) (2024-05-29)
 
 
