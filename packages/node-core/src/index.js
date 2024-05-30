@@ -11,7 +11,7 @@ const WebMetricsCollector = require('./lib/web-metrics-collector')
 const WorkerMetricsCollector = require('./lib/worker-metrics-collector')
 const Judoscale = require('./lib/judoscale')
 
-const defaultConfig = defaultConfigFunction()
+const defaultConfig = defaultConfigFunction() // TODO: Fix weird default/merged config stuff
 
 module.exports = {
   Judoscale,
