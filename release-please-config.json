@@ -1,6 +1,18 @@
 {
   "release-type": "node",
-  "plugins": ["node-workspace"],
+  "plugins": [
+    {
+      "type": "node-workspace",
+      "merge": false
+    },
+    {
+      "type": "linked-versions",
+      "groupName": "packages",
+      "components": [
+        "packages/node-core", "packages/express", "packages/fastify", "packages/bullmq"
+      ]
+    }
+  ],
   "packages": {
     "packages/node-core": {
       "release-type": "node"
