@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.0.1...judoscale-fastify-v2.0.2) (2024-05-30)
+
+
+### Bug Fixes
+
+* Fix internal dependencies on judoscale-node-core ([ad6bcb9](https://github.com/judoscale/judoscale-node/commit/ad6bcb94561d913b67a6b5e2ed68a1477b1abeec))
+
 ## [2.0.1](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.0.0...judoscale-fastify-v2.0.1) (2024-05-29)
 
 
