@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.1](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.0...judoscale-bullmq-v2.1.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* Add `redis_url` config option and fix the Redis connection ([#40](https://github.com/judoscale/judoscale-node/issues/40)) ([f03d0cf](https://github.com/judoscale/judoscale-node/commit/f03d0cfd3175f459cbe8ea6efea3daa1716e2b20))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.0.3 to 2.0.4
+
 ## [2.1.0](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.0.3...judoscale-bullmq-v2.1.0) (2024-05-31)
 
 

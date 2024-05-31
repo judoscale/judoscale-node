@@ -1,6 +1,6 @@
 {
   "name": "judoscale-express",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "ExpressJS adapter for the JudoScale autoscaling add-on for Heroku",
   "main": "src/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "Adam McCrea",
   "license": "MIT",
   "dependencies": {
-    "judoscale-node-core": "2.0.3"
+    "judoscale-node-core": "2.0.4"
   },
   "devDependencies": {
     "jest": "^27.5.1",
