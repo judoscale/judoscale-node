@@ -1,5 +1,4 @@
 const Api = require('./lib/api')
-const logger = require('./lib/logger')
 const requestMetrics = require('./lib/request-metrics')
 const Metric = require('./lib/metric')
 const MetricsStore = require('./lib/metrics-store')
@@ -12,7 +11,6 @@ const Judoscale = require('./lib/judoscale')
 module.exports = {
   Judoscale,
   Api,
-  logger,
   requestMetrics,
   Metric,
   MetricsStore,

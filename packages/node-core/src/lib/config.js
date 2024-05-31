@@ -1,4 +1,4 @@
-const getLogger = require('./logger')
+const winston = require('winston')
 const packageInfo = require('../../package.json')
 
 class Config {
@@ -33,6 +33,18 @@ function getDefaultOptions() {
     report_interval_seconds: 10,
     now: null,
   }
+}
+
+function getLogger(level) {
+  const logger = winston.createLogger({ level })
+
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple(),
+    })
+  )
+
+  return logger
 }
 
 module.exports = Config

@@ -1,14 +1,10 @@
 /* global test, expect, describe */
 
-const { Api, logger, Metric, MetricsStore, Report, Reporter } = require('../index')
+const { Api, Metric, MetricsStore, Report, Reporter } = require('../index')
 
 describe('exports', () => {
   test('Api', () => {
     expect(Api).toBeDefined()
-  })
-
-  test('logger', () => {
-    expect(logger).toBeDefined()
   })
 
   test('Metric', () => {

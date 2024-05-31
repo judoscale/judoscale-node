@@ -2,8 +2,6 @@
 
 const Config = require('../lib/config')
 
-jest.mock('../lib/logger')
-
 describe('Config', () => {
   beforeEach(() => {
     delete process.env.RENDER_INSTANCE_ID
