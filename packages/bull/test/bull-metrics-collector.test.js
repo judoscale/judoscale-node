@@ -16,9 +16,8 @@ describe('BullMetricsCollector', () => {
   })
 
   afterEach(async () => {
-    if (queue) {
-      await queue.close()
-    }
+    if (collector) await collector.closeQueues()
+    if (queue) await queue.close()
   })
 
   test('collects queue metrics', async () => {
