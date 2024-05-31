@@ -1,13 +1,11 @@
-const getLogger = require('./logger')
-const defaultConfig = require('./default-config')
+const Config = require('./config')
 const Reporter = require('./reporter')
 
 class Judoscale {
   static adapters = []
 
   constructor(options) {
-    this.config = { ...defaultConfig(), ...options }
-    if (!this.config.logger) this.config.logger = getLogger(this.config.log_level)
+    this.config = new Config(options)
 
     const reporter = new Reporter()
 

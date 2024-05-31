@@ -1,10 +1,10 @@
 /* global test, expect, describe, jest */
 
-const defaultConfig = require('../lib/default-config')
+const Config = require('../lib/config')
 
 jest.mock('../lib/logger')
 
-describe('defaultConfig', () => {
+describe('Config', () => {
   beforeEach(() => {
     delete process.env.RENDER_INSTANCE_ID
     delete process.env.RENDER_SERVICE_ID
@@ -14,41 +14,41 @@ describe('defaultConfig', () => {
   })
 
   test('has logger property', () => {
-    expect(defaultConfig()).toHaveProperty('logger')
+    expect(new Config()).toHaveProperty('logger')
   })
 
   test('has now property', () => {
-    expect(defaultConfig()).toHaveProperty('now', null)
+    expect(new Config()).toHaveProperty('now', null)
   })
 
   test('has api_base_url property', () => {
     process.env.JUDOSCALE_URL = 'HO HO HO'
-    expect(defaultConfig()).toHaveProperty('api_base_url', 'HO HO HO')
+    expect(new Config()).toHaveProperty('api_base_url', 'HO HO HO')
   })
 
   test('has api_base_url and container properties for render', () => {
     process.env.RENDER_INSTANCE_ID = 'renderServiceId-renderInstanceId'
     process.env.RENDER_SERVICE_ID = 'renderServiceId'
 
-    expect(defaultConfig()).toHaveProperty('api_base_url', 'https://adapter.judoscale.com/api/renderServiceId')
-    expect(defaultConfig()).toHaveProperty('container', 'renderInstanceId')
+    expect(new Config()).toHaveProperty('api_base_url', 'https://adapter.judoscale.com/api/renderServiceId')
+    expect(new Config()).toHaveProperty('container', 'renderInstanceId')
   })
 
   test('has container property for ECS', () => {
     process.env.ECS_CONTAINER_METADATA_URI = 'ecs-service/container-id'
-    expect(defaultConfig()).toHaveProperty('container', 'container-id')
+    expect(new Config()).toHaveProperty('container', 'container-id')
   })
 
   test('has container property for Heroku', () => {
     process.env.DYNO = 'web.123'
-    expect(defaultConfig()).toHaveProperty('container', 'web.123')
+    expect(new Config()).toHaveProperty('container', 'web.123')
   })
 
   test('has version property', () => {
-    expect(defaultConfig().version).toMatch(/\d+\.\d+\.\d+/)
+    expect(new Config().version).toMatch(/\d+\.\d+\.\d+/)
   })
 
   test('has report_interval_seconds property', () => {
-    expect(defaultConfig()).toHaveProperty('report_interval_seconds', 10)
+    expect(new Config()).toHaveProperty('report_interval_seconds', 10)
   })
 })
