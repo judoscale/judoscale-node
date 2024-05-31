@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.3...judoscale-node-core-v2.0.4) (2024-05-31)
+
+
+### Bug Fixes
+
+* Add `redis_url` config option and fix the Redis connection ([#40](https://github.com/judoscale/judoscale-node/issues/40)) ([f03d0cf](https://github.com/judoscale/judoscale-node/commit/f03d0cfd3175f459cbe8ea6efea3daa1716e2b20))
+
 ## [2.0.3](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.2...judoscale-node-core-v2.0.3) (2024-05-31)
 
 
