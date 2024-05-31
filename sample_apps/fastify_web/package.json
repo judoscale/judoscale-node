@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "src/web.js",
   "scripts": {
-    "web": "nodemon src/web.js",
-    "worker": "nodemon src/worker.js"
+    "web": "node src/web.js",
+    "worker": "node src/worker.js"
   },
   "type": "module",
   "license": "MIT",
@@ -15,8 +15,5 @@
     "ejs": "^3.1.10",
     "fastify": "^4.26.2",
     "judoscale-fastify": "*"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
   }
 }
