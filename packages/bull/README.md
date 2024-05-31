@@ -19,11 +19,13 @@ import { Judoscale } from 'judoscale-bull'
 // CommonJS
 const { Judoscale } = require('judoscale-bull')
 
-// Initialize Judoscale with default configuration
-const judoscale = new Judoscale()
+// Initialize Judoscale with optional configuration
+const judoscale = new Judoscale({
+  redis_url: process.env.REDISCLOUD_URL, // defaults to process.env.REDIS_URL
+})
 ```
 
-3. If you want to scale your workers all the way down, you also need to install judoscale-bull in your web process:
+3. If you want to scale your workers down to zero instances, you also need to install judoscale-bull in your web process so Judoscale knows when to scale them back up:
 
 ```javascript
 // ESM
@@ -34,8 +36,10 @@ import 'judoscale-bull'
 const { Judoscale, middleware: judoscaleMiddleware } = require('judoscale-express')
 require('judoscale-bull')
 
-// Judoscale will automatically be initialized for both Bull and Express/Fastify
-const judoscale = new Judoscale()
+// Judoscale will be initialized for both Bull and Express/Fastify
+const judoscale = new Judoscale({
+  redis_url: process.env.REDISCLOUD_URL, // defaults to process.env.REDIS_URL
+})
 ```
 
 ## Troubleshooting

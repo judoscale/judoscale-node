@@ -7,9 +7,12 @@ class Judoscale {
   constructor(options) {
     this.config = new Config(options)
 
-    const reporter = new Reporter()
+    // Expose config to the collectors
+    for (const adapter of Judoscale.adapters) {
+      adapter.collector.config = this.config
+    }
 
-    reporter.start(this.config, Judoscale.adapters)
+    new Reporter().start(this.config, Judoscale.adapters)
   }
 
   static registerAdapter(identifier, collector, meta = {}) {

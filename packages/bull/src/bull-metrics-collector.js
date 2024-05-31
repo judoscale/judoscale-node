@@ -14,8 +14,6 @@ class BullMetricsCollector extends WorkerMetricsCollector {
   constructor() {
     super('Bull')
     collectors.push(this)
-
-    this.redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
     this.queues = new Map()
   }
 
@@ -36,12 +34,11 @@ class BullMetricsCollector extends WorkerMetricsCollector {
   }
 
   async prepareQueues() {
-    const redis = new Redis({ url: this.redisUrl })
     const redisKeys = []
     let cursor = '0'
 
     do {
-      const reply = await redis.scan(cursor, 'MATCH', 'bull:*:id')
+      const reply = await this.redis.scan(cursor, 'MATCH', 'bull:*:id')
       cursor = reply[0]
       redisKeys.push(...reply[1])
     } while (cursor !== '0')
@@ -51,16 +48,24 @@ class BullMetricsCollector extends WorkerMetricsCollector {
       const queue = new Queue(queueName, { url: this.redisUrl })
       this.queues.set(queueName, queue)
     }
-
-    await redis.quit()
   }
 
-  async closeQueues() {
+  async tearDown() {
+    await this.redis.quit()
     for (const queue of this.queues.values()) {
       await queue.close()
     }
 
     this.queues.clear()
+  }
+
+  get redis() {
+    if (!this._redis) {
+      const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+      this._redis = new Redis(redisUrl)
+    }
+
+    return this._redis
   }
 }
 

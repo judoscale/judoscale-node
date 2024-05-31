@@ -5,15 +5,12 @@ const { Metric, WorkerMetricsCollector } = require('judoscale-node-core')
 class BullMQMetricsCollector extends WorkerMetricsCollector {
   constructor() {
     super('BullMQ')
-
-    const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
-
-    this.redis = new Redis({ connection: { url: redisUrl } })
     this.queueNames = new Set()
   }
 
   async collect() {
     // TODO: New queues created after first collect() call will not be reported
+    console.log('COLLECT')
     if (this.queueNames.size == 0) await this.fetchQueueNames()
 
     let metrics = []
@@ -43,6 +40,15 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
       const queueName = redisKey.split(':')[1]
       this.queueNames.add(queueName)
     }
+  }
+
+  get redis() {
+    if (!this._redis) {
+      const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+      this._redis = new Redis(redisUrl)
+    }
+
+    return this._redis
   }
 }
 
