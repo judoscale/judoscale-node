@@ -1,4 +1,3 @@
-const Redis = require('ioredis')
 const Queue = require('bull')
 const BullMetricsCollector = require('../src/bull-metrics-collector')
 
@@ -9,14 +8,12 @@ describe('BullMetricsCollector', () => {
     collector = new BullMetricsCollector()
 
     // Clear all Bull information in Redis
-    const redis = new Redis({ url: this.redisUrl })
-    const keys = await redis.keys('bull:*')
-    if (keys.length) await redis.del(keys)
-    await redis.quit()
+    const keys = await collector.redis.keys('bull:*')
+    if (keys.length) await collector.redis.del(keys)
   })
 
   afterEach(async () => {
-    if (collector) await collector.closeQueues()
+    if (collector) await collector.tearDown()
     if (queue) await queue.close()
   })
 

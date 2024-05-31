@@ -1,6 +1,7 @@
 class WorkerMetricsCollector {
   constructor(collectorName) {
     this.collectorName = collectorName
+    this.config = {}
   }
 
   collect() {
