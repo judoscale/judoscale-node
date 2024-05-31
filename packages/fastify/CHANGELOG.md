@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.0.3...judoscale-fastify-v2.1.0) (2024-05-31)
+
+
+### Features
+
+* Add integration for autoscaling Bull job queue workers ([#37](https://github.com/judoscale/judoscale-node/issues/37)) ([5898502](https://github.com/judoscale/judoscale-node/commit/58985020319f8d747c5ec4ce5c21e388d666f5f6))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.0.2 to 2.0.3
+
 ## [2.0.3](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.0.2...judoscale-fastify-v2.0.3) (2024-05-30)
 
 
