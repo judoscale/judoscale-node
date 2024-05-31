@@ -1,5 +1,5 @@
 const winston = require('winston')
-const packageInfo = require('../../package.json')
+const packageInfo = require('../package.json')
 
 class Config {
   constructor(options = {}) {

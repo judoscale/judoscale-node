@@ -1,6 +1,6 @@
 /* global test, expect, describe, jest */
 
-const Config = require('../lib/config')
+const Config = require('../src/config')
 
 describe('Config', () => {
   beforeEach(() => {

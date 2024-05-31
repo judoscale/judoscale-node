@@ -1,12 +1,12 @@
-const Api = require('./lib/api')
-const requestMetrics = require('./lib/request-metrics')
-const Metric = require('./lib/metric')
-const MetricsStore = require('./lib/metrics-store')
-const Report = require('./lib/report')
-const Reporter = require('./lib/reporter')
-const WebMetricsCollector = require('./lib/web-metrics-collector')
-const WorkerMetricsCollector = require('./lib/worker-metrics-collector')
-const Judoscale = require('./lib/judoscale')
+const Api = require('./api')
+const requestMetrics = require('./request-metrics')
+const Metric = require('./metric')
+const MetricsStore = require('./metrics-store')
+const Report = require('./report')
+const Reporter = require('./reporter')
+const WebMetricsCollector = require('./web-metrics-collector')
+const WorkerMetricsCollector = require('./worker-metrics-collector')
+const Judoscale = require('./judoscale')
 
 module.exports = {
   Judoscale,

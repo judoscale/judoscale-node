@@ -1,6 +1,6 @@
 /* global test, expect, describe */
 
-const { Api, Metric, MetricsStore, Report, Reporter } = require('../index')
+const { Api, Metric, MetricsStore, Report, Reporter } = require('../src/index')
 
 describe('exports', () => {
   test('Api', () => {

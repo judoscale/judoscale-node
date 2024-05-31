@@ -1,7 +1,7 @@
 /* global test, expect, describe, jest */
 
-const Api = require('../lib/api')
-const Config = require('../lib/config')
+const Api = require('../src/api')
+const Config = require('../src/config')
 const unirest = require('unirest')
 
 jest.mock('unirest', () => {
