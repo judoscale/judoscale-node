@@ -1,6 +1,6 @@
 /* global test, expect, describe */
 
-const RequestMetrics = require('../lib/request-metrics')
+const RequestMetrics = require('../src/request-metrics')
 
 describe('RequestMetrics', () => {
   describe('queueTimeFromHeaders', () => {

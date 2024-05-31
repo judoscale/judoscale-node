@@ -1,7 +1,14 @@
-const getLogger = require('./logger')
-const packageInfo = require('../../package.json')
+const winston = require('winston')
+const packageInfo = require('../package.json')
 
-module.exports = function () {
+class Config {
+  constructor(options = {}) {
+    Object.assign(this, getDefaultOptions(), options)
+    if (!this.logger) this.logger = getLogger(this.log_level)
+  }
+}
+
+function getDefaultOptions() {
   const defaultLogLevel = process.env.JUDOSCALE_LOG_LEVEL || 'info'
 
   let apiBaseUrl = process.env.JUDOSCALE_URL
@@ -18,12 +25,26 @@ module.exports = function () {
   }
 
   return {
+    // TODO: camelCase these for internal use, snake_case for reporting
     version: packageInfo.version,
     api_base_url: apiBaseUrl,
     log_level: defaultLogLevel,
     container: containerID,
     report_interval_seconds: 10,
     now: null,
-    logger: getLogger(defaultLogLevel),
   }
 }
+
+function getLogger(level) {
+  const logger = winston.createLogger({ level })
+
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple(),
+    })
+  )
+
+  return logger
+}
+
+module.exports = Config

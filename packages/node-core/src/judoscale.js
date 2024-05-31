@@ -1,11 +1,12 @@
-const mergeConfig = require('./merge-config')
+const Config = require('./config')
 const Reporter = require('./reporter')
 
 class Judoscale {
   static adapters = []
 
   constructor(options) {
-    this.config = mergeConfig(options)
+    this.config = new Config(options)
+
     const reporter = new Reporter()
 
     reporter.start(this.config, Judoscale.adapters)

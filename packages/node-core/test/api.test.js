@@ -1,7 +1,7 @@
 /* global test, expect, describe, jest */
 
-const Api = require('../lib/api')
-const defaultConfigFunction = require('../lib/default-config')
+const Api = require('../src/api')
+const Config = require('../src/config')
 const unirest = require('unirest')
 
 jest.mock('unirest', () => {
@@ -15,16 +15,11 @@ jest.mock('unirest', () => {
   }
 })
 
-const defaultConfig = defaultConfigFunction()
-const api = new Api(defaultConfig)
+const api = new Api(new Config())
 
 describe('constructor', () => {
-  test('config property', () => {
-    expect(api.config).toEqual(defaultConfig)
-  })
-
   test('base_url property', () => {
-    expect(api.base_url).toEqual(defaultConfig.api_base_url)
+    expect(api.base_url).toEqual(new Config().api_base_url)
   })
 })
 
