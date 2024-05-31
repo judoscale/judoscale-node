@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.2...judoscale-node-core-v2.0.3) (2024-05-31)
+
+
+### Bug Fixes
+
+* Clean up configuration code ([#39](https://github.com/judoscale/judoscale-node/issues/39)) ([cd426be](https://github.com/judoscale/judoscale-node/commit/cd426be85aef07875b96a7e22c276b5b84ed4d7b))
+
 ## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.1...judoscale-node-core-v2.0.2) (2024-05-30)
 
 
