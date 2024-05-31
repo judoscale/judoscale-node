@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.1...judoscale-bullmq-v2.1.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* Remove unnecessary logging ([ca7512d](https://github.com/judoscale/judoscale-node/commit/ca7512da96957586b1b09f3f29e9f0a25f980f84))
+
 ## [2.1.1](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.0...judoscale-bullmq-v2.1.1) (2024-05-31)
 
 
