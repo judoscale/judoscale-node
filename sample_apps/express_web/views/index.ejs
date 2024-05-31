@@ -58,9 +58,8 @@
             <label>
               <span>Queue</span>
               <select name="queue" required>
-                <% queues.forEach(queue => { %>
-                <option value="<%= queue.name %>"><%= queue.name %></option>
-                <% }); %>
+                <option value="default">default</option>
+                <option value="urgent">urgent</option>
               </select>
             </label>
 

@@ -6,12 +6,12 @@ import Queue from 'bull'
 import Redis from 'ioredis'
 import { Judoscale, plugin as judoscalePlugin } from 'judoscale-fastify'
 
+const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
 const redisOpts = {
-  url: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
   maxRetriesPerRequest: null, // Since bull v4
   enableReadyCheck: false, // Since bull v4
 }
-const redis = new Redis(redisOpts)
+const redis = new Redis(redisUrl, redisOpts)
 
 const fastify = Fastify({
   logger: {

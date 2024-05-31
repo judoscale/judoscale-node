@@ -1,7 +1,13 @@
+import Redis from 'ioredis'
 import { Worker } from 'bullmq'
 import { Judoscale } from 'judoscale-bullmq'
 
-const redisOpts = { url: process.env.REDIS_URL || 'redis://127.0.0.1:6379' }
+const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+const redisOpts = {
+  maxRetriesPerRequest: null, // Since bull v4
+  enableReadyCheck: false, // Since bull v4
+}
+const redis = new Redis(redisUrl, redisOpts)
 const queueNames = ['default', 'urgent']
 
 new Judoscale({
@@ -10,7 +16,7 @@ new Judoscale({
 
 const workers = queueNames.map((queueName) => {
   console.log(`Starting worker for ${queueName} queue`)
-  return new Worker(queueName, handlerForQueue(queueName), { connection: redisOpts })
+  return new Worker(queueName, handlerForQueue(queueName), { connection: redis })
 })
 
 process.on('SIGINT', () => gracefulShutdown('SIGINT'))

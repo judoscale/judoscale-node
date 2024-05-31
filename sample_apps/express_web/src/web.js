@@ -6,8 +6,12 @@ import 'judoscale-bullmq'
 
 const app = express()
 const port = process.env.PORT || 5000
-const redisConfig = { connection: { host: '127.0.0.1', port: 6379 } }
-const redis = new Redis(redisConfig.connection)
+const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+const redisOpts = {
+  maxRetriesPerRequest: null, // Since bull v4
+  enableReadyCheck: false, // Since bull v4
+}
+const redis = new Redis(redisUrl, redisOpts)
 
 app.set('views', './views')
 app.set('view engine', 'ejs')
@@ -33,7 +37,7 @@ async function handleIndex(req, res) {
 
   const queueStats = await Promise.all(
     queueNames.map(async (name) => {
-      const queue = new Queue(name, redisConfig)
+      const queue = new Queue(name, { connection: redis })
       const jobCounts = await queue.getJobCounts('waiting', 'active')
 
       // // Fetch the oldest job in the waiting state to calculate queue latency
@@ -54,7 +58,7 @@ async function handleIndex(req, res) {
 
 async function handleEnqueueJobs(req, res) {
   const queueName = req.body.queue || 'default'
-  const queue = new Queue(queueName, redisConfig)
+  const queue = new Queue(queueName, { connection: redis })
 
   const numJobs = Number(req.body.jobs) || 10
   const jobData = { duration: Number(req.body.duration) || 10 }
