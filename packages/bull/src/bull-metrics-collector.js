@@ -6,9 +6,7 @@ class BullMetricsCollector extends WorkerMetricsCollector {
   constructor() {
     super('Bull')
 
-    const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
-
-    this.redis = new Redis({ connection: { url: redisUrl } })
+    this.redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
     this.queueNames = new Set()
   }
 
@@ -19,22 +17,25 @@ class BullMetricsCollector extends WorkerMetricsCollector {
     let metrics = []
 
     for (const queueName of this.queueNames) {
-      const queue = new Queue(queueName, { connection: this.redis })
+      const queue = new Queue(queueName, { url: this.redisUrl })
       const jobCounts = await queue.getJobCounts('waiting', 'active')
 
       metrics.push(new Metric('qd', new Date(), jobCounts.waiting, queueName))
       metrics.push(new Metric('busy', new Date(), jobCounts.active, queueName))
+
+      queue.close()
     }
 
     return metrics
   }
 
   async fetchQueueNames() {
+    const redis = new Redis({ url: this.redisUrl })
     const redisKeys = []
     let cursor = '0'
 
     do {
-      const reply = await this.redis.scan(cursor, 'MATCH', 'bull:*:id')
+      const reply = await redis.scan(cursor, 'MATCH', 'bull:*:id')
       cursor = reply[0]
       redisKeys.push(...reply[1])
     } while (cursor !== '0')
@@ -43,6 +44,8 @@ class BullMetricsCollector extends WorkerMetricsCollector {
       const queueName = redisKey.split(':')[1]
       this.queueNames.add(queueName)
     }
+
+    await redis.quit()
   }
 }
 
