@@ -1,6 +1,5 @@
 const Api = require('./lib/api')
 const defaultConfigFunction = require('./lib/default-config')
-const mergeConfig = require('./lib/merge-config')
 const logger = require('./lib/logger')
 const requestMetrics = require('./lib/request-metrics')
 const Metric = require('./lib/metric')
@@ -16,7 +15,6 @@ const defaultConfig = defaultConfigFunction() // TODO: Fix weird default/merged 
 module.exports = {
   Judoscale,
   Api,
-  mergeConfig,
   logger,
   requestMetrics,
   Metric,
