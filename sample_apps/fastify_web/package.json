@@ -1,14 +1,22 @@
 {
   "name": "judoscale-sample-fastify",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/web.js",
   "scripts": {
-    "dev": "npx node ./app.js"
+    "web": "nodemon src/web.js",
+    "worker": "nodemon src/worker.js"
   },
   "type": "module",
   "license": "MIT",
   "dependencies": {
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/view": "^9.1.0",
+    "bull": "^4.12.9",
+    "ejs": "^3.1.10",
     "fastify": "^4.26.2",
     "judoscale-fastify": "*"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

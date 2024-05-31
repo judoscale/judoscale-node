@@ -7,6 +7,7 @@ These packages work together with the [Judoscale](https://judoscale.com) autosca
 - [Express](https://github.com/judoscale/judoscale-node/tree/main/express)
 - [Fastify](https://github.com/judoscale/judoscale-node/tree/main/fastify)
 - [BullMQ](https://github.com/judoscale/judoscale-node/tree/main/bullmq)
+- [Bull](https://github.com/judoscale/judoscale-node/tree/main/bull)
 
 ## What data is collected?
 
@@ -15,7 +16,7 @@ The following data is submitted periodically to the Judoscale API:
 - Node and framework versions
 - Judoscale package versions
 - Dyno or service name (example: web.1)
-- Queue time metrics
+- Queue metrics
 
 Judoscale aggregates and stores this information to power the autoscaling algorithm and dashboard visualizations.
 

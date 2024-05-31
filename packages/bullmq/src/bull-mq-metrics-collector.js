@@ -13,6 +13,7 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
   }
 
   async collect() {
+    // TODO: New queues created after first collect() call will not be reported
     if (this.queueNames.size == 0) await this.fetchQueueNames()
 
     let metrics = []
