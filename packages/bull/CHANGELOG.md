@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.3](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.0.2...judoscale-bull-v2.0.3) (2024-06-04)
+
+
+### Bug Fixes
+
+* Add `redis` config option for Bull & BullMQ ([#43](https://github.com/judoscale/judoscale-node/issues/43)) ([bb57dbd](https://github.com/judoscale/judoscale-node/commit/bb57dbd93cce930af872112a4a00c468d28fbc33))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.0.4 to 2.0.5
+
 ## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.0.1...judoscale-bull-v2.0.2) (2024-05-31)
 
 
