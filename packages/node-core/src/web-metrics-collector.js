@@ -1,8 +1,8 @@
 class WebMetricsCollector {
-  constructor(store, collectorName = 'Web') {
+  constructor(store, collectorName = 'Web', config = {}) {
     this.collectorName = collectorName
     this.store = store
-    this.config = {}
+    this.config = config
   }
 
   collect() {

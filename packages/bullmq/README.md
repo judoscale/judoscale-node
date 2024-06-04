@@ -40,6 +40,11 @@ require('judoscale-bullmq')
 const judoscale = new Judoscale({
   redis_url: process.env.REDISCLOUD_URL, // defaults to process.env.REDIS_URL
 })
+
+// You can optionally pass a Redis config object or an ioredis instance
+const judoscale = new Judoscale({
+  redis: redisConfig,
+})
 ```
 
 ## Troubleshooting

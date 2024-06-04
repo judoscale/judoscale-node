@@ -2,16 +2,15 @@ import Redis from 'ioredis'
 import { Worker } from 'bullmq'
 import { Judoscale } from 'judoscale-bullmq'
 
-const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
-const redisOpts = {
+const redis = new Redis('redis://127.0.0.1:6379', {
   maxRetriesPerRequest: null, // Since bull v4
   enableReadyCheck: false, // Since bull v4
-}
-const redis = new Redis(redisUrl, redisOpts)
+})
 const queueNames = ['default', 'urgent']
 
 new Judoscale({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+  redis: redis,
 })
 
 const workers = queueNames.map((queueName) => {
