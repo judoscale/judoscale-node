@@ -9,7 +9,7 @@ class Judoscale {
 
     // Expose config to the collectors
     for (const adapter of Judoscale.adapters) {
-      adapter.collector.config = this.config
+      adapter.collector.config = { ...this.config, ...adapter.collector.config }
     }
 
     new Reporter().start(this.config, Judoscale.adapters)

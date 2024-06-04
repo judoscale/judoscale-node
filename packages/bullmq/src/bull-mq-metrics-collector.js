@@ -3,8 +3,8 @@ const { Queue } = require('bullmq')
 const { Metric, WorkerMetricsCollector } = require('judoscale-node-core')
 
 class BullMQMetricsCollector extends WorkerMetricsCollector {
-  constructor() {
-    super('BullMQ')
+  constructor(config = {}) {
+    super('BullMQ', config)
     this.queueNames = new Set()
   }
 
@@ -43,8 +43,14 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
 
   get redis() {
     if (!this._redis) {
-      const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
-      this._redis = new Redis(redisUrl)
+      if (this.config.redis instanceof Redis) {
+        this._redis = this.config.redis
+      } else if (this.config.redis) {
+        this._redis = new Redis(this.config.redis)
+      } else {
+        const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+        this._redis = new Redis(redisUrl)
+      }
     }
 
     return this._redis

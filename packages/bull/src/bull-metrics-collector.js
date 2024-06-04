@@ -11,8 +11,8 @@ process.on('exit', async () => {
 })
 
 class BullMetricsCollector extends WorkerMetricsCollector {
-  constructor() {
-    super('Bull')
+  constructor(config = {}) {
+    super('Bull', config)
     collectors.push(this)
     this.queues = new Map()
   }
@@ -61,8 +61,14 @@ class BullMetricsCollector extends WorkerMetricsCollector {
 
   get redis() {
     if (!this._redis) {
-      const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
-      this._redis = new Redis(redisUrl)
+      if (this.config.redis instanceof Redis) {
+        this._redis = this.config.redis
+      } else if (this.config.redis) {
+        this._redis = new Redis(this.config.redis)
+      } else {
+        const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+        this._redis = new Redis(redisUrl)
+      }
     }
 
     return this._redis

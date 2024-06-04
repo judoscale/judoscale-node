@@ -6,18 +6,17 @@ import 'judoscale-bullmq'
 
 const app = express()
 const port = process.env.PORT || 5000
-const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
-const redisOpts = {
+const redis = new Redis('redis://127.0.0.1:6379', {
   maxRetriesPerRequest: null, // Since bull v4
   enableReadyCheck: false, // Since bull v4
-}
-const redis = new Redis(redisUrl, redisOpts)
+})
 
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
 const judoscale = new Judoscale({
   api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+  redis: redis,
 })
 
 app.use(judoscaleMiddleware(judoscale))
