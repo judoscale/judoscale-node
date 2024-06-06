@@ -16,9 +16,9 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
 
     for (const queueName of this.queueNames) {
       const queue = new Queue(queueName, { connection: this.redis })
-      const jobCounts = await queue.getJobCounts('waiting', 'active')
+      const jobCounts = await queue.getJobCounts('waiting', 'active', 'prioritized')
 
-      metrics.push(new Metric('qd', new Date(), jobCounts.waiting, queueName))
+      metrics.push(new Metric('qd', new Date(), jobCounts.waiting + jobCounts.prioritized, queueName))
       metrics.push(new Metric('busy', new Date(), jobCounts.active, queueName))
     }
 
