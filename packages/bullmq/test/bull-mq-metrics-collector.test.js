@@ -3,21 +3,27 @@ const { Queue } = require('bullmq')
 const BullMQMetricsCollector = require('../src/bull-mq-metrics-collector')
 
 describe('BullMQMetricsCollector', () => {
-  let collector
+  const resetBullData = async (redis) => {
+    const keys = await redis.keys('bull:*')
+    if (keys.length) await redis.del(keys)
+  }
 
-  beforeEach(async () => {
-    collector = new BullMQMetricsCollector()
+  let redisConnectionsToCleanUp
 
-    // Clear all Bull information in Redis
-    const keys = await collector.redis.keys('bull:*')
-    if (keys.length) await collector.redis.del(keys)
+  beforeEach(() => {
+    redisConnectionsToCleanUp = []
   })
 
   afterEach(() => {
-    collector.redis.quit()
+    redisConnectionsToCleanUp.forEach((redis) => redis.quit())
   })
 
   test('collects queue metrics', async () => {
+    const collector = new BullMQMetricsCollector()
+
+    redisConnectionsToCleanUp.push(collector.redis)
+    await resetBullData(collector.redis)
+
     const queue = new Queue('foo', { connection: collector.redis })
     await queue.add('test-job')
 
@@ -37,6 +43,10 @@ describe('BullMQMetricsCollector', () => {
     const collector1 = new BullMQMetricsCollector({ redis_url: 'redis://localhost:6379/1' })
     const collector2 = new BullMQMetricsCollector({ redis_url: 'redis://localhost:6379/2' })
 
+    redisConnectionsToCleanUp.push(collector1.redis, collector2.redis)
+    await resetBullData(collector1.redis)
+    await resetBullData(collector2.redis)
+
     const queue = new Queue('foo', { connection: collector1.redis })
     await queue.add('test-job')
 
@@ -45,14 +55,15 @@ describe('BullMQMetricsCollector', () => {
 
     expect(metrics1.length).toEqual(2)
     expect(metrics2.length).toEqual(0)
-
-    collector1.redis.quit()
-    collector2.redis.quit()
   })
 
   test('uses the redis connection if provided', async () => {
     const redis1 = new Redis('redis://localhost:6379/1')
     const redis2 = new Redis('redis://localhost:6379/2')
+
+    redisConnectionsToCleanUp.push(redis1, redis2)
+    await resetBullData(redis1)
+    await resetBullData(redis2)
 
     const collector1 = new BullMQMetricsCollector({ redis: redis1 })
     const collector2 = new BullMQMetricsCollector({ redis: redis2 })
@@ -65,9 +76,6 @@ describe('BullMQMetricsCollector', () => {
 
     expect(metrics1.length).toEqual(2)
     expect(metrics2.length).toEqual(0)
-
-    redis1.quit()
-    redis2.quit()
   })
 
   test('uses the redis connection options if provided', async () => {
@@ -77,6 +85,10 @@ describe('BullMQMetricsCollector', () => {
     const collector1 = new BullMQMetricsCollector({ redis: redis1 })
     const collector2 = new BullMQMetricsCollector({ redis: redis2 })
 
+    redisConnectionsToCleanUp.push(collector1.redis, collector2.redis)
+    await resetBullData(collector1.redis)
+    await resetBullData(collector2.redis)
+
     const queue = new Queue('foo', { connection: collector1.redis })
     await queue.add('test-job')
 
@@ -85,8 +97,5 @@ describe('BullMQMetricsCollector', () => {
 
     expect(metrics1.length).toEqual(2)
     expect(metrics2.length).toEqual(0)
-
-    collector1.redis.quit()
-    collector2.redis.quit()
   })
 })
