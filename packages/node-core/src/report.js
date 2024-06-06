@@ -14,9 +14,12 @@ class Report {
     return {
       container: this.config.container,
       pid: process.pid,
-      // Convert logger (DerivedLogger instance) into something sane
-      config: { ...this.config, logger: this.config.logger && this.config.logger.constructor.name },
       adapters: adapterMetadata,
+      config: {
+        version: this.config.version,
+        container: this.config.container,
+        log_level: this.config.log_level,
+      },
       metrics: this.metrics.map((metric) => [
         metric.time.getTime() / 1000,
         metric.value,
