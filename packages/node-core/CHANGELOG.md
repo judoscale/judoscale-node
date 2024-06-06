@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.5...judoscale-node-core-v2.0.6) (2024-06-06)
+
+
+### Bug Fixes
+
+* Don't include the entire config object in reports ([#47](https://github.com/judoscale/judoscale-node/issues/47)) ([d51426c](https://github.com/judoscale/judoscale-node/commit/d51426cf581aecf80c51c23737c8b106a1aaea93))
+
 ## [2.0.5](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.4...judoscale-node-core-v2.0.5) (2024-06-04)
 
 
