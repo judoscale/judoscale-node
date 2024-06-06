@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.4](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.3...judoscale-bullmq-v2.1.4) (2024-06-06)
+
+
+### Bug Fixes
+
+* Include prioritized jobs in queue depth metric ([#45](https://github.com/judoscale/judoscale-node/issues/45)) ([cdc26c5](https://github.com/judoscale/judoscale-node/commit/cdc26c5ec9e6c71db1915c2a6652f6e59f696c0c))
+
 ## [2.1.3](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.2...judoscale-bullmq-v2.1.3) (2024-06-04)
 
 
