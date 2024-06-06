@@ -26,6 +26,7 @@ describe('BullMQMetricsCollector', () => {
 
     const queue = new Queue('foo', { connection: collector.redis })
     await queue.add('test-job')
+    await queue.add('prioritized-job', {}, { priority: 1 })
 
     const metrics = await collector.collect()
 
@@ -33,7 +34,7 @@ describe('BullMQMetricsCollector', () => {
 
     expect(metrics[0].identifier).toEqual('qd')
     expect(metrics[0].queueName).toEqual('foo')
-    expect(metrics[0].value).toEqual(1)
+    expect(metrics[0].value).toEqual(2)
     expect(metrics[1].identifier).toEqual('busy')
     expect(metrics[1].queueName).toEqual('foo')
     expect(metrics[1].value).toEqual(0)
