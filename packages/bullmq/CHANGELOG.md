@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.5](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.4...judoscale-bullmq-v2.1.5) (2024-06-06)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.0.5 to 2.0.6
+
 ## [2.1.4](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.3...judoscale-bullmq-v2.1.4) (2024-06-06)
 
 
