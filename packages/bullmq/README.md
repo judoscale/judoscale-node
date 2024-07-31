@@ -23,6 +23,11 @@ const { Judoscale } = require('judoscale-bullmq')
 const judoscale = new Judoscale({
   redis_url: process.env.REDISCLOUD_URL, // defaults to process.env.REDIS_URL
 })
+
+// You can optionally pass a Redis config object or an ioredis instance
+const judoscale = new Judoscale({
+  redis: redisConfig,
+})
 ```
 
 3. If you want to scale your workers down to zero instances, you also need to install judoscale-bullmq in your web process so Judoscale knows when to scale them back up:
@@ -39,11 +44,6 @@ require('judoscale-bullmq')
 // Judoscale will be initialized for both BullMQ and Express/Fastify
 const judoscale = new Judoscale({
   redis_url: process.env.REDISCLOUD_URL, // defaults to process.env.REDIS_URL
-})
-
-// You can optionally pass a Redis config object or an ioredis instance
-const judoscale = new Judoscale({
-  redis: redisConfig,
 })
 ```
 
