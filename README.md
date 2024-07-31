@@ -4,10 +4,10 @@ These packages work together with the [Judoscale](https://judoscale.com) autosca
 
 ## Supported frameworks
 
-- [Express](https://github.com/judoscale/judoscale-node/tree/main/express)
-- [Fastify](https://github.com/judoscale/judoscale-node/tree/main/fastify)
-- [BullMQ](https://github.com/judoscale/judoscale-node/tree/main/bullmq)
-- [Bull](https://github.com/judoscale/judoscale-node/tree/main/bull)
+- [Express](https://github.com/judoscale/judoscale-node/tree/main/packages/express)
+- [Fastify](https://github.com/judoscale/judoscale-node/tree/main/packages/fastify)
+- [BullMQ](https://github.com/judoscale/judoscale-node/tree/main/packages/bullmq)
+- [Bull](https://github.com/judoscale/judoscale-node/tree/main/packages/bull)
 
 ## What data is collected?
 
