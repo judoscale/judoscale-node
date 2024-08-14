@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.0.5...judoscale-bull-v2.0.6) (2024-08-14)
+
+
+### Bug Fixes
+
+* bull package memory leak ([5143b7e](https://github.com/judoscale/judoscale-node/commit/5143b7e0ef70f30df0448f568fcabd7af45093a8))
+
 ## [2.0.5](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.0.4...judoscale-bull-v2.0.5) (2024-06-06)
 
 
