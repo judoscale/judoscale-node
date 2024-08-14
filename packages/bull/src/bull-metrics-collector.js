@@ -25,6 +25,7 @@ class BullMetricsCollector extends WorkerMetricsCollector {
 
     for (const [queueName, queue] of this.queues) {
       const jobCounts = await queue.getJobCounts('waiting', 'active')
+      await queue.close()
 
       metrics.push(new Metric('qd', new Date(), jobCounts.waiting, queueName))
       metrics.push(new Metric('busy', new Date(), jobCounts.active, queueName))
