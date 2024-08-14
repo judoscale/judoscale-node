@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.6](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.5...judoscale-bullmq-v2.1.6) (2024-08-14)
+
+
+### Bug Fixes
+
+* bullmq package memory leak ([#50](https://github.com/judoscale/judoscale-node/issues/50)) ([3b80a03](https://github.com/judoscale/judoscale-node/commit/3b80a03dd092a1c880170bc03364b484917d30a9))
+
 ## [2.1.5](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.4...judoscale-bullmq-v2.1.5) (2024-06-06)
 
 
