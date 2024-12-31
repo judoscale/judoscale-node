@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.7](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.6...judoscale-node-core-v2.0.7) (2024-12-31)
+
+
+### Bug Fixes
+
+* JUDOSCALE_URL should take priority over RENDER_SERVICE_ID on Render ([4dffebf](https://github.com/judoscale/judoscale-node/commit/4dffebfab61857400b482f5d8fca7177cc233838))
+
 ## [2.0.6](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.5...judoscale-node-core-v2.0.6) (2024-06-06)
 
 
