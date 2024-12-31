@@ -32,6 +32,15 @@ describe('Config', () => {
     expect(new Config()).toHaveProperty('container', 'renderInstanceId')
   })
 
+  test('JUDOSCALE_URL overrides RENDER_INSTANCE_ID for render', () => {
+    process.env.JUDOSCALE_URL = 'HO HO HO'
+    process.env.RENDER_INSTANCE_ID = 'renderServiceId-renderInstanceId'
+    process.env.RENDER_SERVICE_ID = 'renderServiceId'
+
+    expect(new Config()).toHaveProperty('api_base_url', 'HO HO HO')
+    expect(new Config()).toHaveProperty('container', 'renderInstanceId')
+  })
+
   test('has container property for ECS', () => {
     process.env.ECS_CONTAINER_METADATA_URI = 'ecs-service/container-id'
     expect(new Config()).toHaveProperty('container', 'container-id')

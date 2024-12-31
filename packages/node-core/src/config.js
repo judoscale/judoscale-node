@@ -16,7 +16,7 @@ function getDefaultOptions() {
 
   if (process.env.RENDER_INSTANCE_ID) {
     containerID = process.env.RENDER_INSTANCE_ID.replace(process.env.RENDER_SERVICE_ID, '').replace('-', '')
-    apiBaseUrl = `https://adapter.judoscale.com/api/${process.env.RENDER_SERVICE_ID}`
+    apiBaseUrl ||= `https://adapter.judoscale.com/api/${process.env.RENDER_SERVICE_ID}`
   }
 
   if (process.env.ECS_CONTAINER_METADATA_URI) {
