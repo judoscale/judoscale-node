@@ -5,6 +5,7 @@ const Config = require('../src/config')
 describe('Config', () => {
   beforeEach(() => {
     delete process.env.JUDOSCALE_URL
+    delete process.env.JUDOSCALE_LOG_LEVEL
     delete process.env.DYNO
     delete process.env.RENDER_INSTANCE_ID
     delete process.env.RENDER_SERVICE_ID
@@ -14,6 +15,13 @@ describe('Config', () => {
 
   test('has logger property', () => {
     expect(new Config()).toHaveProperty('logger')
+  })
+
+  test('has log_level property that can be overridden via JUDOSCALE_LOG_LEVEL', () => {
+    expect(new Config()).toHaveProperty('log_level', 'info')
+
+    process.env.JUDOSCALE_LOG_LEVEL = 'warn'
+    expect(new Config()).toHaveProperty('log_level', 'warn')
   })
 
   test('has now property', () => {
