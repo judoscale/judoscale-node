@@ -12,14 +12,14 @@ function getDefaultOptions() {
   const defaultLogLevel = process.env.JUDOSCALE_LOG_LEVEL || 'info'
 
   let apiBaseUrl = process.env.JUDOSCALE_URL
-  let containerID = process.env.DYNO
+  let containerID
 
-  if (process.env.RENDER_INSTANCE_ID) {
-    containerID = process.env.RENDER_INSTANCE_ID.replace(process.env.RENDER_SERVICE_ID, '').replace('-', '')
+  if (process.env.DYNO) {
+    containerID = process.env.DYNO
+  } else if (process.env.RENDER_INSTANCE_ID) {
     apiBaseUrl ||= `https://adapter.judoscale.com/api/${process.env.RENDER_SERVICE_ID}`
-  }
-
-  if (process.env.ECS_CONTAINER_METADATA_URI) {
+    containerID = process.env.RENDER_INSTANCE_ID.replace(process.env.RENDER_SERVICE_ID, '').replace('-', '')
+  } else if (process.env.ECS_CONTAINER_METADATA_URI) {
     const parts = process.env.ECS_CONTAINER_METADATA_URI.split('/')
     containerID = parts[parts.length - 1]
   }
