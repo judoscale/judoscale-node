@@ -18,7 +18,7 @@ function getDefaultOptions() {
     containerID = process.env.DYNO
   } else if (process.env.RENDER_INSTANCE_ID) {
     apiBaseUrl ||= `https://adapter.judoscale.com/api/${process.env.RENDER_SERVICE_ID}`
-    containerID = process.env.RENDER_INSTANCE_ID.replace(process.env.RENDER_SERVICE_ID, '').replace('-', '')
+    containerID = process.env.RENDER_INSTANCE_ID.replace(`${process.env.RENDER_SERVICE_ID}-`, '')
   } else if (process.env.ECS_CONTAINER_METADATA_URI) {
     const parts = process.env.ECS_CONTAINER_METADATA_URI.split('/')
     containerID = parts[parts.length - 1]
