@@ -4,15 +4,24 @@ const Config = require('../src/config')
 
 describe('Config', () => {
   beforeEach(() => {
+    delete process.env.JUDOSCALE_URL
+    delete process.env.JUDOSCALE_LOG_LEVEL
+    delete process.env.DYNO
     delete process.env.RENDER_INSTANCE_ID
     delete process.env.RENDER_SERVICE_ID
-    delete process.env.DYNO
-    delete process.env.JUDOSCALE_URL
     delete process.env.ECS_CONTAINER_METADATA_URI
+    delete process.env.RAILWAY_REPLICA_ID
   })
 
   test('has logger property', () => {
     expect(new Config()).toHaveProperty('logger')
+  })
+
+  test('has log_level property that can be overridden via JUDOSCALE_LOG_LEVEL', () => {
+    expect(new Config()).toHaveProperty('log_level', 'info')
+
+    process.env.JUDOSCALE_LOG_LEVEL = 'warn'
+    expect(new Config()).toHaveProperty('log_level', 'warn')
   })
 
   test('has now property', () => {
@@ -49,6 +58,11 @@ describe('Config', () => {
   test('has container property for Heroku', () => {
     process.env.DYNO = 'web.123'
     expect(new Config()).toHaveProperty('container', 'web.123')
+  })
+
+  test('has container property for Railway', () => {
+    process.env.RAILWAY_REPLICA_ID = 'random-replica-uuid'
+    expect(new Config()).toHaveProperty('container', 'random-replica-uuid')
   })
 
   test('has version property', () => {
