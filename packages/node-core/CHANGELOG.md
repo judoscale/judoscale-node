@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.7...judoscale-node-core-v2.1.0) (2025-01-15)
+
+
+### Features
+
+* Configure runtime container for Railway ([#54](https://github.com/judoscale/judoscale-node/issues/54)) ([8ca929d](https://github.com/judoscale/judoscale-node/commit/8ca929d68a460fd6123e62e5f341cea0f2d9c900))
+
 ## [2.0.7](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.6...judoscale-node-core-v2.0.7) (2024-12-31)
 
 
