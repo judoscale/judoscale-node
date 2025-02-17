@@ -22,6 +22,8 @@ function getDefaultOptions() {
   } else if (process.env.ECS_CONTAINER_METADATA_URI) {
     const parts = process.env.ECS_CONTAINER_METADATA_URI.split('/')
     containerID = parts[parts.length - 1]
+  } else if (process.env.FLY_MACHINE_ID) {
+    containerID = process.env.FLY_MACHINE_ID
   } else if (process.env.RAILWAY_REPLICA_ID) {
     containerID = process.env.RAILWAY_REPLICA_ID
   }

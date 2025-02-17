@@ -10,6 +10,7 @@ describe('Config', () => {
     delete process.env.RENDER_INSTANCE_ID
     delete process.env.RENDER_SERVICE_ID
     delete process.env.ECS_CONTAINER_METADATA_URI
+    delete process.env.FLY_MACHINE_ID
     delete process.env.RAILWAY_REPLICA_ID
   })
 
@@ -58,6 +59,11 @@ describe('Config', () => {
   test('has container property for Heroku', () => {
     process.env.DYNO = 'web.123'
     expect(new Config()).toHaveProperty('container', 'web.123')
+  })
+
+  test('has container property for Fly', () => {
+    process.env.FLY_MACHINE_ID = 'random-machine-id'
+    expect(new Config()).toHaveProperty('container', 'random-machine-id')
   })
 
   test('has container property for Railway', () => {
