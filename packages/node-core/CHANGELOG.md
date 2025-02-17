@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.1.0...judoscale-node-core-v2.2.0) (2025-02-17)
+
+
+### Features
+
+* Configure runtime container for Fly.io ([#56](https://github.com/judoscale/judoscale-node/issues/56)) ([09f36e1](https://github.com/judoscale/judoscale-node/commit/09f36e11aff3f0970d84659176c3e1257f69b3a3))
+
 ## [2.1.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.0.7...judoscale-node-core-v2.1.0) (2025-01-15)
 
 
