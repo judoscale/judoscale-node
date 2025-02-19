@@ -1,6 +1,6 @@
 {
   "name": "judoscale-node-core",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Core dependencies for NodeJS adapters for the JudoScale autoscaling add-on for Heroku",
   "main": "src/index.js",
   "scripts": {
