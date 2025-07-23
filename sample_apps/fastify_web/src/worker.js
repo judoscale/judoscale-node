@@ -5,7 +5,7 @@ const queueNames = ['default', 'urgent']
 const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
 
 new Judoscale({
-  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node.requestcatcher.com',
 })
 
 const queues = queueNames.map((queueName) => {

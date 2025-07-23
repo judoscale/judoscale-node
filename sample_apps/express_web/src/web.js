@@ -15,7 +15,7 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 
 const judoscale = new Judoscale({
-  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node.requestcatcher.com',
   redis: redis,
 })
 

@@ -20,7 +20,7 @@ const fastify = Fastify({
 })
 
 const judoscale = new Judoscale({
-  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node-sample.requestcatcher.com',
+  api_base_url: process.env.JUDOSCALE_URL || 'https://judoscale-node.requestcatcher.com',
 })
 
 fastify.register(judoscalePlugin, judoscale)
