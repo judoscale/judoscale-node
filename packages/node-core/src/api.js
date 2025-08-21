@@ -1,4 +1,4 @@
-const unirest = require('unirest')
+const fetch = require('node-fetch')
 
 class Api {
   constructor(config) {
@@ -13,7 +13,11 @@ class Api {
   postJson(path, data) {
     this.config.logger.debug(`[Judoscale] Posting to ${this.base_url}${path}`)
 
-    return unirest.post(`${this.base_url}${path}`).headers({ 'Content-Type': 'application/json' }).send(data)
+    return fetch(`${this.base_url}${path}`, {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 }
 

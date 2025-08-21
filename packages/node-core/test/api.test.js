@@ -2,18 +2,9 @@
 
 const Api = require('../src/api')
 const Config = require('../src/config')
-const unirest = require('unirest')
+const fetch = require('node-fetch')
 
-jest.mock('unirest', () => {
-  const originalModule = jest.requireActual('unirest')
-
-  return {
-    ...originalModule,
-    post: jest.fn().mockReturnThis(),
-    headers: jest.fn().mockReturnThis(),
-    send: jest.fn().mockResolvedValue({}),
-  }
-})
+jest.mock('node-fetch', () => jest.fn().mockResolvedValue({}))
 
 const api = new Api(new Config())
 
@@ -27,12 +18,14 @@ describe('reportMetrics', () => {
   test('Makes POST request to the api metrics endpoint', () => {
     api.reportMetrics({})
 
-    expect(unirest.post).toHaveBeenCalledWith(`${api.base_url}/v3/reports`)
-    expect(unirest.headers).toHaveBeenCalledWith({ 'Content-Type': 'application/json' })
-    expect(unirest.send).toHaveBeenCalledWith({})
+    expect(fetch).toHaveBeenCalledWith(`${api.base_url}/v3/reports`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: "{}"
+    })
   })
 
-  test('Returns promisse', () => {
+  test('Returns promise', () => {
     expect(api.reportMetrics({})).resolves.toEqual({})
   })
 })
