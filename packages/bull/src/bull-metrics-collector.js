@@ -46,7 +46,7 @@ class BullMetricsCollector extends WorkerMetricsCollector {
 
     for (const redisKey of redisKeys) {
       const queueName = redisKey.split(':')[1]
-      const queue = new Queue(queueName, { url: this.redisUrl })
+      const queue = new Queue(queueName, { createClient: () => this.redis })
       this.queues.set(queueName, queue)
     }
   }

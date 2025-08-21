@@ -6,7 +6,7 @@ import 'judoscale-bullmq'
 
 const app = express()
 const port = process.env.PORT || 5000
-const redis = new Redis('redis://127.0.0.1:6379', {
+const redis = new Redis(process.env.REDIS_URL || 'redis://127.0.0.1:6379', {
   maxRetriesPerRequest: null, // Since bull v4
   enableReadyCheck: false, // Since bull v4
 })
