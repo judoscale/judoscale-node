@@ -35,7 +35,17 @@ fastify.listen({ port: process.env.PORT || 3000 }, function (err, address) {
   }
 })
 
+const sleep = secs => new Promise(resolve => setTimeout(resolve, secs * 1000))
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+
 async function handleIndex(req, reply) {
+  // Accept a `?sleep=N` query param to sleep for the specified N of seconds,
+  // or `?sleep=<not-a-number>` to sleep randomly for 0-2 seconds.
+  if (req.query.sleep) {
+    const sleepFor = parseInt(req.query.sleep)
+    await sleep(isNaN(sleepFor) ? randomInt(0, 2) : sleepFor)
+  }
+
   const keys = await redis.keys('bull:*:id')
   const queueNames = keys.map((key) => key.split(':')[1])
 
