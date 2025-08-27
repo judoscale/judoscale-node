@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.2.0...judoscale-node-core-v2.2.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* Move from unirest to node-fetch and upgrade packages to fix security vulnerabilities ([#62](https://github.com/judoscale/judoscale-node/issues/62)) ([f3df6da](https://github.com/judoscale/judoscale-node/commit/f3df6da16739819ac1f190e57d0519057a01cf49))
+
 ## [2.2.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.1.0...judoscale-node-core-v2.2.0) (2025-02-17)
 
 

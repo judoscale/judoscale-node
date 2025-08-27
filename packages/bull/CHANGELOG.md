@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.10](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.0.9...judoscale-bull-v2.0.10) (2025-08-27)
+
+
+### Bug Fixes
+
+* Fix bull collector queue connection with Redis ([#61](https://github.com/judoscale/judoscale-node/issues/61)) ([47da6b5](https://github.com/judoscale/judoscale-node/commit/47da6b55f83a81e19cdd5859d8a9bc58eea992dd))
+* Move from unirest to node-fetch and upgrade packages to fix security vulnerabilities ([#62](https://github.com/judoscale/judoscale-node/issues/62)) ([f3df6da](https://github.com/judoscale/judoscale-node/commit/f3df6da16739819ac1f190e57d0519057a01cf49))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.2.0 to 2.2.1
+
 ## [2.0.9](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.0.8...judoscale-bull-v2.0.9) (2025-02-17)
 
 
