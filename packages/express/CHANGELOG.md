@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.11](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.0.10...judoscale-express-v2.0.11) (2025-08-27)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.2.0 to 2.2.1
+
 ## [2.0.10](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.0.9...judoscale-express-v2.0.10) (2025-02-17)
 
 
