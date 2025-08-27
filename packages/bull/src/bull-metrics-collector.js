@@ -46,7 +46,9 @@ class BullMetricsCollector extends WorkerMetricsCollector {
 
     for (const redisKey of redisKeys) {
       const queueName = redisKey.split(':')[1]
-      const queue = new Queue(queueName, { url: this.redisUrl })
+      // We only need a `client` connection to fetch job counts, which should be okay to share.
+      // https://docs.bullmq.io/bull/patterns/reusing-redis-connections
+      const queue = new Queue(queueName, { createClient: (_type, _redisOpts) => this.redis })
       this.queues.set(queueName, queue)
     }
   }
