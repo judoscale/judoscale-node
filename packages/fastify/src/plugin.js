@@ -18,6 +18,19 @@ async function rawPlugin(fastify) {
       fastify.log.error(err, 'Error processing request queue time')
     }
   })
+
+  fastify.addHook('onRequest', async (request, _reply) => {
+    request.judoscaleAppStartTime = process.hrtime.bigint()
+  })
+
+  fastify.addHook('onResponse', async (request, _reply) => {
+    const endTime = process.hrtime.bigint()
+    const appTimeNs = endTime - request.judoscaleAppStartTime
+    const appTimeMs = Math.floor(Number(appTimeNs) / 1_000_000)
+
+    metricsStore.push('at', appTimeMs)
+    fastify.log.debug(`App Time: ${appTimeMs} ms`)
+  })
 }
 
 const plugin = fp(rawPlugin, {

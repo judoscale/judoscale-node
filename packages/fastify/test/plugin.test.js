@@ -27,11 +27,14 @@ describe('Judoscale Fastify Plugin', () => {
 
     const metrics = Judoscale.adapters[0].collector.collect()
 
-    expect(metrics.length).toEqual(1)
+    expect(metrics.length).toEqual(2)
 
     // Queue time should be 100-200ms depending how long the test takes to run
+    expect(metrics[0].identifier).toEqual('qt')
     expect(metrics[0].value).toBeGreaterThanOrEqual(100)
     expect(metrics[0].value).toBeLessThan(200)
+    expect(metrics[1].identifier).toEqual('at')
+    expect(metrics[1].value).toBeGreaterThanOrEqual(0)
   })
 
   test('gracefully handles missing queue time', async () => {
@@ -43,6 +46,8 @@ describe('Judoscale Fastify Plugin', () => {
 
     const metrics = Judoscale.adapters[0].collector.collect()
 
-    expect(metrics).toEqual([])
+    // Only app time is tracked, queue time isn't.
+    expect(metrics.length).toEqual(1)
+    expect(metrics[0].identifier).toEqual('at')
   })
 })
