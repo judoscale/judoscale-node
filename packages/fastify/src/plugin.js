@@ -6,15 +6,11 @@ const metricsStore = new MetricsStore()
 
 async function rawPlugin(fastify) {
   fastify.addHook('onRequest', async (request, _reply) => {
-    try {
-      const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
+    const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
 
-      if (queueTime !== null) {
-        metricsStore.push('qt', queueTime)
-        fastify.log.debug(`[Judoscale] queue_time=${queueTime}ms`)
-      }
-    } catch (err) {
-      fastify.log.error(err, '[Judoscale] Error processing request queue time')
+    if (queueTime !== null) {
+      metricsStore.push('qt', queueTime)
+      fastify.log.debug(`[Judoscale] queue_time=${queueTime}ms`)
     }
   })
 
