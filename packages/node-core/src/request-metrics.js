@@ -17,7 +17,21 @@ function requestId(headers) {
   return headers['x-request-id']
 }
 
+function elapsedTime(startTime) {
+    const endTime = monotonicTime()
+    const appTimeNs = endTime - startTime
+    const appTimeMs = Math.floor(Number(appTimeNs) / 1_000_000)
+
+    return appTimeMs
+}
+
+function monotonicTime() {
+  return process.hrtime.bigint()
+}
+
 module.exports = {
   queueTimeFromHeaders,
   requestId,
+  elapsedTime,
+  monotonicTime
 }

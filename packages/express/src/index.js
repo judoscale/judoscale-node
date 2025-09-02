@@ -14,15 +14,13 @@ function middleware(judoscale) {
       store.push('qt', queueTime)
     }
 
-    const startTime = process.hrtime.bigint();
+    const startTime = requestMetrics.monotonicTime()
 
     res.on('finish', () => {
-      const endTime = process.hrtime.bigint();
-      const appTimeNs = endTime - startTime
-      const appTimeMs = Math.floor(Number(appTimeNs) / 1_000_000)
+      const appTime = requestMetrics.elapsedTime(startTime)
+      store.push('at', appTime)
 
-      store.push('at', appTimeMs)
-      judoscale.config.logger.debug(`[Judoscale] app_time=${appTimeMs}ms request_id=${requestId}`)
+      judoscale.config.logger.debug(`[Judoscale] app_time=${appTime}ms request_id=${requestId}`)
     })
 
     next()
