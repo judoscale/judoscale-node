@@ -1,7 +1,14 @@
-/* global test, expect, describe, beforeEach, jest */
+/* global test, expect, describe */
 
-const { Judoscale } = require('judoscale-node-core')
-const { middleware } = require('../index.js')
+const express = require('express')
+const request = require('supertest')
+const { Judoscale, middleware } = require('../index.js')
+
+const app = express()
+app.use(middleware(new Judoscale()))
+app.get('/test', (_req, res) => {
+  res.send('Middleware test')
+})
 
 test('adapter is registered', () => {
   expect(Judoscale.adapters.length).toEqual(1)
@@ -9,35 +16,26 @@ test('adapter is registered', () => {
 })
 
 describe('middleware', () => {
-  let req, res, next, judoscale
-
-  beforeEach(() => {
-    req = { headers: {} }
-    res = {}
-    next = jest.fn()
-    judoscale = new Judoscale()
-  })
-
-  test('captures request queue time in the metrics store', () => {
+  test('captures request queue time in the metrics store', async () => {
     // Simulate 100ms queue time
-    req.headers['x-request-start'] = (Date.now() - 100).toString()
-    middleware(judoscale)(req, res, next)
+    const simulatedHeaderTime = Date.now() - 100
+
+    const response = await request(app).get('/test').set('x-request-start', simulatedHeaderTime.toString())
+    expect(response.statusCode).toBe(200)
+    expect(response.text).toBe('Middleware test')
 
     const metrics = Judoscale.adapters[0].collector.collect()
-
-    expect(next).toHaveBeenCalled()
     expect(metrics.length).toEqual(1)
     // Queue time should be 100-200ms depending how long the test takes to run
     expect(metrics[0].value).toBeGreaterThanOrEqual(100)
     expect(metrics[0].value).toBeLessThan(200)
   })
 
-  test('gracefully handles missing queue time', () => {
-    middleware(judoscale)(req, res, next)
+  test('gracefully handles missing queue time', async () => {
+    const response = await request(app).get('/test')
+    expect(response.statusCode).toBe(200)
 
     const metrics = Judoscale.adapters[0].collector.collect()
-
-    expect(next).toHaveBeenCalled()
     expect(metrics).toEqual([])
   })
 })
