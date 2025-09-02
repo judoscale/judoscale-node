@@ -5,8 +5,7 @@ const metricsStore = new MetricsStore()
 
 function middleware(judoscale) {
   return (req, res, next) => {
-    const now = judoscale.config.now || new Date()
-    const queueTime = requestMetrics.queueTimeFromHeaders(req.headers, now)
+    const queueTime = requestMetrics.queueTimeFromHeaders(req.headers, new Date())
     const requestId = requestMetrics.requestId(req.headers)
 
     if (queueTime !== null) {
