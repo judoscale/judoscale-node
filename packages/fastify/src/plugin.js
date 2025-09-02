@@ -11,11 +11,10 @@ async function rawPlugin(fastify) {
 
       if (queueTime !== null) {
         metricsStore.push('qt', queueTime)
+        fastify.log.debug(`[Judoscale] queue_time=${queueTime}ms`)
       }
-
-      fastify.log.debug(`Queue Time: ${queueTime} ms`)
     } catch (err) {
-      fastify.log.error(err, 'Error processing request queue time')
+      fastify.log.error(err, '[Judoscale] Error processing request queue time')
     }
   })
 
@@ -25,9 +24,8 @@ async function rawPlugin(fastify) {
 
   fastify.addHook('onResponse', async (request, _reply) => {
     const appTime = requestMetrics.elapsedTime(request.judoscaleAppStartTime)
-
     metricsStore.push('at', appTime)
-    fastify.log.debug(`App Time: ${appTime} ms`)
+    fastify.log.debug(`[Judoscale] app_time=${appTime}ms`)
   })
 }
 
