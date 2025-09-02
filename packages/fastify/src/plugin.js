@@ -6,7 +6,7 @@ const metricsStore = new MetricsStore()
 
 async function rawPlugin(fastify) {
   fastify.addHook('onRequest', async (request, _reply) => {
-    const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
+    const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, new Date())
 
     if (queueTime !== null) {
       metricsStore.push('qt', queueTime)
