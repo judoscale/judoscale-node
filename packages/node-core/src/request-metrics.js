@@ -18,11 +18,11 @@ function requestId(headers) {
 }
 
 function elapsedTime(startTime) {
-    const endTime = monotonicTime()
-    const appTimeNs = endTime - startTime
-    const appTimeMs = Math.floor(Number(appTimeNs) / 1_000_000)
+  const endTime = monotonicTime()
+  const appTimeNs = endTime - startTime
+  const appTimeMs = Math.floor(Number(appTimeNs) / 1_000_000)
 
-    return appTimeMs
+  return appTimeMs
 }
 
 function monotonicTime() {
