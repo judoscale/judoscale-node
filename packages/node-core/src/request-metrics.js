@@ -21,13 +21,14 @@ function requestId(headers) {
 
 function elapsedTime(startTime) {
   const endTime = monotonicTime()
-  return Math.floor(endTime - startTime)
+  const elapsedTimeNs = endTime - startTime
+  // Convert elapsed time calculated from nanoseconds to milliseconds.
+  return Math.floor(Number(elapsedTimeNs) / 1_000_000)
 }
 
 function monotonicTime() {
-  // `hrtime.bigint()` returns current high-resolution real time in nanoseconds,
-  // we convert to work with milliseconds.
-  return Number(process.hrtime.bigint()) / 1_000_000
+  // `hrtime.bigint()` returns current high-resolution real time in nanoseconds.
+  return process.hrtime.bigint()
 }
 
 module.exports = {
