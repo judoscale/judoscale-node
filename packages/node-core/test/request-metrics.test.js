@@ -1,5 +1,12 @@
 /* global test, expect, describe */
 
+jest.mock('process', () => {
+  return {
+    ...jest.requireActual('process'),
+    hrtime: { bigint: jest.fn().mockReturnValue(1_000_000_000_000) }
+  }
+})
+
 const RequestMetrics = require('../src/request-metrics')
 
 describe('RequestMetrics', () => {
@@ -36,6 +43,17 @@ describe('RequestMetrics', () => {
   describe('requestId', () => {
     test('Request ID from headers', () => {
       expect(RequestMetrics.requestId({ 'x-request-id': 'someidvalue' })).toBe('someidvalue')
+    })
+  })
+
+  describe('elapsedTime', () => {
+    test('Calculates elapsed time in milliseconds from the given start time', () => {
+      expect(RequestMetrics.monotonicTime()).toBe(1_000_000)
+
+      expect(RequestMetrics.elapsedTime(1_000_000)).toBe(0)
+      expect(RequestMetrics.elapsedTime(999_999)).toBe(1)
+      expect(RequestMetrics.elapsedTime(999_000)).toBe(1_000)
+      expect(RequestMetrics.elapsedTime(500_000)).toBe(500_000)
     })
   })
 })

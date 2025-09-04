@@ -25,10 +25,6 @@ describe('Config', () => {
     expect(new Config()).toHaveProperty('log_level', 'warn')
   })
 
-  test('has now property', () => {
-    expect(new Config()).toHaveProperty('now', null)
-  })
-
   test('has api_base_url property', () => {
     process.env.JUDOSCALE_URL = 'HO HO HO'
     expect(new Config()).toHaveProperty('api_base_url', 'HO HO HO')

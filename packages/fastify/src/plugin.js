@@ -6,17 +6,22 @@ const metricsStore = new MetricsStore()
 
 async function rawPlugin(fastify) {
   fastify.addHook('onRequest', async (request, _reply) => {
-    try {
-      const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, Date.now())
+    const queueTime = requestMetrics.queueTimeFromHeaders(request.headers, new Date())
 
-      if (queueTime !== null) {
-        metricsStore.push('qt', queueTime)
-      }
-
-      fastify.log.debug(`Queue Time: ${queueTime} ms`)
-    } catch (err) {
-      fastify.log.error(err, 'Error processing request queue time')
+    if (queueTime !== null) {
+      metricsStore.push('qt', queueTime)
+      fastify.log.debug(`[Judoscale] queue_time=${queueTime}ms`)
     }
+  })
+
+  fastify.addHook('onRequest', async (request, _reply) => {
+    request.judoscaleAppStartTime = requestMetrics.monotonicTime()
+  })
+
+  fastify.addHook('onResponse', async (request, _reply) => {
+    const appTime = requestMetrics.elapsedTime(request.judoscaleAppStartTime)
+    metricsStore.push('at', appTime)
+    fastify.log.debug(`[Judoscale] app_time=${appTime}ms`)
   })
 }
 

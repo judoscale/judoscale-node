@@ -35,7 +35,6 @@ function getDefaultOptions() {
     log_level: defaultLogLevel,
     container: containerID,
     report_interval_seconds: 10,
-    now: null,
   }
 }
 

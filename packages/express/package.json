@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "standard": "^17.1.0"
+    "standard": "^17.1.0",
+    "supertest": "^7.1.4"
   },
   "peerDependencies": {
     "express": "^4.0.0"
