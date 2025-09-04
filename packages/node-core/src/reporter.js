@@ -22,8 +22,6 @@ class Reporter {
         `[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`
       )
 
-      this.report(adapters, config)
-
       forever((next) => {
         setTimeout(() => {
           this.report(adapters, config).then(() => {
