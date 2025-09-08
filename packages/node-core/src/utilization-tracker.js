@@ -13,7 +13,7 @@ class UtilizationTracker {
     this._activeRequestCounter = 0
     this._idleStartedAt = null
     this._reportCycleStartedAt = null
-    this._totalIdleTime = 0.0
+    this._totalIdleTime = 0n
     this._started = false
   }
 
@@ -35,14 +35,14 @@ class UtilizationTracker {
       this._started = false
       this._idleStartedAt = null
       this._reportCycleStartedAt = null
-      this._totalIdleTime = 0.0
+      this._totalIdleTime = 0n
       this._activeRequestCounter = 0
     }
   }
 
   incr() {
     // TODO: lock?
-    if (this._activeRequestCounter == 0 && this._idleStartedAt != null) {
+    if (this._activeRequestCounter == 0 && this._idleStartedAt !== null) {
       // We were idle and now we're not - add to total idle time
       this._totalIdleTime += this._getCurrentTime() - this._idleStartedAt
       this._idleStartedAt = null
@@ -84,12 +84,12 @@ class UtilizationTracker {
   }
 
   _resetIdleReportCycle(currentTime) {
-    this._totalIdleTime = 0.0
+    this._totalIdleTime = 0n
     this._reportCycleStartedAt = currentTime
   }
 
   _getIdleRatio(currentTime) {
-    if (this._reportCycleStartedAt == null) {
+    if (this._reportCycleStartedAt === null) {
       return 0.0
     }
 
@@ -105,7 +105,7 @@ class UtilizationTracker {
       this._idleStartedAt = currentTime
     }
 
-    return this._totalIdleTime / totalReportCycleTime
+    return Number(this._totalIdleTime) / Number(totalReportCycleTime)
   }
 }
 

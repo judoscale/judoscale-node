@@ -28,42 +28,42 @@ describe('UtilizationTracker', () => {
     const tracker = new UtilizationTracker()
 
     // T=0: Tracker starts
-    mockMonotonicTime.mockReturnValue(0)
+    mockMonotonicTime.mockReturnValue(0n)
     tracker.start()
     expect(tracker.utilizationPct(false)).toBe(100) // No time has passed yet
 
     // T=1: Request 1 starts
-    mockMonotonicTime.mockReturnValue(1)
+    mockMonotonicTime.mockReturnValue(1n)
     tracker.incr()
     expect(tracker.utilizationPct(false)).toBe(0) // 1 second idle out of 1 total second = 100% idle
 
     // T=2: Request 1 ends
-    mockMonotonicTime.mockReturnValue(2)
+    mockMonotonicTime.mockReturnValue(2n)
     tracker.decr()
     expect(tracker.utilizationPct(false)).toBe(50) // 1 second idle out of 2 total seconds = 50% idle
 
     // T=4: Request 2 starts
-    mockMonotonicTime.mockReturnValue(4)
+    mockMonotonicTime.mockReturnValue(4n)
     tracker.incr()
     expect(tracker.utilizationPct(false)).toBe(25) // 3 seconds idle out of 4 total seconds = 75% idle
 
     // T=5: Request 3 starts
-    mockMonotonicTime.mockReturnValue(5)
+    mockMonotonicTime.mockReturnValue(5n)
     tracker.incr()
     expect(tracker.utilizationPct(false)).toBe(40) // 3 seconds idle out of 5 total seconds = 60% idle
 
     // T=6: Request 2 ends
-    mockMonotonicTime.mockReturnValue(6)
+    mockMonotonicTime.mockReturnValue(6n)
     tracker.decr()
     expect(tracker.utilizationPct(false)).toBe(50) // 3 seconds idle out of 6 total seconds = 50% idle
 
     // T=8: Request 3 ends
-    mockMonotonicTime.mockReturnValue(8)
+    mockMonotonicTime.mockReturnValue(8n)
     tracker.decr()
     expect(tracker.utilizationPct(false)).toBe(62) // 3 seconds idle out of 8 total seconds = 37.5% idle
 
     // T=10: Report cycle - should calculate final utilization percentage
-    mockMonotonicTime.mockReturnValue(10)
+    mockMonotonicTime.mockReturnValue(10n)
     expect(tracker.utilizationPct()).toBe(50) // 5 seconds idle out of 10 total seconds = 50% idle
   })
 
@@ -82,53 +82,53 @@ describe('UtilizationTracker', () => {
     const tracker = new UtilizationTracker()
 
     // T=0: Tracker starts
-    mockMonotonicTime.mockReturnValue(0)
+    mockMonotonicTime.mockReturnValue(0n)
     tracker.start()
     expect(tracker.utilizationPct(false)).toBe(100) // No time has passed yet
 
     // T=1: Request 1 starts
-    mockMonotonicTime.mockReturnValue(1)
+    mockMonotonicTime.mockReturnValue(1n)
     tracker.incr()
     expect(tracker.utilizationPct(false)).toBe(0) // 1 second idle out of 1 total second = 100% idle
 
     // T=2: Request 1 ends
-    mockMonotonicTime.mockReturnValue(2)
+    mockMonotonicTime.mockReturnValue(2n)
     tracker.decr()
     expect(tracker.utilizationPct(false)).toBe(50) // 1 second idle out of 2 total seconds = 50% idle
 
-    mockMonotonicTime.mockReturnValue(3)
+    mockMonotonicTime.mockReturnValue(3n)
     expect(tracker.utilizationPct(false)).toBe(33) // 2 seconds idle out of 3 total seconds = 66.66% idle
 
     // T=4: Report cycle
-    mockMonotonicTime.mockReturnValue(4)
+    mockMonotonicTime.mockReturnValue(4n)
     expect(tracker.utilizationPct()).toBe(25) // 3 seconds idle out of 4 total seconds = 75% idle
 
     // T=5: Request 2 starts
-    mockMonotonicTime.mockReturnValue(5)
+    mockMonotonicTime.mockReturnValue(5n)
     tracker.incr()
     expect(tracker.utilizationPct(false)).toBe(0) // 1 second idle out of 1 total second = 100% idle
 
     // T=8: Report cycle
-    mockMonotonicTime.mockReturnValue(8)
+    mockMonotonicTime.mockReturnValue(8n)
     expect(tracker.utilizationPct()).toBe(75) // 1 second idle out of 4 total seconds = 25% idle
 
     // T=9: Request 3 starts
-    mockMonotonicTime.mockReturnValue(9)
+    mockMonotonicTime.mockReturnValue(9n)
     tracker.incr()
     expect(tracker.utilizationPct(false)).toBe(100) // 0 seconds idle out of 1 total second = 0% idle
 
     // T=10: Request 2 ends
-    mockMonotonicTime.mockReturnValue(10)
+    mockMonotonicTime.mockReturnValue(10n)
     tracker.decr()
     expect(tracker.utilizationPct(false)).toBe(100) // 0 seconds idle out of 2 total second = 0% idle
 
     // T=11: Request 3 ends
-    mockMonotonicTime.mockReturnValue(11)
+    mockMonotonicTime.mockReturnValue(11n)
     tracker.decr()
     expect(tracker.utilizationPct(false)).toBe(100) // 0 seconds idle out of 3 total second = 0% idle
 
     // T=12: Report cycle
-    mockMonotonicTime.mockReturnValue(12)
+    mockMonotonicTime.mockReturnValue(12n)
     expect(tracker.utilizationPct()).toBe(75) // 1 second idle out of 4 total seconds = 25% idle
   })
 })
