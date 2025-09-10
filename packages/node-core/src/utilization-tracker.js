@@ -22,7 +22,6 @@ class UtilizationTracker {
   }
 
   start() {
-    // TODO: lock?
     if (!this.isStarted) {
       this._started = true
       this._initIdleReportCycle()
@@ -30,7 +29,6 @@ class UtilizationTracker {
   }
 
   stop() {
-    // TODO: lock?
     if (this.isStarted) {
       this._started = false
       this._idleStartedAt = null
@@ -41,7 +39,6 @@ class UtilizationTracker {
   }
 
   incr() {
-    // TODO: lock?
     if (this._activeRequestCounter === 0 && this._idleStartedAt !== null) {
       // We were idle and now we're not - add to total idle time
       this._totalIdleTime += this._getCurrentTime() - this._idleStartedAt
@@ -52,7 +49,6 @@ class UtilizationTracker {
   }
 
   decr() {
-    // TODO: lock?
     this._activeRequestCounter -= 1
 
     if (this._activeRequestCounter === 0) {
@@ -62,7 +58,6 @@ class UtilizationTracker {
   }
 
   utilizationPct(reset = true) {
-    // TODO: lock?
     const currentTime = this._getCurrentTime()
     const idleRatio = this._getIdleRatio(currentTime)
 
