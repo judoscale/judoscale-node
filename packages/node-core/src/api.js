@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = globalThis.fetch || require('node-fetch')
 
 class Api {
   constructor(config) {
