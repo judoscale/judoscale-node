@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.1.7...judoscale-fastify-v2.2.0) (2025-09-12)
+
+
+### Features
+
+* Collect & report app time with Fastify/Express ([#65](https://github.com/judoscale/judoscale-node/issues/65)) ([5ccda25](https://github.com/judoscale/judoscale-node/commit/5ccda25b609b83afe89882fbd6caaaaf7bbf8f70))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.2.1 to 2.3.0
+
 ## [2.1.7](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.1.6...judoscale-fastify-v2.1.7) (2025-08-27)
 
 
