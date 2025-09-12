@@ -1,7 +1,7 @@
 {
-  "packages/node-core": "2.2.1",
-  "packages/express": "2.0.11",
-  "packages/fastify": "2.1.7",
-  "packages/bullmq": "2.1.10",
-  "packages/bull": "2.0.10"
+  "packages/node-core": "2.3.0",
+  "packages/express": "2.1.0",
+  "packages/fastify": "2.2.0",
+  "packages/bullmq": "2.1.11",
+  "packages/bull": "2.0.11"
 }

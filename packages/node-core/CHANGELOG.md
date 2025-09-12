@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.2.1...judoscale-node-core-v2.3.0) (2025-09-12)
+
+
+### Features
+
+* Collect & report app time with Fastify/Express ([#65](https://github.com/judoscale/judoscale-node/issues/65)) ([5ccda25](https://github.com/judoscale/judoscale-node/commit/5ccda25b609b83afe89882fbd6caaaaf7bbf8f70))
+
+
+### Bug Fixes
+
+* Sleep before running & reporting the first metrics collection ([#74](https://github.com/judoscale/judoscale-node/issues/74)) ([7a0bc8d](https://github.com/judoscale/judoscale-node/commit/7a0bc8d75ffb9fafdd4deef14be0c375ede1a3df))
+* Use native fetch if available to avoid `require` failure on NextJS apps ([#81](https://github.com/judoscale/judoscale-node/issues/81)) ([cfbcf2f](https://github.com/judoscale/judoscale-node/commit/cfbcf2f7e6a62ea9c2d2ab7bffe45a3de6cb06c7))
+
 ## [2.2.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.2.0...judoscale-node-core-v2.2.1) (2025-08-27)
 
 
