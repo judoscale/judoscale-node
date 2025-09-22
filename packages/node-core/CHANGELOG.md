@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.3.0...judoscale-node-core-v2.4.0) (2025-09-22)
+
+
+### Features
+
+* Collect & report new utilization metric for Express/Fastify ([#75](https://github.com/judoscale/judoscale-node/issues/75)) ([6efaef1](https://github.com/judoscale/judoscale-node/commit/6efaef16c86ef372586d54a7f57e7ea33c836b93))
+
 ## [2.3.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.2.1...judoscale-node-core-v2.3.0) (2025-09-12)
 
 
