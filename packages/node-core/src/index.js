@@ -4,6 +4,7 @@ const Metric = require('./metric')
 const MetricsStore = require('./metrics-store')
 const Report = require('./report')
 const Reporter = require('./reporter')
+const UtilizationTracker = require('./utilization-tracker')
 const WebMetricsCollector = require('./web-metrics-collector')
 const WorkerMetricsCollector = require('./worker-metrics-collector')
 const Judoscale = require('./judoscale')
@@ -16,6 +17,7 @@ module.exports = {
   MetricsStore,
   Report,
   Reporter,
+  UtilizationTracker,
   WebMetricsCollector,
   WorkerMetricsCollector,
 }

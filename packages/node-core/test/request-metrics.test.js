@@ -3,7 +3,7 @@
 jest.mock('process', () => {
   return {
     ...jest.requireActual('process'),
-    hrtime: { bigint: jest.fn().mockReturnValue(1_000_000_000_000) }
+    hrtime: { bigint: jest.fn().mockReturnValue(1_000_000_000_000n) }
   }
 })
 
@@ -48,12 +48,12 @@ describe('RequestMetrics', () => {
 
   describe('elapsedTime', () => {
     test('Calculates elapsed time in milliseconds from the given start time', () => {
-      expect(RequestMetrics.monotonicTime()).toBe(1_000_000)
+      expect(RequestMetrics.monotonicTime()).toBe(1_000_000_000_000n)
 
-      expect(RequestMetrics.elapsedTime(1_000_000)).toBe(0)
-      expect(RequestMetrics.elapsedTime(999_999)).toBe(1)
-      expect(RequestMetrics.elapsedTime(999_000)).toBe(1_000)
-      expect(RequestMetrics.elapsedTime(500_000)).toBe(500_000)
+      expect(RequestMetrics.elapsedTime(1_000_000_000_000n)).toBe(0)
+      expect(RequestMetrics.elapsedTime(999_999_000_000n)).toBe(1)
+      expect(RequestMetrics.elapsedTime(999_000_000_000n)).toBe(1_000)
+      expect(RequestMetrics.elapsedTime(500_000_000_000n)).toBe(500_000)
     })
   })
 })
