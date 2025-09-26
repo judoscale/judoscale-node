@@ -1,6 +1,6 @@
 {
   "name": "judoscale-fastify",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Fastify plugin for the Judoscale autoscaler",
   "main": "src/plugin.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "standard": "^17.1.0"
   },
   "dependencies": {
-    "judoscale-node-core": "2.3.0",
+    "judoscale-node-core": "2.4.0",
     "fastify-plugin": "^4.5.1"
   },
   "peerDependencies": {
