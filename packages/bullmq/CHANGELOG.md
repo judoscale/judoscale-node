@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.12](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.11...judoscale-bullmq-v2.1.12) (2025-09-22)
+## [2.1.12](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.1.11...judoscale-bullmq-v2.1.12) (2025-09-26)
 
 
 ### Dependencies

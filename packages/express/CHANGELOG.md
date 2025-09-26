@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2.0](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.1.0...judoscale-express-v2.2.0) (2025-09-22)
+## [2.2.0](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.1.0...judoscale-express-v2.2.0) (2025-09-26)
 
 
 ### Features

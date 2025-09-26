@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.0](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.2.0...judoscale-fastify-v2.3.0) (2025-09-22)
+## [2.3.0](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.2.0...judoscale-fastify-v2.3.0) (2025-09-26)
 
 
 ### Features
