@@ -16,7 +16,8 @@ class Api {
     return fetch(`${this.base_url}${path}`, {
       method: 'post',
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(5000)
     })
   }
 }
