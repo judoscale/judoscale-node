@@ -16,13 +16,19 @@ describe('constructor', () => {
 
 describe('reportMetrics', () => {
   test('Makes POST request to the api metrics endpoint', () => {
+    spy = jest.spyOn(AbortSignal, "timeout").mockReturnValue("signal-timeout")
+
     api.reportMetrics({})
 
     expect(fetch).toHaveBeenCalledWith(`${api.base_url}/v3/reports`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: "{}"
+      body: "{}",
+      signal: "signal-timeout"
     })
+    expect(spy).toHaveBeenCalledWith(5000)
+
+    spy.mockRestore()
   })
 
   test('Returns promise', () => {
