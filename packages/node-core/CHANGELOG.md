@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.4.0...judoscale-node-core-v2.4.1) (2025-10-16)
+
+
+### Bug Fixes
+
+* Configure timeout of 5s to api requests ([#84](https://github.com/judoscale/judoscale-node/issues/84)) ([029592b](https://github.com/judoscale/judoscale-node/commit/029592b55e7859dfa3eac98c31a94dcd8a5031fc))
+
 ## [2.4.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.3.0...judoscale-node-core-v2.4.0) (2025-09-26)
 
 
