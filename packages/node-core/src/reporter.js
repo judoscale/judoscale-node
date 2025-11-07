@@ -51,7 +51,7 @@ class Reporter {
         config.logger.debug('[Judoscale] Reported successfully')
       })
       .catch((error) => {
-        config.logger.error('[Judoscale] Error reporting metrics:', { error: error.message, stack: error.stack })
+        config.logger.error('[Judoscale] Error reporting metrics:', error)
       })
   }
 }
