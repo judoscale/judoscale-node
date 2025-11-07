@@ -46,9 +46,13 @@ class Reporter {
     const report = new Report(adapters, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
-    new Api(config).reportMetrics(report.payload()).then(async () => {
-      config.logger.debug('[Judoscale] Reported successfully')
-    })
+    new Api(config).reportMetrics(report.payload())
+      .then(async () => {
+        config.logger.debug('[Judoscale] Reported successfully')
+      })
+      .catch((error) => {
+        config.logger.error('[Judoscale] Error reporting metrics:', error)
+      })
   }
 }
 
