@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.2](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.4.1...judoscale-node-core-v2.4.2) (2025-11-07)
+
+
+### Bug Fixes
+
+* Add promise error handling for metrics reporting ([#86](https://github.com/judoscale/judoscale-node/issues/86)) ([8d62cd0](https://github.com/judoscale/judoscale-node/commit/8d62cd04df13c058ca7ff53eb5217695f83df3ab))
+
 ## [2.4.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.4.0...judoscale-node-core-v2.4.1) (2025-10-16)
 
 

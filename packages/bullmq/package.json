@@ -1,6 +1,6 @@
 {
   "name": "judoscale-bullmq",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "description": "BullMQ adapter for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "dependencies": {
-    "judoscale-node-core": "2.4.1"
+    "judoscale-node-core": "2.4.2"
   },
   "devDependencies": {
     "jest": "^29.7.0",
