@@ -1,7 +1,7 @@
 {
   "name": "judoscale-node-core",
   "version": "2.4.2",
-  "description": "Core dependencies for NodeJS adapters for the Judoscale autoscaler",
+  "description": "Core dependencies for NodeJS packages for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",

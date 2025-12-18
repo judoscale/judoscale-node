@@ -1,7 +1,7 @@
 {
   "name": "judoscale-bullmq",
   "version": "2.1.14",
-  "description": "BullMQ adapter for the Judoscale autoscaler",
+  "description": "BullMQ package for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
