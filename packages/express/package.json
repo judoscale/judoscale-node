@@ -1,7 +1,7 @@
 {
   "name": "judoscale-express",
   "version": "2.2.2",
-  "description": "ExpressJS adapter for the Judoscale autoscaling add-on for Heroku",
+  "description": "ExpressJS adapter for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
