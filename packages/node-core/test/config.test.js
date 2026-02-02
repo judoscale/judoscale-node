@@ -6,6 +6,7 @@ describe('Config', () => {
   beforeEach(() => {
     delete process.env.JUDOSCALE_URL
     delete process.env.JUDOSCALE_LOG_LEVEL
+    delete process.env.JUDOSCALE_CONTAINER
     delete process.env.DYNO
     delete process.env.RENDER_INSTANCE_ID
     delete process.env.RENDER_SERVICE_ID
@@ -65,6 +66,18 @@ describe('Config', () => {
   test('has container property for Railway', () => {
     process.env.RAILWAY_REPLICA_ID = 'random-replica-uuid'
     expect(new Config()).toHaveProperty('container', 'random-replica-uuid')
+  })
+
+  test('has container property via JUDOSCALE_CONTAINER', () => {
+    process.env.JUDOSCALE_CONTAINER = 'custom-container-id'
+    expect(new Config()).toHaveProperty('container', 'custom-container-id')
+  })
+
+  test('JUDOSCALE_CONTAINER takes priority over platform-specific env vars', () => {
+    process.env.JUDOSCALE_CONTAINER = 'custom-container-id'
+    process.env.DYNO = 'web.123'
+    process.env.FLY_MACHINE_ID = 'fly-machine-id'
+    expect(new Config()).toHaveProperty('container', 'custom-container-id')
   })
 
   test('has version property', () => {
