@@ -14,7 +14,9 @@ function getDefaultOptions() {
   let apiBaseUrl = process.env.JUDOSCALE_URL
   let containerID
 
-  if (process.env.DYNO) {
+  if (process.env.JUDOSCALE_CONTAINER) {
+    containerID = process.env.JUDOSCALE_CONTAINER
+  } else if (process.env.DYNO) {
     containerID = process.env.DYNO
   } else if (process.env.RENDER_INSTANCE_ID) {
     apiBaseUrl ||= `https://adapter.judoscale.com/api/${process.env.RENDER_SERVICE_ID}`
