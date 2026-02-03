@@ -28,10 +28,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-modules-fastify-${{ matrix.fastify-version }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install Fastify ${{ matrix.fastify-version }}
+        run: npm install fastify@${{ matrix.fastify-version }}
+        working-directory: packages/fastify
 
       - name: Run tests
         run: npm test

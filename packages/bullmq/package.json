@@ -30,7 +30,7 @@
     "standard": "^17.1.0"
   },
   "peerDependencies": {
-    "bullmq": "^5.0.0"
+    "bullmq": "^4.0.0 || ^5.0.0"
   },
   "standard": {
     "globals": [

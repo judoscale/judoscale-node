@@ -34,10 +34,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-modules-bullmq-${{ matrix.bullmq-version }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install BullMQ ${{ matrix.bullmq-version }}
+        run: npm install bullmq@${{ matrix.bullmq-version }}
+        working-directory: packages/bullmq
 
       - name: Run tests
         run: npm test
