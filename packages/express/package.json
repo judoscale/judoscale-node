@@ -23,6 +23,6 @@
     "supertest": "^7.1.4"
   },
   "peerDependencies": {
-    "express": "^4.0.0"
+    "express": "^4.0.0 || ^5.0.0"
   }
 }
