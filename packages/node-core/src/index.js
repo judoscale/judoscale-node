@@ -8,6 +8,12 @@ const UtilizationTracker = require('./utilization-tracker')
 const WebMetricsCollector = require('./web-metrics-collector')
 const WorkerMetricsCollector = require('./worker-metrics-collector')
 const Judoscale = require('./judoscale')
+const packageInfo = require('../package.json')
+
+Judoscale.registerAdapter('judoscale-node', null, {
+  adapter_version: packageInfo.version,
+  language_version: process.version,
+})
 
 module.exports = {
   Judoscale,

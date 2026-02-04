@@ -10,9 +10,11 @@ app.get('/test', (_req, res) => {
   res.send('Middleware test')
 })
 
+const expressAdapter = Judoscale.adapters.find((a) => a.identifier === 'judoscale-express')
+
 test('adapter is registered', () => {
-  expect(Judoscale.adapters.length).toEqual(1)
-  expect(Judoscale.adapters[0].identifier).toEqual('judoscale-express')
+  expect(expressAdapter).toBeDefined()
+  expect(expressAdapter.identifier).toEqual('judoscale-express')
 })
 
 describe('middleware', () => {
@@ -24,7 +26,7 @@ describe('middleware', () => {
     expect(response.statusCode).toBe(200)
     expect(response.text).toBe('Middleware test')
 
-    const metrics = Judoscale.adapters[0].collector.collect()
+    const metrics = expressAdapter.collector.collect()
     expect(metrics.length).toEqual(3)
     // Queue time should be 100-200ms depending how long the test takes to run
     expect(metrics[0].identifier).toEqual('qt')
@@ -40,7 +42,7 @@ describe('middleware', () => {
     const response = await request(app).get('/test')
     expect(response.statusCode).toBe(200)
 
-    const metrics = Judoscale.adapters[0].collector.collect()
+    const metrics = expressAdapter.collector.collect()
     // Only app time & utilization pct are tracked, queue time isn't.
     expect(metrics.length).toEqual(2)
     expect(metrics[0].identifier).toEqual('at')
