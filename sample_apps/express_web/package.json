@@ -11,8 +11,8 @@
   "dependencies": {
     "bullmq": "^5.7.9",
     "ejs": "^3.1.6",
-    "express": "^4.21.2",
-    "judoscale-express": "*",
-    "judoscale-bullmq": "*"
+    "express": "^5.2.1",
+    "judoscale-bullmq": "*",
+    "judoscale-express": "*"
   }
 }
