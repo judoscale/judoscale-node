@@ -18,6 +18,9 @@
   ],
   "author": "Adam McCrea",
   "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "bugs": {
     "url": "https://github.com/judoscale/judoscale-node/issues"
   },
