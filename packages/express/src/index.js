@@ -34,7 +34,7 @@ function middleware(judoscale) {
 
 Judoscale.registerAdapter('judoscale-express', new WebMetricsCollector(metricsStore, utilizationTracker), {
   adapter_version: packageInfo.version,
-  framework_version: expressPackageInfo.version,
+  runtime_version: expressPackageInfo.version,
 })
 
 module.exports = { Judoscale, middleware }
