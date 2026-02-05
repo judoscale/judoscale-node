@@ -9,12 +9,12 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "@fastify/formbody": "^7.4.0",
-    "@fastify/view": "^9.1.0",
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/view": "^11.1.1",
     "bull": "^4.12.9",
     "ejs": "^3.1.10",
-    "fastify": "^4.26.2",
-    "judoscale-fastify": "*",
-    "judoscale-bull": "*"
+    "fastify": "^5.7.4",
+    "judoscale-bull": "*",
+    "judoscale-fastify": "*"
   }
 }
