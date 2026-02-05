@@ -9,9 +9,11 @@ app.get('/test', async (_request, _reply) => {
   return { message: 'Middleware test' }
 })
 
+const fastifyAdapter = Judoscale.adapters.find((a) => a.identifier === 'judoscale-fastify')
+
 test('adapter is registered', () => {
-  expect(Judoscale.adapters.length).toEqual(1)
-  expect(Judoscale.adapters[0].identifier).toEqual('judoscale-fastify')
+  expect(fastifyAdapter).toBeDefined()
+  expect(fastifyAdapter.identifier).toEqual('judoscale-fastify')
 })
 
 describe('Judoscale Fastify Plugin', () => {
@@ -35,7 +37,7 @@ describe('Judoscale Fastify Plugin', () => {
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({ message: 'Middleware test' })
 
-    const metrics = Judoscale.adapters[0].collector.collect()
+    const metrics = fastifyAdapter.collector.collect()
     expect(metrics.length).toEqual(3)
     // Queue time should be 100-200ms depending how long the test takes to run
     expect(metrics[0].identifier).toEqual('qt')
@@ -55,7 +57,7 @@ describe('Judoscale Fastify Plugin', () => {
     })
     expect(response.statusCode).toBe(200)
 
-    const metrics = Judoscale.adapters[0].collector.collect()
+    const metrics = fastifyAdapter.collector.collect()
     // Only app time & utilization pct are tracked, queue time isn't.
     expect(metrics.length).toEqual(2)
     expect(metrics[0].identifier).toEqual('at')

@@ -41,7 +41,7 @@ class Reporter {
   }
 
   async report(adapters, config) {
-    const collectors = adapters.map((a) => a.collector)
+    const collectors = adapters.map((a) => a.collector).filter(Boolean)
     const metrics = (await Promise.all(collectors.map((collector) => collector.collect()))).flat()
     const report = new Report(adapters, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)

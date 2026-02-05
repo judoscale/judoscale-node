@@ -1,5 +1,6 @@
 const { Judoscale, MetricsStore, requestMetrics, UtilizationTracker, WebMetricsCollector } = require('judoscale-node-core')
 const packageInfo = require('../package.json')
+const expressPackageInfo = require('express/package.json')
 
 const metricsStore = new MetricsStore()
 const utilizationTracker = new UtilizationTracker()
@@ -33,6 +34,7 @@ function middleware(judoscale) {
 
 Judoscale.registerAdapter('judoscale-express', new WebMetricsCollector(metricsStore, utilizationTracker), {
   adapter_version: packageInfo.version,
+  framework_version: expressPackageInfo.version,
 })
 
 module.exports = { Judoscale, middleware }
