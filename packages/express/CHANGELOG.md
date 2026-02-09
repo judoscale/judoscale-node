@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.3.0](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.2.2...judoscale-express-v2.3.0) (2026-02-09)
+
+
+### Features
+
+* Support node 25, drop support to node 18, test express v5 and fastify v5 ([#91](https://github.com/judoscale/judoscale-node/issues/91)) ([9fb6f34](https://github.com/judoscale/judoscale-node/commit/9fb6f345ec5614cb7b1162308c95e628799a86f4))
+
+
+### Bug Fixes
+
+* Include the framework version with the report metadata ([#93](https://github.com/judoscale/judoscale-node/issues/93)) ([ef3482b](https://github.com/judoscale/judoscale-node/commit/ef3482bf0495bb3e94198ccc50a8d2175f4a7a1e))
+* Switch to reporting `runtime_version` across the board for consistency ([#94](https://github.com/judoscale/judoscale-node/issues/94)) ([77bf446](https://github.com/judoscale/judoscale-node/commit/77bf446c44e81e533595f2abe2dbb8ef9001ae2e))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.4.2 to 2.5.0
+
 ## [2.2.2](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.2.1...judoscale-express-v2.2.2) (2025-11-07)
 
 
