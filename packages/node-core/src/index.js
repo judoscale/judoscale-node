@@ -12,7 +12,7 @@ const packageInfo = require('../package.json')
 
 Judoscale.registerAdapter('judoscale-node', null, {
   adapter_version: packageInfo.version,
-  language_version: process.version,
+  runtime_version: process.version,
 })
 
 module.exports = {

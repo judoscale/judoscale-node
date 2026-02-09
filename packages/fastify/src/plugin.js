@@ -42,7 +42,7 @@ const plugin = fp(rawPlugin, {
 
 Judoscale.registerAdapter('judoscale-fastify', new WebMetricsCollector(metricsStore, utilizationTracker), {
   adapter_version: packageInfo.version,
-  framework_version: fastifyPackageInfo.version,
+  runtime_version: fastifyPackageInfo.version,
 })
 
 module.exports = {

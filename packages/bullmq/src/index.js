@@ -5,7 +5,7 @@ const bullmqPackageInfo = require('bullmq/package.json')
 
 Judoscale.registerAdapter('judoscale-bullmq', new BullMQMetricsCollector(), {
   adapter_version: packageInfo.version,
-  framework_version: bullmqPackageInfo.version,
+  runtime_version: bullmqPackageInfo.version,
 })
 
 module.exports = {

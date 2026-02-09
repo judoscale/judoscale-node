@@ -5,7 +5,7 @@ const bullPackageInfo = require('bull/package.json')
 
 Judoscale.registerAdapter('judoscale-bull', new BullMetricsCollector(), {
   adapter_version: packageInfo.version,
-  framework_version: bullPackageInfo.version,
+  runtime_version: bullPackageInfo.version,
 })
 
 module.exports = {
