@@ -1,6 +1,6 @@
 {
   "name": "judoscale-node-core",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Core dependencies for NodeJS packages for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
