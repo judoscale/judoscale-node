@@ -79,13 +79,13 @@ describe('sendWelcomeEmail', () => {
   })
 })
 
-describe('sendChurnEmail', () => {
-  test('sends a churn email to the given address', async () => {
+describe('sendLostEmail', () => {
+  test('sends a lost email to the given address', async () => {
     const emails = buildEmails()
     const mockSend = jest.fn().mockResolvedValue({ MessageID: '456' })
     emails.client.send = mockSend
 
-    await emails.sendChurnEmail({ email: 'user@example.com', name: 'John Smith' })
+    await emails.sendLostEmail({ email: 'user@example.com', name: 'John Smith' })
 
     expect(mockSend).toHaveBeenCalledTimes(1)
 
@@ -101,9 +101,24 @@ describe('sendChurnEmail', () => {
     const mockSend = jest.fn().mockResolvedValue({})
     emails.client.send = mockSend
 
-    await emails.sendChurnEmail({ email: 'user@example.com' })
+    await emails.sendLostEmail({ email: 'user@example.com' })
 
     const call = mockSend.mock.calls[0][0]
     expect(call.htmlBody).toContain('Hey there')
+  })
+})
+
+describe('sendChurnEmail (deprecated)', () => {
+  test('delegates to sendLostEmail', async () => {
+    const emails = buildEmails()
+    const mockSend = jest.fn().mockResolvedValue({ MessageID: '789' })
+    emails.client.send = mockSend
+
+    await emails.sendChurnEmail({ email: 'user@example.com', name: 'Jane' })
+
+    expect(mockSend).toHaveBeenCalledTimes(1)
+    const call = mockSend.mock.calls[0][0]
+    expect(call.to).toBe('user@example.com')
+    expect(call.subject).toBe("We're sorry to see you go")
   })
 })

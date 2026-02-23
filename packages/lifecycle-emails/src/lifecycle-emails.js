@@ -1,6 +1,6 @@
 const EmailClient = require('./email-client')
 const welcomeEmail = require('./emails/welcome')
-const churnEmail = require('./emails/churn')
+const lostEmail = require('./emails/lost')
 
 class LifecycleEmails {
   constructor({ apiToken, fromAddress, messageStream }) {
@@ -20,14 +20,19 @@ class LifecycleEmails {
     })
   }
 
-  async sendChurnEmail({ email, name }) {
-    const { subject, htmlBody } = churnEmail({ name })
+  async sendLostEmail({ email, name }) {
+    const { subject, htmlBody } = lostEmail({ name })
 
     return this.client.send({
       to: email,
       subject,
       htmlBody,
     })
+  }
+
+  // @deprecated Use sendLostEmail instead
+  async sendChurnEmail({ email, name }) {
+    return this.sendLostEmail({ email, name })
   }
 }
 
