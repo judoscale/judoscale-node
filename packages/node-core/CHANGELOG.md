@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.0...judoscale-node-core-v2.5.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* Add retry with an exponential backoff the report API requests ([#97](https://github.com/judoscale/judoscale-node/issues/97)) ([191b103](https://github.com/judoscale/judoscale-node/commit/191b1039e7be57c9362e4b8603ebe50456956a9d))
+
 ## [2.5.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.4.2...judoscale-node-core-v2.5.0) (2026-02-09)
 
 
