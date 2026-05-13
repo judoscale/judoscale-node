@@ -1,0 +1,3 @@
+proxy: npx judoscale-adapter-proxy-server
+web: npm run start
+worker: npm run worker

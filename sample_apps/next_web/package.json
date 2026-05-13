@@ -1,0 +1,21 @@
+{
+  "name": "judoscale-sample-next",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "worker": "node src/worker.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bullmq": "^5.7.9",
+    "ioredis": "^5.6.0",
+    "judoscale-bullmq": "*",
+    "judoscale-nextjs": "*",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
