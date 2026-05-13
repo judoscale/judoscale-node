@@ -1,0 +1,41 @@
+name: Next.js adapter tests
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20.x, 22.x, 24.x, 25.x]
+        next-version: [14.x, 15.x]
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-next-${{ matrix.next-version }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Next.js ${{ matrix.next-version }}
+        run: npm install next@${{ matrix.next-version }}
+        working-directory: packages/nextjs
+
+      - name: Run tests
+        run: npm test
+        working-directory: packages/nextjs
