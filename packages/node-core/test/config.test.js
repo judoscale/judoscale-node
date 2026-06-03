@@ -13,6 +13,7 @@ describe('Config', () => {
     delete process.env.ECS_CONTAINER_METADATA_URI
     delete process.env.FLY_MACHINE_ID
     delete process.env.RAILWAY_REPLICA_ID
+    delete process.env.CONTAINER
   })
 
   test('has logger property', () => {
@@ -66,6 +67,11 @@ describe('Config', () => {
   test('has container property for Railway', () => {
     process.env.RAILWAY_REPLICA_ID = 'random-replica-uuid'
     expect(new Config()).toHaveProperty('container', 'random-replica-uuid')
+  })
+
+  test('has container property for Scalingo', () => {
+    process.env.CONTAINER = 'web-1'
+    expect(new Config()).toHaveProperty('container', 'web-1')
   })
 
   test('has container property via JUDOSCALE_CONTAINER', () => {

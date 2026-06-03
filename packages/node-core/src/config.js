@@ -28,6 +28,9 @@ function getDefaultOptions() {
     containerID = process.env.FLY_MACHINE_ID
   } else if (process.env.RAILWAY_REPLICA_ID) {
     containerID = process.env.RAILWAY_REPLICA_ID
+  } else if (process.env.CONTAINER) {
+    // Scalingo exposes the container type and index (e.g. "web-1") via CONTAINER.
+    containerID = process.env.CONTAINER
   }
 
   return {
