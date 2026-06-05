@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.2](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.1...judoscale-node-core-v2.5.2) (2026-06-03)
+
+
+### Bug Fixes
+
+* Read Scalingo container identity from CONTAINER env var ([#105](https://github.com/judoscale/judoscale-node/issues/105)) ([f29554e](https://github.com/judoscale/judoscale-node/commit/f29554e1e95f67288121898a8cb22ac68284d507))
+
 ## [2.5.1](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.0...judoscale-node-core-v2.5.1) (2026-03-05)
 
 
