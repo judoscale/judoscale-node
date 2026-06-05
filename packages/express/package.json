@@ -7,6 +7,11 @@
     "test": "jest",
     "lint": "npx standard"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judoscale/judoscale-node.git",
+    "directory": "packages/express"
+  },
   "keywords": [
     "heroku",
     "autoscale",
@@ -17,6 +22,10 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "bugs": {
+    "url": "https://github.com/judoscale/judoscale-node/issues"
+  },
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "dependencies": {
     "judoscale-node-core": "2.5.2"
   },
