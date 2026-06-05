@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.3](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.2...judoscale-node-core-v2.5.3) (2026-06-05)
+
+
+### Bug Fixes
+
+* Add repository metadata to package.json for npm provenance ([b374cc7](https://github.com/judoscale/judoscale-node/commit/b374cc726efdcd3b7a2d6772c785b70587afcb5c))
+
 ## [2.5.2](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.1...judoscale-node-core-v2.5.2) (2026-06-03)
 
 
