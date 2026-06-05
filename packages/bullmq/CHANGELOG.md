@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.3](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.2.2...judoscale-bullmq-v2.2.3) (2026-06-05)
+
+
+### Bug Fixes
+
+* Add repository metadata to package.json for npm provenance ([b374cc7](https://github.com/judoscale/judoscale-node/commit/b374cc726efdcd3b7a2d6772c785b70587afcb5c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.2 to 2.5.3
+
 ## [2.2.2](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.2.1...judoscale-bullmq-v2.2.2) (2026-06-03)
 
 
