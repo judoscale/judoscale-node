@@ -2,6 +2,7 @@ const Api = require('./api')
 const requestMetrics = require('./request-metrics')
 const Metric = require('./metric')
 const MetricsStore = require('./metrics-store')
+const Platform = require('./platform')
 const Report = require('./report')
 const Reporter = require('./reporter')
 const UtilizationTracker = require('./utilization-tracker')
@@ -21,6 +22,7 @@ module.exports = {
   requestMetrics,
   Metric,
   MetricsStore,
+  Platform,
   Report,
   Reporter,
   UtilizationTracker,
