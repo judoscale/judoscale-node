@@ -32,7 +32,7 @@ describe('Judoscale Fastify Plugin', () => {
     const response = await app.inject({
       method: 'GET',
       url: '/test',
-      headers: { 'x-request-start': simulatedHeaderTime.toString() }
+      headers: { 'x-request-start': simulatedHeaderTime.toString() },
     })
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({ message: 'Middleware test' })
@@ -53,7 +53,7 @@ describe('Judoscale Fastify Plugin', () => {
     const response = await app.inject({
       method: 'GET',
       url: '/test',
-      headers: {}
+      headers: {},
     })
     expect(response.statusCode).toBe(200)
 
