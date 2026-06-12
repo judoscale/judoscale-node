@@ -1,5 +1,6 @@
 const Api = require('./api')
 const Report = require('./report')
+const WorkerMetricsCollector = require('./worker-metrics-collector')
 const forever = require('async/forever')
 
 class Reporter {
@@ -9,12 +10,17 @@ class Reporter {
 
   start(config, adapters) {
     if (!this.hasStarted()) {
-      this.started = true
-
       if (!config.api_base_url) {
         config.logger.info(`[Judoscale] Reporter not started: JUDOSCALE_URL is not set`)
         return
       }
+
+      if (config.platform.ephemeralInstance()) {
+        config.logger.info('[Judoscale] Reporter not started: in an ephemeral container')
+        return
+      }
+
+      this.started = true
 
       const adapterMsg = adapters.map((a) => a.identifier).join(', ')
 
@@ -41,7 +47,7 @@ class Reporter {
   }
 
   async report(adapters, config) {
-    const collectors = adapters.map((a) => a.collector).filter(Boolean)
+    const collectors = this.activeCollectors(adapters, config)
     const metrics = (await Promise.all(collectors.map((collector) => collector.collect()))).flat()
     const report = new Report(adapters, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
@@ -53,6 +59,16 @@ class Reporter {
       .catch((error) => {
         config.logger.error('[Judoscale] Error reporting metrics:', error)
       })
+  }
+
+  activeCollectors(adapters, config) {
+    const collectors = adapters.map((a) => a.collector).filter(Boolean)
+
+    if (config.platform.redundantInstance()) {
+      return collectors.filter((collector) => !(collector instanceof WorkerMetricsCollector))
+    }
+
+    return collectors
   }
 }
 
