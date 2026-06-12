@@ -15,13 +15,8 @@ class Reporter {
         return
       }
 
-      if (config.platform.releaseInstance()) {
-        config.logger.info('[Judoscale] Reporter not started: in a build process')
-        return
-      }
-
-      if (config.platform.oneOff()) {
-        config.logger.info('[Judoscale] Reporter not started: in a one-off container')
+      if (config.platform.ephemeralInstance()) {
+        config.logger.info('[Judoscale] Reporter not started: in an ephemeral container')
         return
       }
 

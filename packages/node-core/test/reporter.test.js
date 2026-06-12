@@ -42,23 +42,17 @@ describe('Reporter', () => {
     expect(new Reporter().activeCollectors(adapters, config)).toEqual([webCollector])
   })
 
-  test('does not start in release instances', () => {
-    const { config, logs } = configFor(new Platform.Heroku('release.1'))
+  test.each([
+    ['Heroku release', new Platform.Heroku('release.1')],
+    ['Heroku', new Platform.Heroku('run.1234')],
+    ['Scalingo', new Platform.Scalingo('one-off-1234')]
+  ])('does not start in %s ephemeral instances', (_platformName, platform) => {
+    const { config, logs } = configFor(platform)
     const reporter = new Reporter()
 
     reporter.start(config, adapters)
 
     expect(reporter.hasStarted()).toEqual(false)
-    expect(logs).toContain('[Judoscale] Reporter not started: in a build process')
-  })
-
-  test('does not start in one-off instances', () => {
-    const { config, logs } = configFor(new Platform.Heroku('run.1234'))
-    const reporter = new Reporter()
-
-    reporter.start(config, adapters)
-
-    expect(reporter.hasStarted()).toEqual(false)
-    expect(logs).toContain('[Judoscale] Reporter not started: in a one-off container')
+    expect(logs).toContain('[Judoscale] Reporter not started: in an ephemeral container')
   })
 })
