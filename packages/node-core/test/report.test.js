@@ -2,9 +2,10 @@
 
 const Report = require('../src/report')
 const Metric = require('../src/metric')
+const Platform = require('../src/platform')
 
 const adapter = { identifier: 'some-adapter' }
-const exampleConfig = { container: 'web.007' }
+const exampleConfig = { platform: new Platform.Heroku('web.007') }
 const metric = new Metric('some-identifier', new Date(), '1234')
 const report = new Report([adapter], exampleConfig, [metric])
 

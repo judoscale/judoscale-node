@@ -1,6 +1,7 @@
 /* global test, expect, describe, jest */
 
 const Config = require('../src/config')
+const Platform = require('../src/platform')
 
 describe('Config', () => {
   beforeEach(() => {
@@ -32,58 +33,64 @@ describe('Config', () => {
     expect(new Config()).toHaveProperty('api_base_url', 'HO HO HO')
   })
 
-  test('has api_base_url and container properties for render', () => {
+  test('detects the Render platform and strips the service id prefix from the container', () => {
     process.env.RENDER_INSTANCE_ID = 'renderServiceId-renderInstanceId'
     process.env.RENDER_SERVICE_ID = 'renderServiceId'
 
-    expect(new Config()).toHaveProperty('api_base_url', 'https://adapter.judoscale.com/api/renderServiceId')
-    expect(new Config()).toHaveProperty('container', 'renderInstanceId')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Render)
+    expect(config.platform.container).toEqual('renderInstanceId')
   })
 
-  test('JUDOSCALE_URL overrides RENDER_INSTANCE_ID for render', () => {
-    process.env.JUDOSCALE_URL = 'HO HO HO'
-    process.env.RENDER_INSTANCE_ID = 'renderServiceId-renderInstanceId'
-    process.env.RENDER_SERVICE_ID = 'renderServiceId'
-
-    expect(new Config()).toHaveProperty('api_base_url', 'HO HO HO')
-    expect(new Config()).toHaveProperty('container', 'renderInstanceId')
-  })
-
-  test('has container property for ECS', () => {
+  test('detects the ECS platform and container', () => {
     process.env.ECS_CONTAINER_METADATA_URI = 'ecs-service/container-id'
-    expect(new Config()).toHaveProperty('container', 'container-id')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Ecs)
+    expect(config.platform.container).toEqual('container-id')
   })
 
-  test('has container property for Heroku', () => {
+  test('detects the Heroku platform and container', () => {
     process.env.DYNO = 'web.123'
-    expect(new Config()).toHaveProperty('container', 'web.123')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Heroku)
+    expect(config.platform.container).toEqual('web.123')
   })
 
-  test('has container property for Fly', () => {
+  test('detects the Fly platform and container', () => {
     process.env.FLY_MACHINE_ID = 'random-machine-id'
-    expect(new Config()).toHaveProperty('container', 'random-machine-id')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Fly)
+    expect(config.platform.container).toEqual('random-machine-id')
   })
 
-  test('has container property for Railway', () => {
+  test('detects the Railway platform and container', () => {
     process.env.RAILWAY_REPLICA_ID = 'random-replica-uuid'
-    expect(new Config()).toHaveProperty('container', 'random-replica-uuid')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Railway)
+    expect(config.platform.container).toEqual('random-replica-uuid')
   })
 
-  test('has container property for Scalingo', () => {
+  test('detects the Scalingo platform and container', () => {
     process.env.CONTAINER = 'web-1'
-    expect(new Config()).toHaveProperty('container', 'web-1')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Scalingo)
+    expect(config.platform.container).toEqual('web-1')
   })
 
-  test('has container property via JUDOSCALE_CONTAINER', () => {
+  test('detects a custom platform via JUDOSCALE_CONTAINER', () => {
     process.env.JUDOSCALE_CONTAINER = 'custom-container-id'
-    expect(new Config()).toHaveProperty('container', 'custom-container-id')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Custom)
+    expect(config.platform.container).toEqual('custom-container-id')
   })
 
   test('JUDOSCALE_CONTAINER takes priority over platform-specific env vars', () => {
     process.env.JUDOSCALE_CONTAINER = 'custom-container-id'
     process.env.DYNO = 'web.123'
     process.env.FLY_MACHINE_ID = 'fly-machine-id'
-    expect(new Config()).toHaveProperty('container', 'custom-container-id')
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Custom)
+    expect(config.platform.container).toEqual('custom-container-id')
   })
 
   test('has version property', () => {
