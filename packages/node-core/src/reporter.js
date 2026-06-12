@@ -10,12 +10,22 @@ class Reporter {
 
   start(config, adapters) {
     if (!this.hasStarted()) {
-      this.started = true
-
       if (!config.api_base_url) {
         config.logger.info(`[Judoscale] Reporter not started: JUDOSCALE_URL is not set`)
         return
       }
+
+      if (config.platform.releaseInstance()) {
+        config.logger.info('[Judoscale] Reporter not started: in a build process')
+        return
+      }
+
+      if (config.platform.oneOff()) {
+        config.logger.info('[Judoscale] Reporter not started: in a one-off container')
+        return
+      }
+
+      this.started = true
 
       const adapterMsg = adapters.map((a) => a.identifier).join(', ')
 
@@ -59,7 +69,7 @@ class Reporter {
   activeCollectors(adapters, config) {
     const collectors = adapters.map((a) => a.collector).filter(Boolean)
 
-    if (config.platform.redundantInstance() || config.platform.oneOff()) {
+    if (config.platform.redundantInstance()) {
       return collectors.filter((collector) => !(collector instanceof WorkerMetricsCollector))
     }
 

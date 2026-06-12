@@ -34,6 +34,14 @@ describe('Platform', () => {
     expect(new Platform.Unknown('').redundantInstance()).toEqual(false)
   })
 
+  test('treats only Heroku release dynos as release instances', () => {
+    expect(new Platform.Heroku('release.1').releaseInstance()).toEqual(true)
+    expect(new Platform.Heroku('release.2').releaseInstance()).toEqual(true)
+    expect(new Platform.Heroku('web.1').releaseInstance()).toEqual(false)
+    expect(new Platform.Scalingo('web-1').releaseInstance()).toEqual(false)
+    expect(new Platform.Unknown('').releaseInstance()).toEqual(false)
+  })
+
   test('treats Heroku and Scalingo one-off containers as one-off', () => {
     expect(new Platform.Heroku('run.1234').oneOff()).toEqual(true)
     expect(new Platform.Scalingo('one-off-1234').oneOff()).toEqual(true)

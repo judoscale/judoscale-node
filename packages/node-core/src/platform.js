@@ -1,8 +1,9 @@
 // The hosting platform we detected from the environment. The container/instance
 // id is just one property of the platform — behavior that only applies to
 // certain platforms (whether an instance is a redundant member of a formation,
-// or a one-off task) lives on the platform subclasses that actually have those
-// concepts, instead of being re-derived from the shape of the container string.
+// a release/build instance, or a one-off task) lives on the platform subclasses
+// that actually have those concepts, instead of being re-derived from the shape
+// of the container string.
 class Platform {
   constructor(container) {
     this.container = container == null ? '' : String(container)
@@ -12,6 +13,10 @@ class Platform {
   // Railway, custom), so by default no instance is redundant and none is one-off.
   // Platforms that have those concepts override these.
   redundantInstance() {
+    return false
+  }
+
+  releaseInstance() {
     return false
   }
 
@@ -50,6 +55,11 @@ class Heroku extends Platform {
   redundantInstance() {
     const match = this.container.match(/^[a-z_]+\.(\d+)$/)
     return match ? parseInt(match[1], 10) > 1 : false
+  }
+
+  // Heroku release-phase dynos are named "release.1234".
+  releaseInstance() {
+    return this.container.toLowerCase().startsWith('release.')
   }
 
   // Heroku one-off dynos are named "run.1234".
