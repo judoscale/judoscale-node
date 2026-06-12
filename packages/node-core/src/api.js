@@ -24,7 +24,7 @@ class Api {
           method: 'post',
           body,
           headers: { 'Content-Type': 'application/json' },
-          signal: AbortSignal.timeout(5000)
+          signal: AbortSignal.timeout(5000),
         })
       } catch (err) {
         if (this._isTransientError(err) && attempt < MAX_RETRIES) {
@@ -38,11 +38,7 @@ class Api {
   }
 
   _isTransientError(err) {
-    return (
-      err.name === 'TypeError' ||
-      err.name === 'AbortError' ||
-      err.name === 'TimeoutError'
-    )
+    return err.name === 'TypeError' || err.name === 'AbortError' || err.name === 'TimeoutError'
   }
 }
 

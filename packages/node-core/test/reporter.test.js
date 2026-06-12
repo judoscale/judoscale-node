@@ -11,7 +11,7 @@ describe('Reporter', () => {
   const workerCollector = new WorkerMetricsCollector('Worker')
   const adapters = [
     { identifier: 'judoscale-web', collector: webCollector },
-    { identifier: 'judoscale-worker', collector: workerCollector }
+    { identifier: 'judoscale-worker', collector: workerCollector },
   ]
 
   const configFor = (platform) => {
@@ -21,12 +21,12 @@ describe('Reporter', () => {
       config: {
         api_base_url: 'https://example.com',
         logger: {
-          info: (message) => logs.push(message)
+          info: (message) => logs.push(message),
         },
         platform,
-        report_interval_seconds: 10
+        report_interval_seconds: 10,
       },
-      logs
+      logs,
     }
   }
 
@@ -45,7 +45,7 @@ describe('Reporter', () => {
   test.each([
     ['Heroku release', new Platform.Heroku('release.1')],
     ['Heroku', new Platform.Heroku('run.1234')],
-    ['Scalingo', new Platform.Scalingo('one-off-1234')]
+    ['Scalingo', new Platform.Scalingo('one-off-1234')],
   ])('does not start in %s ephemeral instances', (_platformName, platform) => {
     const { config, logs } = configFor(platform)
     const reporter = new Reporter()

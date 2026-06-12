@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "npx standard"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

@@ -7,7 +7,7 @@ describe('Platform', () => {
     expect(Platform.detect({ JUDOSCALE_CONTAINER: 'x', DYNO: 'web.1' })).toBeInstanceOf(Platform.Custom)
     expect(Platform.detect({ DYNO: 'web.1' })).toBeInstanceOf(Platform.Heroku)
     expect(Platform.detect({ RENDER_INSTANCE_ID: 'srv-x-abc', RENDER_SERVICE_ID: 'srv-x' })).toBeInstanceOf(
-      Platform.Render
+      Platform.Render,
     )
     expect(Platform.detect({ ECS_CONTAINER_METADATA_URI: 'http://169.254.170.2/v3/abc' })).toBeInstanceOf(Platform.Ecs)
     expect(Platform.detect({ FLY_MACHINE_ID: '683d924b322418' })).toBeInstanceOf(Platform.Fly)
