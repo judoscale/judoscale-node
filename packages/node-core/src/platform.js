@@ -1,21 +1,22 @@
 // The hosting platform we detected from the environment. The container/instance
 // id is just one property of the platform — behavior that only applies to
 // certain platforms (whether an instance is a redundant member of a formation,
-// or a one-off task) lives on the platform subclasses that actually have those
-// concepts, instead of being re-derived from the shape of the container string.
+// or an ephemeral process) lives on the platform subclasses that actually have
+// those concepts, instead of being re-derived from the shape of the container
+// string.
 class Platform {
   constructor(container) {
     this.container = container == null ? '' : String(container)
   }
 
   // Most platforms expose opaque, non-ordinal instance ids (Render, ECS, Fly,
-  // Railway, custom), so by default no instance is redundant and none is one-off.
+  // Railway, custom), so by default no instance is redundant or ephemeral.
   // Platforms that have those concepts override these.
   redundantInstance() {
     return false
   }
 
-  oneOff() {
+  ephemeralInstance() {
     return false
   }
 
@@ -52,9 +53,10 @@ class Heroku extends Platform {
     return match ? parseInt(match[1], 10) > 1 : false
   }
 
-  // Heroku one-off dynos are named "run.1234".
-  oneOff() {
-    return this.container.startsWith('run.')
+  // Heroku release phase and one-off dynos are named "release.1234" and "run.1234".
+  ephemeralInstance() {
+    const container = this.container.toLowerCase()
+    return container.startsWith('release.') || container.startsWith('run.')
   }
 }
 
@@ -66,7 +68,7 @@ class Scalingo extends Platform {
   }
 
   // Scalingo one-off containers are named "one-off-1234".
-  oneOff() {
+  ephemeralInstance() {
     return this.container.startsWith('one-off-')
   }
 }
