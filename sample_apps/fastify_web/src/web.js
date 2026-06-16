@@ -35,7 +35,7 @@ fastify.listen({ port: process.env.PORT || 3000 }, function (err, address) {
   }
 })
 
-const sleep = secs => new Promise(resolve => setTimeout(resolve, secs * 1000))
+const sleep = (secs) => new Promise((resolve) => setTimeout(resolve, secs * 1000))
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 async function handleIndex(req, reply) {
@@ -64,7 +64,7 @@ async function handleIndex(req, reply) {
         enqueuedJobs: jobCounts.waiting,
         activeJobs: jobCounts.active,
       }
-    })
+    }),
   )
 
   await reply.view('src/index.ejs', { queues: queueStats })

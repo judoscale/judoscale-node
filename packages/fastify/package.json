@@ -5,7 +5,7 @@
   "main": "src/plugin.js",
   "scripts": {
     "test": "jest",
-    "lint": "npx standard"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -27,23 +27,13 @@
   },
   "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "devDependencies": {
-    "jest": "^29.7.0",
-    "standard": "^17.1.0"
+    "jest": "^29.7.0"
   },
   "dependencies": {
-    "judoscale-node-core": "2.5.3",
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^4.5.1",
+    "judoscale-node-core": "2.5.3"
   },
   "peerDependencies": {
     "fastify": "^4.0.0 || ^5.0.0"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "test",
-      "expect",
-      "beforeEach",
-      "afterEach"
-    ]
   }
 }

@@ -25,7 +25,7 @@ class Reporter {
       const adapterMsg = adapters.map((a) => a.identifier).join(', ')
 
       config.logger.info(
-        `[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`
+        `[Judoscale] Reporter starting, will report every ${config.report_interval_seconds} seconds. Adapters: [${adapterMsg}]`,
       )
 
       forever((next) => {
@@ -52,7 +52,8 @@ class Reporter {
     const report = new Report(adapters, config, metrics)
     config.logger.info(`[Judoscale] Reporting ${report.metrics.length} metrics`)
 
-    new Api(config).reportMetrics(report.payload())
+    new Api(config)
+      .reportMetrics(report.payload())
       .then(async () => {
         config.logger.debug('[Judoscale] Reported successfully')
       })

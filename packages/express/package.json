@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "npx standard"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "standard": "^17.1.0",
     "supertest": "^7.1.4"
   },
   "peerDependencies": {

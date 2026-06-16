@@ -1,0 +1,5 @@
+node_modules
+coverage
+.next
+**/CHANGELOG.md
+sample_apps/**/tmp

@@ -28,7 +28,7 @@ function getLogger(level) {
   logger.add(
     new winston.transports.Console({
       format: winston.format.simple(),
-    })
+    }),
   )
 
   return logger

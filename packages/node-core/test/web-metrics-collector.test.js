@@ -23,7 +23,7 @@ describe('collect', () => {
   })
 
   test('Adds utilization pct metric when given utilization tracker', () => {
-    collector.utilizationTracker = {isStarted: false, utilizationPct: () => 10}
+    collector.utilizationTracker = { isStarted: false, utilizationPct: () => 10 }
 
     expect(collector.collect().length).toBe(0)
 

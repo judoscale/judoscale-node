@@ -3,7 +3,7 @@
 jest.mock('process', () => {
   return {
     ...jest.requireActual('process'),
-    hrtime: { bigint: jest.fn().mockReturnValue(1_000_000_000_000n) }
+    hrtime: { bigint: jest.fn().mockReturnValue(1_000_000_000_000n) },
   }
 })
 
