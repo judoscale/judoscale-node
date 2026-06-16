@@ -55,7 +55,8 @@ class Heroku extends Platform {
 
   // Heroku release phase and one-off dynos are named "release.1234" and "run.1234".
   ephemeralInstance() {
-    return this.container.toLowerCase().startsWith('release.') || this.container.startsWith('run.')
+    const container = this.container.toLowerCase()
+    return container.startsWith('release.') || container.startsWith('run.')
   }
 }
 

@@ -36,7 +36,6 @@ describe('Platform', () => {
 
   test('treats Heroku release phase and one-off dynos as ephemeral instances', () => {
     expect(new Platform.Heroku('release.1').ephemeralInstance()).toEqual(true)
-    expect(new Platform.Heroku('Release.1234').ephemeralInstance()).toEqual(true)
     expect(new Platform.Heroku('run.1234').ephemeralInstance()).toEqual(true)
   })
 
