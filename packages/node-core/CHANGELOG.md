@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.4](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.3...judoscale-node-core-v2.5.4) (2026-06-16)
+
+
+### Bug Fixes
+
+* Skip ephemeral reporters and redundant worker metrics ([#109](https://github.com/judoscale/judoscale-node/issues/109)) ([4fe731a](https://github.com/judoscale/judoscale-node/commit/4fe731ac666cddf7f3b82b01a381a570f1f0ec49))
+
 ## [2.5.3](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.2...judoscale-node-core-v2.5.3) (2026-06-05)
 
 
