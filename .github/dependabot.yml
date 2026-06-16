@@ -9,6 +9,16 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 0
+    # Never let Dependabot touch framework peer dependencies (version OR
+    # security updates). For a library these are the consumer's responsibility;
+    # bumping their minimum silently drops support for older majors. A bare
+    # dependency-name ignore suppresses both kinds of PR. Add each new adapter's
+    # framework peer dep to this list.
+    ignore:
+      - dependency-name: "express"
+      - dependency-name: "fastify"
+      - dependency-name: "bull"
+      - dependency-name: "bullmq"
     groups:
       # One PR for all security fixes
       npm-security:
