@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^30.4.2"
   },
   "dependencies": {
-    "fastify-plugin": "^4.5.1",
+    "fastify-plugin": "^6.0.0",
     "judoscale-node-core": "2.5.3"
   },
   "peerDependencies": {
-    "fastify": "^4.0.0 || ^5.0.0"
+    "fastify": "^5.8.5"
   }
 }

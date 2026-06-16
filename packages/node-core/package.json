@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^30.4.2"
   },
   "dependencies": {
-    "async": "^2.6.3",
-    "node-fetch": "^2.7.0",
-    "winston": "^3.6.0"
+    "async": "^3.2.6",
+    "node-fetch": "^3.3.2",
+    "winston": "^3.19.0"
   }
 }

@@ -9,8 +9,8 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "bullmq": "^5.7.9",
-    "ejs": "^3.1.6",
+    "bullmq": "^5.78.1",
+    "ejs": "^6.0.1",
     "express": "^5.2.1",
     "judoscale-bullmq": "*",
     "judoscale-express": "*"
