@@ -10,6 +10,8 @@ class Reporter {
 
   start(config, adapters) {
     if (!this.hasStarted()) {
+      this.started = true
+
       if (!config.api_base_url) {
         config.logger.info(`[Judoscale] Reporter not started: JUDOSCALE_URL is not set`)
         return
@@ -19,8 +21,6 @@ class Reporter {
         config.logger.info('[Judoscale] Reporter not started: in an ephemeral container')
         return
       }
-
-      this.started = true
 
       const adapterMsg = adapters.map((a) => a.identifier).join(', ')
 

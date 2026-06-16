@@ -52,7 +52,7 @@ describe('Reporter', () => {
 
     reporter.start(config, adapters)
 
-    expect(reporter.hasStarted()).toEqual(false)
+    expect(reporter.hasStarted()).toEqual(true)
     expect(logs).toContain('[Judoscale] Reporter not started: in an ephemeral container')
   })
 })
