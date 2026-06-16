@@ -1,17 +1,15 @@
 version: 2
 updates:
-  # npm dependencies for the whole workspace (single root lockfile)
+  # npm dependencies for the whole workspace (single root lockfile).
+  # Security updates only: open-pull-requests-limit 0 disables routine version
+  # bumps (which would rewrite our peerDependencies/runtime ranges and drop
+  # support for older majors), while security advisory PRs still come through.
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: monthly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
     groups:
-      # One PR for all routine version bumps
-      npm:
-        applies-to: version-updates
-        patterns:
-          - "*"
       # One PR for all security fixes
       npm-security:
         applies-to: security-updates
