@@ -1,0 +1,29 @@
+version: 2
+updates:
+  # npm dependencies for the whole workspace (single root lockfile)
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      # One PR for all routine version bumps
+      npm:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      # One PR for all security fixes
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  # Keep GitHub Actions in the workflows up to date
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
