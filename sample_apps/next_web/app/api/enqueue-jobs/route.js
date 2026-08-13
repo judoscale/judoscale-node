@@ -29,5 +29,5 @@ export async function POST (request) {
   }
 
   await queue.close()
-  return NextResponse.redirect(new URL('/', request.url))
+  return NextResponse.redirect(new URL('/', request.url), 303)
 }

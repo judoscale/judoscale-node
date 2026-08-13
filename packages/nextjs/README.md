@@ -1,6 +1,6 @@
 # Judoscale for Next.js
 
-Official [Judoscale](https://judoscale.com) adapter package for Next.js applications running on a **long-lived Node.js server** (`next start` or equivalent). It instruments the Node `http` / `https` server to collect queue time, application time, and utilization for every request (including App Router, Pages Router, Route Handlers, and RSC), without adding framework middleware.
+Official [Judoscale](https://judoscale.com) adapter package for Next.js applications running on a **long-lived Node.js server** (`next start` or equivalent — not serverless). It instruments the Node `http` / `https` server to collect queue time, application time, and utilization for every request (including App Router, Pages Router, Route Handlers, and RSC), without adding framework middleware.
 
 ## Set up your Next.js app for autoscaling
 
@@ -33,7 +33,6 @@ export async function register() {
     const { register: registerJudoscale } = await import('judoscale-nextjs')
     registerJudoscale({
       // Same options as `new Judoscale({ ... })` from judoscale-node-core
-      // api_base_url: process.env.JUDOSCALE_URL,
       // log_level: 'debug',
     })
   }
@@ -54,7 +53,6 @@ export async function register() {
     registerJudoscale({
       judoscale: new Judoscale({
         redis,
-        api_base_url: process.env.JUDOSCALE_URL,
       }),
     })
   }
