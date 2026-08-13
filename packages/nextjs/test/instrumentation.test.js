@@ -3,8 +3,7 @@
 const http = require('http')
 const { Judoscale, register } = require('../src/index')
 
-const nextAdapter = () =>
-  Judoscale.adapters.find((a) => a.identifier === 'judoscale-nextjs')
+const nextAdapter = () => Judoscale.adapters.find((a) => a.identifier === 'judoscale-nextjs')
 
 beforeAll(() => {
   register({})
@@ -33,18 +32,20 @@ describe('HTTP instrumentation', () => {
     const { port } = server.address()
 
     await new Promise((resolve, reject) => {
-      http.get(
-        {
-          hostname: '127.0.0.1',
-          port,
-          path: '/',
-          headers: { 'x-request-start': simulatedHeaderTime.toString() }
-        },
-        (res) => {
-          res.on('data', () => {})
-          res.on('end', resolve)
-        }
-      ).on('error', reject)
+      http
+        .get(
+          {
+            hostname: '127.0.0.1',
+            port,
+            path: '/',
+            headers: { 'x-request-start': simulatedHeaderTime.toString() },
+          },
+          (res) => {
+            res.on('data', () => {})
+            res.on('end', resolve)
+          },
+        )
+        .on('error', reject)
     })
 
     server.close()
@@ -69,17 +70,19 @@ describe('HTTP instrumentation', () => {
     const { port } = server.address()
 
     await new Promise((resolve, reject) => {
-      http.get(
-        {
-          hostname: '127.0.0.1',
-          port,
-          path: '/'
-        },
-        (res) => {
-          res.on('data', () => {})
-          res.on('end', resolve)
-        }
-      ).on('error', reject)
+      http
+        .get(
+          {
+            hostname: '127.0.0.1',
+            port,
+            path: '/',
+          },
+          (res) => {
+            res.on('data', () => {})
+            res.on('end', resolve)
+          },
+        )
+        .on('error', reject)
     })
 
     server.close()

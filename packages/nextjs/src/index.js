@@ -3,5 +3,5 @@ const { register } = require('./instrumentation')
 
 module.exports = {
   Judoscale,
-  register
+  register,
 }

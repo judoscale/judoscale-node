@@ -6,7 +6,7 @@ const mockMonotonicTime = jest.fn()
 jest.mock('process', () => {
   return {
     ...jest.requireActual('process'),
-    hrtime: { bigint: mockMonotonicTime }
+    hrtime: { bigint: mockMonotonicTime },
   }
 })
 

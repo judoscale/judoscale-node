@@ -30,7 +30,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-const sleep = secs => new Promise(resolve => setTimeout(resolve, secs * 1000))
+const sleep = (secs) => new Promise((resolve) => setTimeout(resolve, secs * 1000))
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 async function handleIndex(req, res) {
@@ -59,7 +59,7 @@ async function handleIndex(req, res) {
         enqueuedJobs: jobCounts.waiting,
         activeJobs: jobCounts.active,
       }
-    })
+    }),
   )
 
   res.render('index', { queues: queueStats })

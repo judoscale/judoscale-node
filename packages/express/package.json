@@ -1,11 +1,16 @@
 {
   "name": "judoscale-express",
-  "version": "2.3.1",
+  "version": "2.3.3",
   "description": "ExpressJS package for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "npx standard"
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judoscale/judoscale-node.git",
+    "directory": "packages/express"
   },
   "keywords": [
     "heroku",
@@ -17,12 +22,15 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "bugs": {
+    "url": "https://github.com/judoscale/judoscale-node/issues"
+  },
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "dependencies": {
-    "judoscale-node-core": "2.5.1"
+    "judoscale-node-core": "2.5.3"
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "standard": "^17.1.0",
     "supertest": "^7.1.4"
   },
   "peerDependencies": {

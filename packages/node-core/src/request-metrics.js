@@ -1,4 +1,4 @@
-const process = require('process');
+const process = require('process')
 
 function queueTimeFromHeaders(headers, now) {
   // Heroku sets the header as integer milliseconds.
@@ -35,5 +35,5 @@ module.exports = {
   queueTimeFromHeaders,
   requestId,
   elapsedTime,
-  monotonicTime
+  monotonicTime,
 }

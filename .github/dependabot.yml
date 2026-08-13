@@ -1,0 +1,38 @@
+version: 2
+updates:
+  # npm dependencies for the whole workspace (single root lockfile).
+  # Security updates only: open-pull-requests-limit 0 disables routine version
+  # bumps (which would rewrite our peerDependencies/runtime ranges and drop
+  # support for older majors), while security advisory PRs still come through.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 0
+    # Never let Dependabot touch framework peer dependencies (version OR
+    # security updates). For a library these are the consumer's responsibility;
+    # bumping their minimum silently drops support for older majors. A bare
+    # dependency-name ignore suppresses both kinds of PR. Add each new adapter's
+    # framework peer dep to this list.
+    ignore:
+      - dependency-name: 'express'
+      - dependency-name: 'fastify'
+      - dependency-name: 'bull'
+      - dependency-name: 'bullmq'
+      - dependency-name: 'next'
+    groups:
+      # One PR for all security fixes
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - '*'
+
+  # Keep GitHub Actions in the workflows up to date
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns:
+          - '*'

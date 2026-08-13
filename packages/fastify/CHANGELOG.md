@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.4.3](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.4.2...judoscale-fastify-v2.4.3) (2026-06-05)
+
+
+### Bug Fixes
+
+* Add repository metadata to package.json for npm provenance ([b374cc7](https://github.com/judoscale/judoscale-node/commit/b374cc726efdcd3b7a2d6772c785b70587afcb5c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.2 to 2.5.3
+
+## [2.4.2](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.4.1...judoscale-fastify-v2.4.2) (2026-06-03)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.1 to 2.5.2
+
 ## [2.4.1](https://github.com/judoscale/judoscale-node/compare/judoscale-fastify-v2.4.0...judoscale-fastify-v2.4.1) (2026-03-05)
 
 

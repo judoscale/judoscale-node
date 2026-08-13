@@ -1,5 +1,11 @@
 const fp = require('fastify-plugin')
-const { Judoscale, MetricsStore, requestMetrics, UtilizationTracker, WebMetricsCollector } = require('judoscale-node-core')
+const {
+  Judoscale,
+  MetricsStore,
+  requestMetrics,
+  UtilizationTracker,
+  WebMetricsCollector,
+} = require('judoscale-node-core')
 const packageInfo = require('../package.json')
 const fastifyPackageInfo = require('fastify/package.json')
 

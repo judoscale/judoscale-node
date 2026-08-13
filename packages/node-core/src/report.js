@@ -12,12 +12,12 @@ class Report {
     }
 
     return {
-      container: this.config.container,
+      container: this.config.platform.container,
       pid: process.pid,
       adapters: adapterMetadata,
       config: {
         version: this.config.version,
-        container: this.config.container,
+        container: this.config.platform.container,
         log_level: this.config.log_level,
       },
       metrics: this.metrics.map((metric) => [
