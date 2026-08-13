@@ -15,17 +15,17 @@ updates:
     # dependency-name ignore suppresses both kinds of PR. Add each new adapter's
     # framework peer dep to this list.
     ignore:
-      - dependency-name: 'express'
-      - dependency-name: 'fastify'
-      - dependency-name: 'bull'
-      - dependency-name: 'bullmq'
-      - dependency-name: 'next'
+      - dependency-name: "express"
+      - dependency-name: "fastify"
+      - dependency-name: "bull"
+      - dependency-name: "bullmq"
+      - dependency-name: "next"
     groups:
       # One PR for all security fixes
       npm-security:
         applies-to: security-updates
         patterns:
-          - '*'
+          - "*"
 
   # Keep GitHub Actions in the workflows up to date
   - package-ecosystem: github-actions
@@ -35,4 +35,4 @@ updates:
     groups:
       github-actions:
         patterns:
-          - '*'
+          - "*"
