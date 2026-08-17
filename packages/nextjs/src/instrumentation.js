@@ -95,14 +95,13 @@ function register(options = {}) {
     return judoscaleInstance
   }
 
-  registerCalled = true
-
   const { judoscale, ...judoscaleOptions } = options
   judoscaleInstance = judoscale ?? new Judoscale(judoscaleOptions)
 
   ensureHttpInstrumentation(() => judoscaleInstance.config.logger)
   ensureAdapterRegistered()
 
+  registerCalled = true
   return judoscaleInstance
 }
 
