@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PORT=5006 heroku local

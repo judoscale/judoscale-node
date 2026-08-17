@@ -3,5 +3,6 @@
   "packages/express": "2.3.3",
   "packages/fastify": "2.4.3",
   "packages/bullmq": "2.2.3",
-  "packages/bull": "2.1.3"
+  "packages/bull": "2.1.3",
+  "packages/nextjs": "2.0.0"
 }

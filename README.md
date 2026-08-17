@@ -6,6 +6,7 @@ These packages work together with the [Judoscale](https://judoscale.com) autosca
 
 - [Express](https://github.com/judoscale/judoscale-node/tree/main/packages/express)
 - [Fastify](https://github.com/judoscale/judoscale-node/tree/main/packages/fastify)
+- [Next.js](https://github.com/judoscale/judoscale-node/tree/main/packages/nextjs) (self-hosted Node.js / `next start`)
 - [BullMQ](https://github.com/judoscale/judoscale-node/tree/main/packages/bullmq)
 - [Bull](https://github.com/judoscale/judoscale-node/tree/main/packages/bull)
 

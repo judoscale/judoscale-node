@@ -19,6 +19,7 @@ updates:
       - dependency-name: "fastify"
       - dependency-name: "bull"
       - dependency-name: "bullmq"
+      - dependency-name: "next"
     groups:
       # One PR for all security fixes
       npm-security:

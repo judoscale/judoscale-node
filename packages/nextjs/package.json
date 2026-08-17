@@ -1,0 +1,39 @@
+{
+  "name": "judoscale-nextjs",
+  "version": "2.0.0",
+  "description": "Next.js package for the Judoscale autoscaler",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judoscale/judoscale-node.git",
+    "directory": "packages/nextjs"
+  },
+  "keywords": [
+    "heroku",
+    "autoscale",
+    "nextjs"
+  ],
+  "author": "Adam McCrea",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/judoscale/judoscale-node/issues"
+  },
+  "homepage": "https://github.com/judoscale/judoscale-node#readme",
+  "dependencies": {
+    "judoscale-node-core": "2.5.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "next": "^16.0.0"
+  },
+  "peerDependencies": {
+    "next": "^14.0.0 || ^15.0.0 || ^16.0.0"
+  }
+}
