@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  # Re-run npm publish (e.g. after a partial release failure) without creating a new release.
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -20,18 +22,17 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
-      # The logic below handles the npm publication:
+      # Publish when release-please cuts a release, or when manually re-triggered.
       - uses: actions/checkout@v6
-        # ensure that a publication only occurs when a new release is created
-        if: ${{ fromJSON(steps.release.outputs.releases_created) }}
+        if: ${{ fromJSON(steps.release.outputs.releases_created) || github.event_name == 'workflow_dispatch' }}
 
       - uses: actions/setup-node@v6
-        if: ${{ fromJSON(steps.release.outputs.releases_created) }}
+        if: ${{ fromJSON(steps.release.outputs.releases_created) || github.event_name == 'workflow_dispatch' }}
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
       - run: bin/publish
-        if: ${{ fromJSON(steps.release.outputs.releases_created) }}
+        if: ${{ fromJSON(steps.release.outputs.releases_created) || github.event_name == 'workflow_dispatch' }}
         env:
           NPM_CONFIG_PROVENANCE: true
