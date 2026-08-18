@@ -14,6 +14,8 @@ permissions:
 
 jobs:
   release-please:
+    # workflow_dispatch can target any branch in the UI; only run on main.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v5
