@@ -1,3 +1,4 @@
+const Redis = require('ioredis')
 const Queue = require('bull')
 const BullMetricsCollector = require('../src/bull-metrics-collector')
 
@@ -15,6 +16,33 @@ describe('BullMetricsCollector', () => {
   afterEach(async () => {
     if (collector) await collector.tearDown()
     if (queue) await queue.close()
+  })
+
+  test('attaches an error listener to redis clients that have none', async () => {
+    expect(collector.redis.listenerCount('error')).toBeGreaterThan(0)
+
+    const collectorFromOptions = new BullMetricsCollector({
+      redis: { host: 'localhost', port: 6379, db: 3 },
+    })
+    expect(collectorFromOptions.redis.listenerCount('error')).toBeGreaterThan(0)
+    await collectorFromOptions.tearDown()
+
+    const providedRedis = new Redis()
+    expect(providedRedis.listenerCount('error')).toEqual(0)
+
+    const collectorFromClient = new BullMetricsCollector({ redis: providedRedis })
+    expect(collectorFromClient.redis.listenerCount('error')).toBeGreaterThan(0)
+    await collectorFromClient.tearDown()
+  })
+
+  test('logs redis errors via the judoscale logger', async () => {
+    const logger = { debug: jest.fn() }
+    const collectorWithLogger = new BullMetricsCollector({ logger })
+
+    collectorWithLogger.redis.emit('error', new Error('write EPIPE'))
+
+    expect(logger.debug).toHaveBeenCalledWith('[Judoscale] Redis error: write EPIPE')
+    await collectorWithLogger.tearDown()
   })
 
   test('collects queue metrics', async () => {

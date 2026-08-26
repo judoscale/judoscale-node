@@ -72,6 +72,12 @@ class BullMetricsCollector extends WorkerMetricsCollector {
         const redisUrl = this.config.redis_url || process.env.REDIS_URL || 'redis://127.0.0.1:6379'
         this._redis = new Redis(redisUrl)
       }
+
+      if (this._redis.listenerCount('error') === 0) {
+        this._redis.on('error', (err) => {
+          this.config.logger?.debug(`[Judoscale] Redis error: ${err.message}`)
+        })
+      }
     }
 
     return this._redis
