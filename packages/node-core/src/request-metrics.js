@@ -1,18 +1,36 @@
 const process = require('process')
 
+const MILLISECONDS_CUTOFF = Date.UTC(2000, 0, 1)
+const MICROSECONDS_CUTOFF = MILLISECONDS_CUTOFF * 1000
+const NANOSECONDS_CUTOFF = MICROSECONDS_CUTOFF * 1000
+
+function startedAtMs(header) {
+  // There are several variants of this header. We handle these:
+  //   - whole milliseconds (Heroku)
+  //   - whole microseconds
+  //   - whole nanoseconds (Render)
+  //   - fractional seconds (NGINX)
+  //   - preceding "t=" (NGINX)
+  const value = parseFloat(header.replace(/[^0-9.]/g, ''))
+
+  if (!Number.isFinite(value)) return null
+
+  // `value` could be seconds, milliseconds, microseconds or nanoseconds.
+  // We use some arbitrary cutoffs to determine which one it is.
+  if (value > NANOSECONDS_CUTOFF) return value / 1_000_000
+  if (value > MICROSECONDS_CUTOFF) return value / 1_000
+  if (value > MILLISECONDS_CUTOFF) return value
+  return value * 1_000
+}
+
 function queueTimeFromHeaders(headers, now) {
-  // Heroku sets the header as integer milliseconds.
-  // NGINX sets the header as fractional sections preceeded by "t=".
-  // We can cover both scenarios by stripping all non-digits and treating as milliseconds.
-  let requestStart = headers['x-request-start']
+  const requestStart = headers['x-request-start']
+  if (!requestStart) return null
 
-  if (requestStart) {
-    requestStart = requestStart.replace(/\D/g, '')
-    const queueTime = now - new Date(Number(requestStart))
-    return Math.max(0, queueTime)
-  }
+  const startedAt = startedAtMs(requestStart)
+  if (startedAt === null) return null
 
-  return null
+  return Math.max(0, Math.round(now - startedAt))
 }
 
 function requestId(headers) {
