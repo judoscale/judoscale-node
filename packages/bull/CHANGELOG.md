@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.5](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.1.4...judoscale-bull-v2.1.5) (2026-09-17)
+
+
+### Bug Fixes
+
+* Attach Redis error listeners on Bull and BullMQ collectors ([#121](https://github.com/judoscale/judoscale-node/issues/121)) ([0d682ae](https://github.com/judoscale/judoscale-node/commit/0d682aee832984acab5c5462a9d719b3c377bebe))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.4 to 2.5.5
+
 ## [2.1.4](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.1.3...judoscale-bull-v2.1.4) (2026-08-17)
 
 

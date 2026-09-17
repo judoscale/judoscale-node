@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.5](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.4...judoscale-node-core-v2.5.5) (2026-09-17)
+
+
+### Bug Fixes
+
+* Parse x-request-start in seconds, ms, µs, and ns ([#124](https://github.com/judoscale/judoscale-node/issues/124)) ([e53715c](https://github.com/judoscale/judoscale-node/commit/e53715cb1d2dc38dbb8c9a27ebf07bd6c2971340))
+
 ## [2.5.4](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.3...judoscale-node-core-v2.5.4) (2026-08-17)
 
 
