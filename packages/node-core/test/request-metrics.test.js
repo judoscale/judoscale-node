@@ -27,6 +27,43 @@ describe('RequestMetrics', () => {
       expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(100)
     })
 
+    test('Handle Nginx format with two decimal places', () => {
+      const now = new Date('2026-09-16T12:00:00.000Z')
+      const headers = { 'x-request-start': 't=1789559999.96' }
+
+      expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(40)
+    })
+
+    test('Handle Nginx format with four decimal places', () => {
+      const now = new Date('2026-09-16T12:00:00.000Z')
+      const headers = { 'x-request-start': 't=1789559999.9600' }
+
+      expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(40)
+    })
+
+    test('Handle Nginx format with six decimal places', () => {
+      const now = new Date('2026-09-16T12:00:00.000Z')
+      const headers = { 'x-request-start': 't=1789559999.960000' }
+
+      expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(40)
+    })
+
+    test('Handle X-Request-Start in microseconds', () => {
+      const now = new Date('2012-12-12T12:12:12.012Z')
+      const requestStart = ((now.getTime() - 100) * 1000).toString()
+      const headers = { 'x-request-start': requestStart }
+
+      expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(100)
+    })
+
+    test('Handle X-Request-Start in nanoseconds', () => {
+      const now = new Date('2012-12-12T12:12:12.012Z')
+      const requestStart = ((now.getTime() - 100) * 1_000_000).toString()
+      const headers = { 'x-request-start': requestStart }
+
+      expect(RequestMetrics.queueTimeFromHeaders(headers, now)).toBe(100)
+    })
+
     test('Handle negative queue time', () => {
       const now = new Date('2012-12-12T12:12:12.012Z')
       const requestStart = new Date(now.getTime() + 100).getTime().toString()
