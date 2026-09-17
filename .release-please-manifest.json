@@ -1,8 +1,8 @@
 {
-  "packages/node-core": "2.5.4",
-  "packages/express": "2.3.4",
-  "packages/fastify": "2.4.4",
-  "packages/bullmq": "2.2.4",
-  "packages/bull": "2.1.4",
-  "packages/nextjs": "2.0.1"
+  "packages/node-core": "2.5.5",
+  "packages/express": "2.3.5",
+  "packages/fastify": "2.4.5",
+  "packages/bullmq": "2.2.5",
+  "packages/bull": "2.1.5",
+  "packages/nextjs": "2.0.2"
 }

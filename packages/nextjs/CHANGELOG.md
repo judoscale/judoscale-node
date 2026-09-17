@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-nextjs-v2.0.1...judoscale-nextjs-v2.0.2) (2026-09-17)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.4 to 2.5.5
+
 ## [2.0.1](https://github.com/judoscale/judoscale-node/compare/judoscale-nextjs-v2.0.0...judoscale-nextjs-v2.0.1) (2026-08-17)
 
 
