@@ -16,16 +16,16 @@ jobs:
         next-version: [14.x, 15.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           # We can't use `cache: npm` because setup-node doesn't support our monorepo setup
           node-version: ${{ matrix.node-version }}
 
       - name: Cache node modules
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-next-${{ matrix.next-version }}-${{ hashFiles('package-lock.json') }}
