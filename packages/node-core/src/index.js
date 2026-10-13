@@ -1,5 +1,6 @@
 const Api = require('./api')
 const requestMetrics = require('./request-metrics')
+const onResponseSettled = require('./on-response-settled')
 const Metric = require('./metric')
 const MetricsStore = require('./metrics-store')
 const Platform = require('./platform')
@@ -20,6 +21,7 @@ module.exports = {
   Judoscale,
   Api,
   requestMetrics,
+  onResponseSettled,
   Metric,
   MetricsStore,
   Platform,

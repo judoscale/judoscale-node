@@ -3,6 +3,7 @@ const https = require('https')
 const {
   Judoscale,
   MetricsStore,
+  onResponseSettled,
   requestMetrics,
   UtilizationTracker,
   WebMetricsCollector,
@@ -32,10 +33,15 @@ function instrumentRequest(req, res, logger) {
 
   const startTime = requestMetrics.monotonicTime()
 
-  res.on('finish', () => {
-    const appTime = requestMetrics.elapsedTime(startTime)
-    metricsStore.push('at', appTime)
-    logger?.debug(`[Judoscale] app_time=${appTime}ms request_id=${requestId}`)
+  // Listen for both finish and close: aborted clients often emit close without
+  // finish, which would otherwise leak the utilization counter at > 0 forever.
+  onResponseSettled(res, (reason) => {
+    if (reason === 'finish') {
+      const appTime = requestMetrics.elapsedTime(startTime)
+      metricsStore.push('at', appTime)
+      logger?.debug(`[Judoscale] app_time=${appTime}ms request_id=${requestId}`)
+    }
+
     utilizationTracker.decr()
   })
 }

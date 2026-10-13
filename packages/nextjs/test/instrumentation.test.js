@@ -92,4 +92,37 @@ describe('HTTP instrumentation', () => {
     expect(metrics[0].identifier).toEqual('at')
     expect(metrics[1].identifier).toEqual('up')
   })
+
+  test('releases utilization when the client aborts before the response finishes', async () => {
+    const server = http.createServer((_req, _res) => {
+      // Intentionally never ends the response
+    })
+
+    await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
+    const { port } = server.address()
+
+    await new Promise((resolve) => {
+      const req = http.get({ hostname: '127.0.0.1', port, path: '/' }, () => {})
+      req.on('error', () => {})
+      req.on('socket', (socket) => {
+        socket.on('connect', () => {
+          setTimeout(() => {
+            req.destroy()
+            resolve()
+          }, 20)
+        })
+      })
+    })
+
+    await new Promise((resolve) => setTimeout(resolve, 80))
+
+    const metrics = nextAdapter().collector.collect()
+    const utilization = metrics.find((metric) => metric.identifier === 'up')
+
+    expect(utilization).toBeDefined()
+    // If the abort leaked the request counter, utilization would stay pegged at 100.
+    expect(utilization.value).toBeLessThan(100)
+
+    await new Promise((resolve) => server.close(resolve))
+  })
 })
