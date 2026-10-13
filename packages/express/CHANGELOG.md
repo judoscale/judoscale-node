@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.6](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.3.5...judoscale-express-v2.3.6) (2026-10-13)
+
+
+### Bug Fixes
+
+* Release utilization when responses abort without finish ([be20239](https://github.com/judoscale/judoscale-node/commit/be20239291fb4b501eb82c4d9f58dd80436243f8))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.5 to 2.5.6
+
 ## [2.3.5](https://github.com/judoscale/judoscale-node/compare/judoscale-express-v2.3.4...judoscale-express-v2.3.5) (2026-09-17)
 
 

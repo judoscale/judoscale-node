@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.3](https://github.com/judoscale/judoscale-node/compare/judoscale-nextjs-v2.0.2...judoscale-nextjs-v2.0.3) (2026-10-13)
+
+
+### Bug Fixes
+
+* Release utilization when responses abort without finish ([be20239](https://github.com/judoscale/judoscale-node/commit/be20239291fb4b501eb82c4d9f58dd80436243f8))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * judoscale-node-core bumped from 2.5.5 to 2.5.6
+
 ## [2.0.2](https://github.com/judoscale/judoscale-node/compare/judoscale-nextjs-v2.0.1...judoscale-nextjs-v2.0.2) (2026-09-17)
 
 

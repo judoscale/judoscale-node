@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.6](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.5...judoscale-node-core-v2.5.6) (2026-10-13)
+
+
+### Bug Fixes
+
+* Release utilization when responses abort without finish ([be20239](https://github.com/judoscale/judoscale-node/commit/be20239291fb4b501eb82c4d9f58dd80436243f8))
+
 ## [2.5.5](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.4...judoscale-node-core-v2.5.5) (2026-09-17)
 
 
