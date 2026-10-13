@@ -131,4 +131,23 @@ describe('UtilizationTracker', () => {
     mockMonotonicTime.mockReturnValue(12n)
     expect(tracker.utilizationPct()).toBe(75) // 1 second idle out of 4 total seconds = 25% idle
   })
+
+  test('ignores extra decrements so the counter cannot go negative', () => {
+    const tracker = new UtilizationTracker()
+
+    mockMonotonicTime.mockReturnValue(0n)
+    tracker.start()
+
+    mockMonotonicTime.mockReturnValue(1n)
+    tracker.incr()
+
+    mockMonotonicTime.mockReturnValue(2n)
+    tracker.decr()
+    tracker.decr()
+    tracker.decr()
+
+    mockMonotonicTime.mockReturnValue(4n)
+    // Idle 0→1 and 2→4 (3 of 4); extra decrs must not break idle tracking
+    expect(tracker.utilizationPct()).toBe(25)
+  })
 })

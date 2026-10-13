@@ -49,6 +49,12 @@ class UtilizationTracker {
   }
 
   decr() {
+    // Ignore extra decrements so a double-settle cannot drive the counter negative
+    // and leave idle tracking permanently stuck.
+    if (this._activeRequestCounter <= 0) {
+      return
+    }
+
     this._activeRequestCounter -= 1
 
     if (this._activeRequestCounter === 0) {

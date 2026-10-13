@@ -1,5 +1,6 @@
 /* global test, expect, describe */
 
+const http = require('http')
 const express = require('express')
 const request = require('supertest')
 const { Judoscale, middleware } = require('../index.js')
@@ -47,5 +48,43 @@ describe('middleware', () => {
     expect(metrics.length).toEqual(2)
     expect(metrics[0].identifier).toEqual('at')
     expect(metrics[1].identifier).toEqual('up')
+  })
+
+  test('releases utilization when the client aborts before the response finishes', async () => {
+    const hangApp = express()
+    hangApp.use(middleware(new Judoscale({ report_interval_seconds: 60 })))
+    hangApp.get('/hang', (_req, _res) => {
+      // Intentionally never ends the response
+    })
+
+    const server = http.createServer(hangApp)
+    await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
+    const { port } = server.address()
+
+    await new Promise((resolve) => {
+      const req = http.get({ hostname: '127.0.0.1', port, path: '/hang' }, () => {})
+      req.on('error', () => {})
+      req.on('socket', (socket) => {
+        socket.on('connect', () => {
+          // Abort before the handler can finish — close without finish
+          setTimeout(() => {
+            req.destroy()
+            resolve()
+          }, 20)
+        })
+      })
+    })
+
+    // Give the server time to emit response `close` and idle afterward
+    await new Promise((resolve) => setTimeout(resolve, 80))
+
+    const metrics = expressAdapter.collector.collect()
+    const utilization = metrics.find((metric) => metric.identifier === 'up')
+
+    expect(utilization).toBeDefined()
+    // If the abort leaked the request counter, utilization would stay pegged at 100.
+    expect(utilization.value).toBeLessThan(100)
+
+    await new Promise((resolve) => server.close(resolve))
   })
 })
