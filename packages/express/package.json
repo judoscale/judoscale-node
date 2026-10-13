@@ -1,6 +1,6 @@
 {
   "name": "judoscale-express",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "ExpressJS package for the Judoscale autoscaler",
   "main": "src/index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/judoscale/judoscale-node#readme",
   "dependencies": {
-    "judoscale-node-core": "2.5.5"
+    "judoscale-node-core": "2.5.6"
   },
   "devDependencies": {
     "jest": "^27.5.1",
