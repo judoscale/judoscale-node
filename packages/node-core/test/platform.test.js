@@ -5,6 +5,10 @@ const Platform = require('../src/platform')
 describe('Platform', () => {
   test('detects the platform from environment variables, JUDOSCALE_CONTAINER winning over platform vars', () => {
     expect(Platform.detect({ JUDOSCALE_CONTAINER: 'x', DYNO: 'web.1' })).toBeInstanceOf(Platform.Custom)
+    expect(Platform.detect({ JUDOSCALE_CONTAINER: 'x', HATCHBOX_SERVER_NAME: 'web1' })).toBeInstanceOf(Platform.Custom)
+    expect(
+      Platform.detect({ JUDOSCALE_CONTAINER: 'x', NF_OBJECT_ID: 'prod-web', HOSTNAME: 'prod-web-6fbcbdb958-v2jv5' }),
+    ).toBeInstanceOf(Platform.Custom)
     expect(Platform.detect({ DYNO: 'web.1' })).toBeInstanceOf(Platform.Heroku)
     expect(Platform.detect({ RENDER_INSTANCE_ID: 'srv-x-abc', RENDER_SERVICE_ID: 'srv-x' })).toBeInstanceOf(
       Platform.Render,
@@ -12,8 +16,21 @@ describe('Platform', () => {
     expect(Platform.detect({ ECS_CONTAINER_METADATA_URI: 'http://169.254.170.2/v3/abc' })).toBeInstanceOf(Platform.Ecs)
     expect(Platform.detect({ FLY_MACHINE_ID: '683d924b322418' })).toBeInstanceOf(Platform.Fly)
     expect(Platform.detect({ RAILWAY_REPLICA_ID: 'f9c88b6e' })).toBeInstanceOf(Platform.Railway)
+    expect(Platform.detect({ HATCHBOX_SERVER_NAME: 'web1' })).toBeInstanceOf(Platform.Hatchbox)
+    expect(Platform.detect({ NF_OBJECT_ID: 'prod-web', HOSTNAME: 'prod-web-6fbcbdb958-v2jv5' })).toBeInstanceOf(
+      Platform.Northflank,
+    )
+    // HOSTNAME alone is set nearly everywhere, so it doesn't identify Northflank.
+    expect(Platform.detect({ HOSTNAME: 'prod-web-6fbcbdb958-v2jv5' })).toBeInstanceOf(Platform.Unknown)
     expect(Platform.detect({ CONTAINER: 'web-1' })).toBeInstanceOf(Platform.Scalingo)
     expect(Platform.detect({})).toBeInstanceOf(Platform.Unknown)
+  })
+
+  test('uses HOSTNAME as the container on undetected platforms', () => {
+    expect(Platform.detect({ HOSTNAME: '5c686f7df6-kb6kj' }).container).toEqual('5c686f7df6-kb6kj')
+    expect(Platform.detect({}).container).toEqual('')
+    // HOSTNAME is only a fallback: detected platforms keep their own instance id.
+    expect(Platform.detect({ DYNO: 'web.1', HOSTNAME: '5c686f7df6-kb6kj' }).container).toEqual('web.1')
   })
 
   test('treats only ordinal instances beyond the first as redundant on Heroku and Scalingo', () => {
@@ -30,6 +47,9 @@ describe('Platform', () => {
     expect(new Platform.Ecs('a8880ee042bc4db3ba878dce65b769b6-2750272591').redundantInstance()).toEqual(false)
     expect(new Platform.Fly('683d924b322418').redundantInstance()).toEqual(false)
     expect(new Platform.Railway('f9c88b6e-0e96-46f2-9884-ece3bf53d009').redundantInstance()).toEqual(false)
+    // Hatchbox server names can look like Scalingo ordinals, but each server is its own instance.
+    expect(new Platform.Hatchbox('web-2').redundantInstance()).toEqual(false)
+    expect(new Platform.Northflank('prod-web-6fbcbdb958-v2jv5').redundantInstance()).toEqual(false)
     expect(new Platform.Custom('abcdef-2750272591').redundantInstance()).toEqual(false)
     expect(new Platform.Unknown('').redundantInstance()).toEqual(false)
   })
@@ -54,6 +74,8 @@ describe('Platform', () => {
   test('never treats opaque-id platforms as ephemeral instances', () => {
     expect(new Platform.Render('5497f74465-m5wwr', 'srv-x').ephemeralInstance()).toEqual(false)
     expect(new Platform.Fly('683d924b322418').ephemeralInstance()).toEqual(false)
+    expect(new Platform.Hatchbox('one-off-1234').ephemeralInstance()).toEqual(false)
+    expect(new Platform.Northflank('prod-web-6fbcbdb958-v2jv5').ephemeralInstance()).toEqual(false)
     expect(new Platform.Unknown('').ephemeralInstance()).toEqual(false)
   })
 
