@@ -80,11 +80,10 @@ describe('Config', () => {
     expect(config.platform.container).toEqual('autoscale-web-801dea')
   })
 
-  test('detects the Northflank platform and container', () => {
+  test('reports the pod name as the container on Northflank', () => {
     process.env.NF_OBJECT_ID = 'prod-web'
     process.env.HOSTNAME = 'prod-web-6fbcbdb958-v2jv5'
     const config = new Config()
-    expect(config.platform).toBeInstanceOf(Platform.Northflank)
     expect(config.platform.container).toEqual('prod-web-6fbcbdb958-v2jv5')
   })
 

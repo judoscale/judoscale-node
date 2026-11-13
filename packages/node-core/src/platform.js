@@ -10,8 +10,8 @@ class Platform {
   }
 
   // Most platforms expose opaque, non-ordinal instance ids (Render, ECS, Fly,
-  // Railway, Hatchbox, Northflank, custom), so by default no instance is
-  // redundant or ephemeral. Platforms that have those concepts override these.
+  // Railway, Hatchbox, custom), so by default no instance is redundant or
+  // ephemeral. Platforms that have those concepts override these.
   redundantInstance() {
     return false
   }
@@ -38,16 +38,13 @@ class Platform {
     } else if (env.HATCHBOX_SERVER_NAME) {
       // Hatchbox passes each server's name (e.g. "web1") into its containers.
       return new Hatchbox(env.HATCHBOX_SERVER_NAME)
-    } else if (env.NF_OBJECT_ID) {
-      // Northflank sets NF_OBJECT_ID to the service name; HOSTNAME is the pod
-      // name, which Northflank shows as the container id in its UI and logs.
-      return new Northflank(env.HOSTNAME)
     } else if (env.CONTAINER) {
       // Scalingo exposes the container type and index (e.g. "web-1") via CONTAINER.
       return new Scalingo(env.CONTAINER)
     } else {
       // Docker and Kubernetes set HOSTNAME to the container or pod name, which
-      // tells instances apart on platforms we don't otherwise detect.
+      // tells instances apart on platforms we don't otherwise detect. On
+      // Northflank it's the pod name shown as the container id in its UI.
       return new Unknown(env.HOSTNAME)
     }
   }
@@ -99,14 +96,12 @@ class Railway extends Platform {}
 
 class Hatchbox extends Platform {}
 
-class Northflank extends Platform {}
-
 // User-provided container id via JUDOSCALE_CONTAINER.
 class Custom extends Platform {}
 
 // Unsupported or undetected platform.
 class Unknown extends Platform {}
 
-Object.assign(Platform, { Heroku, Scalingo, Render, Ecs, Fly, Railway, Hatchbox, Northflank, Custom, Unknown })
+Object.assign(Platform, { Heroku, Scalingo, Render, Ecs, Fly, Railway, Hatchbox, Custom, Unknown })
 
 module.exports = Platform
