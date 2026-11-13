@@ -14,6 +14,9 @@ describe('Config', () => {
     delete process.env.ECS_CONTAINER_METADATA_URI
     delete process.env.FLY_MACHINE_ID
     delete process.env.RAILWAY_REPLICA_ID
+    delete process.env.HATCHBOX_SERVER_NAME
+    delete process.env.NF_OBJECT_ID
+    delete process.env.HOSTNAME
     delete process.env.CONTAINER
   })
 
@@ -68,6 +71,20 @@ describe('Config', () => {
     const config = new Config()
     expect(config.platform).toBeInstanceOf(Platform.Railway)
     expect(config.platform.container).toEqual('random-replica-uuid')
+  })
+
+  test('detects the Hatchbox platform and container', () => {
+    process.env.HATCHBOX_SERVER_NAME = 'autoscale-web-801dea'
+    const config = new Config()
+    expect(config.platform).toBeInstanceOf(Platform.Hatchbox)
+    expect(config.platform.container).toEqual('autoscale-web-801dea')
+  })
+
+  test('reports the pod name as the container on Northflank', () => {
+    process.env.NF_OBJECT_ID = 'prod-web'
+    process.env.HOSTNAME = 'prod-web-6fbcbdb958-v2jv5'
+    const config = new Config()
+    expect(config.platform.container).toEqual('prod-web-6fbcbdb958-v2jv5')
   })
 
   test('detects the Scalingo platform and container', () => {
