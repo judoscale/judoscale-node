@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.6...judoscale-node-core-v2.6.0) (2026-11-13)
+
+
+### Features
+
+* report Hatchbox and Northflank instance names as the container ([#127](https://github.com/judoscale/judoscale-node/issues/127)) ([e1d60b2](https://github.com/judoscale/judoscale-node/commit/e1d60b2d9fd9201b60f56509620bdca6adfa888f))
+
 ## [2.5.6](https://github.com/judoscale/judoscale-node/compare/judoscale-node-core-v2.5.5...judoscale-node-core-v2.5.6) (2026-10-13)
 
 
