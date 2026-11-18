@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.1.7...judoscale-bull-v2.2.0) (2026-11-18)
+
+
+### Features
+
+* report how long the longest-running job in each queue has been running ([#129](https://github.com/judoscale/judoscale-node/issues/129)) ([b86df2b](https://github.com/judoscale/judoscale-node/commit/b86df2b05683c539d24310a0f6585e00332cda19))
+
 ## [2.1.7](https://github.com/judoscale/judoscale-node/compare/judoscale-bull-v2.1.6...judoscale-bull-v2.1.7) (2026-11-13)
 
 
