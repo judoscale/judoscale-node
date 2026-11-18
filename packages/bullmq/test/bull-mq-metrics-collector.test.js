@@ -1,5 +1,5 @@
 const Redis = require('ioredis')
-const { Queue } = require('bullmq')
+const { Queue, Worker } = require('bullmq')
 const BullMQMetricsCollector = require('../src/bull-mq-metrics-collector')
 
 describe('BullMQMetricsCollector', () => {
@@ -30,7 +30,7 @@ describe('BullMQMetricsCollector', () => {
 
     const metrics = await collector.collect()
 
-    expect(metrics.length).toEqual(2)
+    expect(metrics.length).toEqual(3)
 
     expect(metrics[0].identifier).toEqual('qd')
     expect(metrics[0].queueName).toEqual('foo')
@@ -38,6 +38,50 @@ describe('BullMQMetricsCollector', () => {
     expect(metrics[1].identifier).toEqual('busy')
     expect(metrics[1].queueName).toEqual('foo')
     expect(metrics[1].value).toEqual(0)
+    expect(metrics[2].identifier).toEqual('bt')
+    expect(metrics[2].queueName).toEqual('foo')
+    expect(metrics[2].value).toEqual(0)
+  })
+
+  test('reports how long the longest-running job in each queue has been running', async () => {
+    const collector = new BullMQMetricsCollector()
+
+    redisConnectionsToCleanUp.push(collector.redis)
+    await resetBullData(collector.redis)
+
+    const queue = new Queue('foo', { connection: collector.redis })
+    const idleQueue = new Queue('bar', { connection: collector.redis })
+    const jobs = [await queue.add('job-1'), await queue.add('job-2')]
+    await idleQueue.add('waiting-job')
+
+    let releaseJobs
+    const jobsReleased = new Promise((resolve) => (releaseJobs = resolve))
+    const worker = new Worker('foo', () => jobsReleased, {
+      connection: { host: 'localhost', port: 6379 },
+      concurrency: 2,
+    })
+
+    try {
+      while ((await queue.getActiveCount()) < 2) await new Promise((resolve) => setTimeout(resolve, 10))
+
+      const now = Date.now()
+      await collector.redis.hset(queue.toKey(jobs[0].id), 'processedOn', now - 60_000)
+      await collector.redis.hset(queue.toKey(jobs[1].id), 'processedOn', now - 600_000)
+
+      const metrics = await collector.collect()
+      const busyTimes = Object.fromEntries(
+        metrics.filter((m) => m.identifier == 'bt').map((m) => [m.queueName, m.value]),
+      )
+
+      expect(busyTimes['foo']).toBeGreaterThanOrEqual(600_000)
+      expect(busyTimes['foo']).toBeLessThan(605_000)
+      expect(busyTimes['bar']).toEqual(0)
+    } finally {
+      releaseJobs()
+      await worker.close()
+      await queue.close()
+      await idleQueue.close()
+    }
   })
 
   test('uses the redis_url config if provided', async () => {
@@ -54,7 +98,7 @@ describe('BullMQMetricsCollector', () => {
     const metrics1 = await collector1.collect()
     const metrics2 = await collector2.collect()
 
-    expect(metrics1.length).toEqual(2)
+    expect(metrics1.length).toEqual(3)
     expect(metrics2.length).toEqual(0)
   })
 
@@ -75,7 +119,7 @@ describe('BullMQMetricsCollector', () => {
     const metrics1 = await collector1.collect()
     const metrics2 = await collector2.collect()
 
-    expect(metrics1.length).toEqual(2)
+    expect(metrics1.length).toEqual(3)
     expect(metrics2.length).toEqual(0)
   })
 
@@ -125,7 +169,7 @@ describe('BullMQMetricsCollector', () => {
     const metrics1 = await collector1.collect()
     const metrics2 = await collector2.collect()
 
-    expect(metrics1.length).toEqual(2)
+    expect(metrics1.length).toEqual(3)
     expect(metrics2.length).toEqual(0)
   })
 })
