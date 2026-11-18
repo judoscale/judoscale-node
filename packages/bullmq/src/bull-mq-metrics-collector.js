@@ -17,13 +17,32 @@ class BullMQMetricsCollector extends WorkerMetricsCollector {
     for (const queueName of this.queueNames) {
       const queue = new Queue(queueName, { connection: this.redis })
       const jobCounts = await queue.getJobCounts('waiting', 'active', 'prioritized')
+      const busyTime = await this.busyTime(queue)
       await queue.close()
 
       metrics.push(new Metric('qd', new Date(), jobCounts.waiting + jobCounts.prioritized, queueName))
       metrics.push(new Metric('busy', new Date(), jobCounts.active, queueName))
+      metrics.push(new Metric('bt', new Date(), busyTime, queueName))
     }
 
     return metrics
+  }
+
+  // The age of the oldest job in the active list, using the `processedOn` time (ms) set when a worker picks it up.
+  // Reads only that field so we don't load job payloads.
+  async busyTime(queue) {
+    const jobIds = await this.redis.lrange(queue.keys.active, 0, -1)
+    if (jobIds.length == 0) return 0
+
+    const pipeline = this.redis.pipeline()
+    for (const jobId of jobIds) pipeline.hget(queue.toKey(jobId), 'processedOn')
+    const results = await pipeline.exec()
+    const processedOns = results
+      .map(([_err, processedOn]) => Number(processedOn))
+      .filter((processedOn) => processedOn > 0)
+    if (processedOns.length == 0) return 0
+
+    return Math.max(0, Date.now() - Math.min(...processedOns))
   }
 
   async fetchQueueNames() {

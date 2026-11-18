@@ -53,7 +53,7 @@ describe('BullMetricsCollector', () => {
 
     const metrics = await collector.collect()
 
-    expect(metrics.length).toEqual(2)
+    expect(metrics.length).toEqual(3)
 
     expect(metrics[0].identifier).toEqual('qd')
     expect(metrics[0].queueName).toEqual('foo')
@@ -61,5 +61,39 @@ describe('BullMetricsCollector', () => {
     expect(metrics[1].identifier).toEqual('busy')
     expect(metrics[1].queueName).toEqual('foo')
     expect(metrics[1].value).toEqual(0)
+    expect(metrics[2].identifier).toEqual('bt')
+    expect(metrics[2].queueName).toEqual('foo')
+    expect(metrics[2].value).toEqual(0)
+  })
+
+  test('reports how long the longest-running job in each queue has been running', async () => {
+    queue = new Queue('foo')
+    const idleQueue = new Queue('bar')
+    const jobs = [await queue.add({}), await queue.add({})]
+    await idleQueue.add({})
+
+    let releaseJobs
+    const jobsReleased = new Promise((resolve) => (releaseJobs = resolve))
+    queue.process(2, () => jobsReleased)
+
+    try {
+      while ((await queue.getActiveCount()) < 2) await new Promise((resolve) => setTimeout(resolve, 10))
+
+      const now = Date.now()
+      await collector.redis.hset(queue.toKey(jobs[0].id), 'processedOn', now - 60_000)
+      await collector.redis.hset(queue.toKey(jobs[1].id), 'processedOn', now - 600_000)
+
+      const metrics = await collector.collect()
+      const busyTimes = Object.fromEntries(
+        metrics.filter((m) => m.identifier == 'bt').map((m) => [m.queueName, m.value]),
+      )
+
+      expect(busyTimes['foo']).toBeGreaterThanOrEqual(600_000)
+      expect(busyTimes['foo']).toBeLessThan(605_000)
+      expect(busyTimes['bar']).toEqual(0)
+    } finally {
+      releaseJobs()
+      await idleQueue.close()
+    }
   })
 })
