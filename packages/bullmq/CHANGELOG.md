@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.2.7...judoscale-bullmq-v2.3.0) (2026-11-18)
+
+
+### Features
+
+* report how long the longest-running job in each queue has been running ([#129](https://github.com/judoscale/judoscale-node/issues/129)) ([b86df2b](https://github.com/judoscale/judoscale-node/commit/b86df2b05683c539d24310a0f6585e00332cda19))
+
 ## [2.2.7](https://github.com/judoscale/judoscale-node/compare/judoscale-bullmq-v2.2.6...judoscale-bullmq-v2.2.7) (2026-11-13)
 
 

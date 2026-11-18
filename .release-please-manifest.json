@@ -2,7 +2,7 @@
   "packages/node-core": "2.6.0",
   "packages/express": "2.3.7",
   "packages/fastify": "2.4.7",
-  "packages/bullmq": "2.2.7",
-  "packages/bull": "2.1.7",
+  "packages/bullmq": "2.3.0",
+  "packages/bull": "2.2.0",
   "packages/nextjs": "2.0.4"
 }
